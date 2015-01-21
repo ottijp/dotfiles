@@ -1,0 +1,2 @@
+3.0
+{'neobundle.vim': {'checked_time': 1415607072, 'installed_uri': 'https://github.com/Shougo/neobundle.vim.git', 'installed_path': '/Users/otti/.vim/bundle/neobundle.vim', 'revisions': {}, 'updated_time': 1415607072}, 'vim-arduino-syntax': {'checked_time': 1415607074, 'installed_uri': 'https://github.com/sudar/vim-arduino-syntax.git', 'installed_path': '/Users/otti/.vim/bundle/vim-arduino-syntax', 'revisions': {'1409279791': '7e9777b03c1ec380fec52b344d9e3bb89be54750'}, 'updated_time': '1409279791'}}

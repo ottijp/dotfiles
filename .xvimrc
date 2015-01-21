@@ -1,0 +1,9 @@
+" 検索
+" ハイライト
+set hlsearch
+" インクリメンタルサーチ
+set incsearch
+" ハイライトをC-g連打でクリアする
+"nnoremap <C-g><C-g> :nohlsearch<CR>
+" 大文字小文字無視
+set ignorecase

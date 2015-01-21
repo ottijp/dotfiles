@@ -1,0 +1,61 @@
+"================
+"General
+"================
+
+"入力時に自動フォーカスしない
+set focuscontent
+" ビジュアルベルを表示しない
+set visualbell
+highlight Bell display:none
+" :oなどでの補完候補をサーチエンジン、履歴に限定
+set complete=sl
+" Hintモードでアルファベット使用
+set hintchars=lsjdkfgh
+" ツールバーはアドオンとタブのみ表示
+set gui=nonavigation
+" commandモードでIMEオフ
+style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
+
+" エディタ設定
+set editor='/Applications/MacVim.app/Contents/MacOS/mvim -f'
+
+" main_coon
+let g:maine_coon_default = "am"
+let g:maine_coon_style = "height: 1em; margin:0; padding: 3px; border: 1px solid #b3b3b3; border-left: 0; border-bottom: 0; text-align:left; color: #000; font: 21px/1 sans-serif; background: #ebebeb;"
+
+"============================
+" Key mapping
+"============================
+
+" google検索を手早くする
+noremap s :open<Space>google<Space>
+noremap ,s :tabopen<Space>google<Space>
+
+" スクロール移動量を7倍に
+noremap j 7<C-e>
+noremap k 7<C-y>
+
+" タブ移動
+noremap <C-h> gT
+noremap <C-l> gt
+
+" ウィンドウ閉じる
+noremap x d
+
+" undo一覧から開く
+nnoremap U :undo<Space>
+
+
+"============================
+" colorscheme
+"============================
+"hi Hint z-index:5000; font-family:Menlo; font-size:14px; color:white; background-color:red; border-color:ButtonShadow; border-width:0px; border-style:solid; padding:0px 2px 0px 2px; position:absolute;
+
+" デフォルトのヒント派手すぎ＞＜
+hi Hint font-family: Arial; font-size: 19px; font-weight: regular; text-shadow: -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black, 1px 1px 1px black; color: #33cccc;
+hi HintElem color: gray; background-color: #a1e4e6;
+hi HintActive color: black; background-color: #ff8700;
+
+" デフォルトのエラー赤くてこわい＞＜
+hi ErrorMsg color:white; background-color: #ec6aa1;
+
