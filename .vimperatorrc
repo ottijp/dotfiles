@@ -45,6 +45,11 @@ noremap x d
 " undo一覧から開く
 nnoremap U :undo<Space>
 
+" ページタイトルをクリップボードにコピー
+nnoremap ct :js util.copyToClipboard(buffer.title);<CR>:echo 'titleのコピー完了!'<CR>
+
+" URLをクリップボードにコピー
+nnoremap cu :js util.copyToClipboard(buffer.URL);<CR>:echo 'urlのコピー完了!'<CR>
 
 "============================
 " colorscheme
