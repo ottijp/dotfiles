@@ -120,21 +120,21 @@ if has('vim_starting')
         set runtimepath+=$HOME/.vim/bundle/neobundle.vim
         call neobundle#begin(expand('~/.vim/bundle/'))
         NeoBundleFetch 'Shougo/neobundle.vim'
+
+        NeoBundle "sudar/vim-arduino-syntax"
+        NeoBundle "Shougo/unite.vim"
+        NeoBundle "Shougo/neomru.vim"
+        NeoBundle "scrooloose/nerdtree"
+        NeoBundle "tomtom/tcomment_vim"
+        "NeoBundle "h1mesuke/vim-alignta"
+        NeoBundle 'plasticboy/vim-markdown'
+        NeoBundle 'kannokanno/previm'
+        NeoBundle 'tyru/open-browser.vim'
+        NeoBundle 'xolox/vim-session', { 'depends' : 'xolox/vim-misc' }
+        NeoBundle 'kana/vim-submode'
+
         call neobundle#end()
 endif
-
-NeoBundle "sudar/vim-arduino-syntax"
-NeoBundle "Shougo/unite.vim"
-NeoBundle "Shougo/neomru.vim"
-NeoBundle "scrooloose/nerdtree"
-NeoBundle "tomtom/tcomment_vim"
-"NeoBundle "h1mesuke/vim-alignta"
-NeoBundle 'plasticboy/vim-markdown'
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'xolox/vim-session', { 'depends' : 'xolox/vim-misc' }
-NeoBundle 'kana/vim-submode'
-
 
 filetype plugin indent on
 
