@@ -124,8 +124,8 @@ if has('vim_starting')
 endif
 
 NeoBundle "sudar/vim-arduino-syntax"
-NeoBundle "Sougo/unite.vim"
-NeoBundle "Sougo/neomru.vim"
+NeoBundle "Shougo/unite.vim"
+NeoBundle "Shougo/neomru.vim"
 NeoBundle "scrooloose/nerdtree"
 NeoBundle "tomtom/tcomment_vim"
 "NeoBundle "h1mesuke/vim-alignta"
@@ -238,6 +238,5 @@ nnoremap sT :<C-u>Unite tab<CR>
 nnoremap st :<C-U>tabnew<CR>
 nnoremap sn gt
 nnoremap sp gT
-
 
 
