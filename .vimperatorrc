@@ -10,9 +10,10 @@ highlight Bell display:none
 " :oなどでの補完候補をサーチエンジン、履歴に限定
 set complete=sl
 " Hintモードでアルファベット使用
-set hintchars=lsjdkfgh
+"set hintchars=lsjdkfgh
+set hintchars=ghfjdkslatyrueiwoqpbnvmcxz
 " ツールバーはアドオンとタブのみ表示
-set gui=nonavigation
+"set gui=nonavigation
 " commandモードでIMEオフ
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
 
