@@ -8,3 +8,6 @@ ln -snf ~/dotfiles/.tmux.conf ~/.tmux.conf
 mkdir -p ~/vimbackup
 mkdir -p ~/.vim
 ln -snf ~/dotfiles/colors ~/.vim/colors
+
+cat .bashrc_diff >> ~/.bashrc
+

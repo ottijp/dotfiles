@@ -132,6 +132,7 @@ if has('vim_starting')
         NeoBundle 'tyru/open-browser.vim'
         NeoBundle 'xolox/vim-session', { 'depends' : 'xolox/vim-misc' }
         NeoBundle 'kana/vim-submode'
+        NeoBundle 'fatih/vim-go'
 
         call neobundle#end()
 endif

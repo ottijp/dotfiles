@@ -1,0 +1,2 @@
+# undef console output stop (enable bash's incremental search)
+stty stop undef
