@@ -133,6 +133,7 @@ if has('vim_starting')
         NeoBundle 'xolox/vim-session', { 'depends' : 'xolox/vim-misc' }
         NeoBundle 'kana/vim-submode'
         NeoBundle 'fatih/vim-go'
+        NeoBundle "aklt/plantuml-syntax"
 
         call neobundle#end()
 endif
