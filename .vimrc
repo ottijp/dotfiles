@@ -77,7 +77,7 @@ nnoremap <silent> <F6> :w <CR> :make run <CR>
 
 " toggle openfixwindow
 let s:quickfixwindow = "close"
-function! b:openCloseQuickfix()
+function! OpenCloseQuickfix()
     if "open" ==? s:quickfixwindow
         let s:quickfixwindow = "close"
         :cclose
@@ -86,8 +86,8 @@ function! b:openCloseQuickfix()
         :copen
     endif
 endfunction
-nnoremap <silent> <F7> :call b:openCloseQuickfix() <CR>
-inoremap <silent> <F7> :call b:openCloseQuickfix() <CR>
+nnoremap <silent> <F7> :call OpenCloseQuickfix() <CR>
+inoremap <silent> <F7> :call OpenCloseQuickfix() <CR>
 
 
 
