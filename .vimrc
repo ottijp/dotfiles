@@ -20,6 +20,9 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
+" js,coffeeは2
+autocmd filetype coffee,javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+
 " 勝手に改行しない
 set tw=0
 
@@ -134,6 +137,9 @@ if has('vim_starting')
         NeoBundle 'kana/vim-submode'
         NeoBundle 'fatih/vim-go'
         NeoBundle "aklt/plantuml-syntax"
+        NeoBundle 'thinca/vim-quickrun'
+        NeoBundle 'myhere/vim-nodejs-complete'
+        NeoBundle 'kchmck/vim-coffee-script'
 
         call neobundle#end()
 endif
@@ -202,6 +208,28 @@ else
   let g:session_autoload = 'no'
 endif
 unlet s:local_session_directory
+
+""""""""""""""""""""""""""""""
+" quickrunの設定
+""""""""""""""""""""""""""""""
+" 下部に結果を表示
+let g:quickrun_config = {
+\   "_" : {
+\       "outputter/buffer/split" : ":botright"
+\   },
+\}
+let g:quickrun_config.coffeejs = {'command': 'coffee', 'cmdopt': '-pb'}
+
+""""""""""""""""""""""""""""""
+" nodejs-completeの設定
+""""""""""""""""""""""""""""""
+autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
+if !exists('g:neocomplcache_omni_functions')
+    let g:neocomplcache_omni_functions = {}
+endif
+let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
+let g:node_usejscomplete = 1
+inoremap <Nul> <C-x><C-o>
 
 
 
