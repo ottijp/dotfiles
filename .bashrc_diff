@@ -1,2 +1,8 @@
 # undef console output stop (enable bash's incremental search)
 stty stop undef
+
+# command alias
+alias ls="ls -F"
+alias la="ls -Fa"
+alias ll="ls -Fl"
+alias lla="ls -Fal"
