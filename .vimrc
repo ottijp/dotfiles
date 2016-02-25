@@ -9,6 +9,7 @@ set autochdir
 " バックアップ、スワップファイルの変更
 set backupdir=$HOME/vimbackup
 set directory=$HOME/vimbackup
+set undodir=$HOME/vimbackup
 
 " Vim互換をOFF
 set nocompatible
