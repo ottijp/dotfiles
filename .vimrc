@@ -232,6 +232,10 @@ let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
 let g:node_usejscomplete = 1
 inoremap <Nul> <C-x><C-o>
 
+""""""""""""""""""""""""""""""
+" plantumlの設定
+""""""""""""""""""""""""""""""
+let g:plantuml_executable_script="~/bin/plantuml"
 
 
 " ウィンドウ操作
