@@ -21,8 +21,8 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 
-" js,coffeeは2
-autocmd filetype coffee,javascript setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+" js,coffee,jadeは2
+autocmd filetype coffee,javascript,jade setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
 
 " 勝手に改行しない
 set tw=0
