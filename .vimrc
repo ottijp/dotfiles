@@ -24,6 +24,9 @@ set shiftwidth=4
 " js,coffee,jadeは2
 autocmd filetype coffee,javascript,jade setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
 
+" filetypes
+autocmd BufRead,BufWrite *.jade setfiletype jade
+
 " 勝手に改行しない
 set tw=0
 
@@ -160,7 +163,7 @@ noremap <C-P> :Unite buffer<CR>
 " ファイル一覧
 noremap <C-N> :Unite -buffer-name=file file<CR>
 " 最近使ったファイルの一覧
-noremap <C-Z> :Unite file_mru<CR>
+noremap <C-X> :Unite file_mru<CR>
 " sourcesを「今開いているファイルのディレクトリ」とする
 noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 " ウィンドウを分割して開く
@@ -275,3 +278,7 @@ nnoremap sn gt
 nnoremap sp gT
 
 
+" read local setting
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
