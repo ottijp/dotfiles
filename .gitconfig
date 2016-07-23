@@ -1,0 +1,13 @@
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[http]
+	sslVerify = false
+[core]
+	excludesfile = ~/.gitignore_global
+[alias]
+    delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -d %
+    fp = !git fetch -p && git delete-merged-branches
+    pp = !git pull -p && git delete-merged-branches
+[include]
+    path = ~/.gitconfig.local
