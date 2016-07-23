@@ -278,3 +278,7 @@ nnoremap sn gt
 nnoremap sp gT
 
 
+" read local setting
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
