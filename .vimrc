@@ -24,6 +24,9 @@ set shiftwidth=4
 " js,coffee,jadeは2
 autocmd filetype coffee,javascript,jade setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
 
+" filetypes
+autocmd BufRead,BufWrite *.jade setfiletype jade
+
 " 勝手に改行しない
 set tw=0
 
