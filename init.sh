@@ -5,6 +5,7 @@ ln -snf ~/dotfiles/.gvimrc ~/.gvimrc
 ln -snf ~/dotfiles/.xvimrc ~/.xvimrc
 ln -snf ~/dotfiles/.vimperatorrc ~/.vimperatorrc
 ln -snf ~/dotfiles/.tmux.conf ~/.tmux.conf
+ln -snf ~/dotfiles/.gitconfig ~/.gitconfig
 
 mkdir -p ~/vimbackup
 mkdir -p ~/.vim
