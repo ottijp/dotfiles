@@ -5,6 +5,7 @@
 	sslVerify = false
 [core]
 	excludesfile = ~/.gitignore_global
+	editor = vim -c \"set fenc=utf-8\"
 [alias]
     delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -d %
     fp = !git fetch -p && git delete-merged-branches
