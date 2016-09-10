@@ -144,6 +144,7 @@ if has('vim_starting')
         NeoBundle 'thinca/vim-quickrun'
         NeoBundle 'myhere/vim-nodejs-complete'
         NeoBundle 'kchmck/vim-coffee-script'
+        NeoBundle 'tpope/vim-fugitive'
 
         call neobundle#end()
 endif
