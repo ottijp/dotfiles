@@ -11,9 +11,6 @@ set backupdir=$HOME/vimbackup
 set directory=$HOME/vimbackup
 set undodir=$HOME/vimbackup
 
-" Vim互換をOFF
-set nocompatible
-
 " タブの代わりに空白文字を指定
 set expandtab
 
