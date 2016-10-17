@@ -6,3 +6,6 @@ alias ls="ls -F"
 alias la="ls -Fa"
 alias ll="ls -Fl"
 alias lla="ls -Fal"
+
+# locale
+export LC_ALL=en_US.UTF-8
