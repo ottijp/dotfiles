@@ -10,5 +10,6 @@
     delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -d %
     fp = !git fetch -p && git delete-merged-branches
     pp = !git pull -p && git delete-merged-branches
+    tree = !git log --graph --all --format='%x09[%ad] %C(cyan bold)%an%Creset%x09%C(yellow)%h%Creset %C(magenta reverse)%d%Creset %s' --date=short
 [include]
     path = ~/.gitconfig.local
