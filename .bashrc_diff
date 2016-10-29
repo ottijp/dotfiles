@@ -9,3 +9,14 @@ alias lla="ls -Fal"
 
 # locale
 export LC_ALL=en_US.UTF-8
+
+# git utilities
+source ~/.git-completion.bash
+source ~/.git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUPSTREAM=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWSTASHSTATE=1
+
+# prompt
+export PS1='\[\033[1;31m\]$(__git_ps1)\[\033[00m\] \h:\W \u\$ '
