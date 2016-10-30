@@ -242,8 +242,8 @@ let g:plantuml_executable_script="~/bin/plantuml"
 " ウィンドウ操作
 nnoremap s <Nop>
 " 分割
-nnoremap ss :<C-u>sp<CR>
-nnoremap sv :<C-u>vs<CR>
+nnoremap ss :<C-u>sp<CR><C-w>j
+nnoremap sv :<C-u>vs<CR><C-w>l
 " カーソル移動
 nnoremap sh <C-w>h
 nnoremap sj <C-w>j
