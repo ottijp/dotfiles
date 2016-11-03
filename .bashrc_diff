@@ -19,4 +19,4 @@ GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWSTASHSTATE=1
 
 # prompt
-export PS1='\[\033[1;31m\]$(__git_ps1 "(%s) ")\[\033[00m\]\h:\W \u\$ '
+export PS1='\[\e[36m\]\u@\h:\[\e[35m\]\W\[\e[1;32m\]$(__git_ps1 " (%s)")\[\e[36m\] \$\[\e[0m\] '
