@@ -280,3 +280,10 @@ nnoremap sp gT
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
 endif
+
+""""""""""""""""""""""""""""""
+"""" diff {
+" show in vertical window
+set diffopt+=vertical
+"""" }
+""""""""""""""""""""""""""""""
