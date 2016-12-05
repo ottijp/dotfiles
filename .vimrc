@@ -288,3 +288,10 @@ endif
 set diffopt+=vertical
 """" }
 """"""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" vim-markdown {
+" do not insert indent automatically
+let g:vim_markdown_new_list_item_indent = 0
+"""" }
+""""""""""""""""""""""""""""""
