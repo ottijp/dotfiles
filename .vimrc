@@ -273,11 +273,13 @@ call submode#map('bufmove', 'n', '', '>', '<C-w>>')
 call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')
 call submode#map('bufmove', 'n', '', '-', '<C-w>-')
-" タブ移動
+" list tab
 nnoremap sT :<C-u>Unite tab<CR>
+" new tab
 nnoremap st :<C-U>tabnew<CR>
-nnoremap sn gt
-nnoremap sp gT
+" change tab
+nnoremap <C-l> gt
+nnoremap <C-h> gT
 
 
 " read local setting
