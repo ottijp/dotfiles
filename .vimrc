@@ -61,6 +61,9 @@ inoremap <silent> <C-e> <C-o>$
 " 通常モードEnterで空行挿入(S-CRは使うのにトリックが要る）
 nnoremap <CR> o<ESC>
 
+" space to add space
+nnoremap <Space> i<Space><Esc>
+
 
 " 引用符、括弧の自動補完
 "inoremap { {}<Left>
