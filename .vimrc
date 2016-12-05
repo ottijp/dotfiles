@@ -142,6 +142,7 @@ if has('vim_starting')
         NeoBundle 'myhere/vim-nodejs-complete'
         NeoBundle 'kchmck/vim-coffee-script'
         NeoBundle 'tpope/vim-fugitive'
+        NeoBundle 'cohama/lexima.vim'
 
         call neobundle#end()
 endif
@@ -285,5 +286,12 @@ endif
 """" diff {
 " show in vertical window
 set diffopt+=vertical
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" vim-markdown {
+" do not insert indent automatically
+let g:vim_markdown_new_list_item_indent = 0
 """" }
 """"""""""""""""""""""""""""""
