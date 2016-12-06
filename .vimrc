@@ -145,7 +145,9 @@ if has('vim_starting')
         NeoBundle 'myhere/vim-nodejs-complete'
         NeoBundle 'kchmck/vim-coffee-script'
         NeoBundle 'tpope/vim-fugitive'
+        NeoBundle 'szw/vim-tags'
         NeoBundle 'cohama/lexima.vim'
+        NeoBundle 'majutsushi/tagbar'
 
         call neobundle#end()
 endif
@@ -286,6 +288,30 @@ nnoremap <C-h> gT
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
 endif
+
+""""""""""""""""""""""""""""""
+" tag operation
+""""""""""""""""""""""""""""""
+" jump to definition
+nnoremap ] g<C-]>
+nnoremap s] <C-w>]
+
+""""""""""""""""""""""""""""""
+"""" vim-tags {
+let g:vim_tags_auto_generate = 1
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" tagbar {
+nnoremap <C-t> :TagbarToggle<CR>
+let g:tagbar_autoshowtag = 1
+let g:tagbar_width = 30
+let g:tagbar_map_togglesort = 'S'
+"""" }
+""""""""""""""""""""""""""""""
+
+
 
 """"""""""""""""""""""""""""""
 """" diff {
