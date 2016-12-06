@@ -286,10 +286,6 @@ nnoremap <C-l> gt
 nnoremap <C-h> gT
 
 
-" read local setting
-if filereadable(expand('~/.vimrc.local'))
-    source ~/.vimrc.local
-endif
 
 """"""""""""""""""""""""""""""
 " tag operation
@@ -328,3 +324,8 @@ set diffopt+=vertical
 let g:vim_markdown_new_list_item_indent = 0
 """" }
 """"""""""""""""""""""""""""""
+
+" read local setting
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
