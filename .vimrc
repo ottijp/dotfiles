@@ -40,8 +40,9 @@ set showmatch
 set hlsearch
 " インクリメンタルサーチ
 set incsearch
-"ハイライトをC-G連打でクリアする
+" disable search highlight
 nnoremap <ESC><ESC> :nohlsearch<CR>
+nnoremap <C-g><C-g> :nohlsearch<CR>
 " 大文字小文字無視
 set ignorecase
 
