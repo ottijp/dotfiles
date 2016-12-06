@@ -147,6 +147,7 @@ if has('vim_starting')
         NeoBundle 'kchmck/vim-coffee-script'
         NeoBundle 'tpope/vim-fugitive'
         NeoBundle 'szw/vim-tags'
+        NeoBundle 'othree/yajs.vim'
         NeoBundle 'cohama/lexima.vim'
         NeoBundle 'majutsushi/tagbar'
 
