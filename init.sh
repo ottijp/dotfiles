@@ -11,6 +11,7 @@ ln -snf ~/dotfiles/.git-completion.bash ~/.git-completion.bash
 curl -L -o .git-prompt.sh https://github.com/git/git/raw/master/contrib/completion/git-prompt.sh
 chmod +x .git-prompt
 ln -snf ~/dotfiles/.git-prompt.sh ~/.git-prompt.sh
+ln -snf ~/dotfiles/.ctags ~/.ctags
 
 mkdir -p ~/vimbackup
 mkdir -p ~/.vim

@@ -40,8 +40,9 @@ set showmatch
 set hlsearch
 " インクリメンタルサーチ
 set incsearch
-"ハイライトをC-G連打でクリアする
+" disable search highlight
 nnoremap <ESC><ESC> :nohlsearch<CR>
+nnoremap <C-g><C-g> :nohlsearch<CR>
 " 大文字小文字無視
 set ignorecase
 
@@ -60,6 +61,9 @@ inoremap <silent> <C-e> <C-o>$
 
 " 通常モードEnterで空行挿入(S-CRは使うのにトリックが要る）
 nnoremap <CR> o<ESC>
+
+" space to add space
+nnoremap <Space> i<Space><Esc>
 
 
 " 引用符、括弧の自動補完
@@ -142,7 +146,11 @@ if has('vim_starting')
         NeoBundle 'myhere/vim-nodejs-complete'
         NeoBundle 'kchmck/vim-coffee-script'
         NeoBundle 'tpope/vim-fugitive'
+        NeoBundle 'szw/vim-tags'
+        NeoBundle 'othree/yajs.vim'
         NeoBundle 'cohama/lexima.vim'
+        NeoBundle 'Shougo/neocomplete.vim'
+        NeoBundle 'majutsushi/tagbar'
 
         call neobundle#end()
 endif
@@ -270,17 +278,39 @@ call submode#map('bufmove', 'n', '', '>', '<C-w>>')
 call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')
 call submode#map('bufmove', 'n', '', '-', '<C-w>-')
-" タブ移動
+" list tab
 nnoremap sT :<C-u>Unite tab<CR>
+" new tab
 nnoremap st :<C-U>tabnew<CR>
-nnoremap sn gt
-nnoremap sp gT
+" change tab
+nnoremap <C-l> gt
+nnoremap <C-h> gT
 
 
-" read local setting
-if filereadable(expand('~/.vimrc.local'))
-    source ~/.vimrc.local
-endif
+
+""""""""""""""""""""""""""""""
+" tag operation
+""""""""""""""""""""""""""""""
+" jump to definition
+nnoremap ] g<C-]>
+nnoremap s] <C-w>]
+
+""""""""""""""""""""""""""""""
+"""" vim-tags {
+let g:vim_tags_auto_generate = 1
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" tagbar {
+nnoremap <C-t> :TagbarToggle<CR>
+let g:tagbar_autoshowtag = 1
+let g:tagbar_width = 30
+let g:tagbar_map_togglesort = 'S'
+"""" }
+""""""""""""""""""""""""""""""
+
+
 
 """"""""""""""""""""""""""""""
 """" diff {
@@ -295,3 +325,93 @@ set diffopt+=vertical
 let g:vim_markdown_new_list_item_indent = 0
 """" }
 """"""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" lexima {}
+call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '{', 'input': '{'})
+call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': "'", 'input': "'"})
+call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '"', 'input': '"'})
+call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': ']', 'input': ']'})
+call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '}', 'input': '}'})
+"""" }
+""""""""""""""""""""""""""""""
+
+
+
+"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+"inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  "return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space> with inserting space.
+inoremap <expr><Space> pumvisible() ? "\<C-y><Space>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+"let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+
+
+" read local setting
+if filereadable(expand('~/.vimrc.local'))
+    source ~/.vimrc.local
+endif
