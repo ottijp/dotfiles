@@ -333,6 +333,7 @@ call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': "'", 'input': "'"})
 call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '"', 'input': '"'})
 call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': ']', 'input': ']'})
 call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '}', 'input': '}'})
+call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '`', 'input': '`'})
 """" }
 """"""""""""""""""""""""""""""
 
@@ -376,8 +377,8 @@ endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-h> pumvisible() ? "\<C-y><BS>" : "\<BS>"
+inoremap <expr><BS> pumvisible() ? "\<C-y><BS>" : "\<BS>"
 " Close popup by <Space> with inserting space.
 inoremap <expr><Space> pumvisible() ? "\<C-y><Space>" : "\<Space>"
 
