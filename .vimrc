@@ -151,7 +151,7 @@ if has('vim_starting')
         NeoBundle 'cohama/lexima.vim'
         NeoBundle 'Shougo/neocomplete.vim'
         NeoBundle 'majutsushi/tagbar'
-        NeoBundle 'leafgarland/typescript-vim'
+        NeoBundle 'Rykka/riv.vim'
 
         call neobundle#end()
 endif
