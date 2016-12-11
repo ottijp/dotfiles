@@ -151,6 +151,7 @@ if has('vim_starting')
         NeoBundle 'cohama/lexima.vim'
         NeoBundle 'Shougo/neocomplete.vim'
         NeoBundle 'majutsushi/tagbar'
+        NeoBundle 'Rykka/riv.vim'
 
         call neobundle#end()
 endif
@@ -331,8 +332,8 @@ let g:vim_markdown_new_list_item_indent = 0
 call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '{', 'input': '{'})
 call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': "'", 'input': "'"})
 call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '"', 'input': '"'})
-call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': ']', 'input': ']'})
-call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '}', 'input': '}'})
+call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '(', 'input': '('})
+call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '[', 'input': '['})
 call lexima#add_rule({'at': '\%#.*[-0-9a-zA-Z_,:]', 'char': '`', 'input': '`'})
 """" }
 """"""""""""""""""""""""""""""
