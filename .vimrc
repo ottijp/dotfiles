@@ -151,7 +151,9 @@ if has('vim_starting')
         NeoBundle 'cohama/lexima.vim'
         NeoBundle 'Shougo/neocomplete.vim'
         NeoBundle 'majutsushi/tagbar'
+        NeoBundle 'leafgarland/typescript-vim'
         NeoBundle 'Rykka/riv.vim'
+        NeoBundle 'Quramy/vim-js-pretty-template'
 
         call neobundle#end()
 endif
@@ -411,6 +413,13 @@ endif
 " https://github.com/c9s/perlomni.vim
 "let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
+
+""""""""""""""""""""""""""""""
+"""" vim-js-pretty-template {
+autocmd FileType typescript JsPreTmpl markdown
+autocmd FileType typescript syn clear foldBraces
+"""" }
+""""""""""""""""""""""""""""""
 
 
 " read local setting
