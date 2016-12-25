@@ -297,6 +297,8 @@ nnoremap <C-h> gT
 " jump to definition
 nnoremap ] g<C-]>
 nnoremap s] <C-w>]
+" set tags path
+set tags+=./tags,tags;$HOME
 
 """"""""""""""""""""""""""""""
 """" vim-tags {
