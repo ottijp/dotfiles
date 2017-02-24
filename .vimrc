@@ -19,10 +19,11 @@ set tabstop=4
 set shiftwidth=4
 
 " tab
-autocmd filetype coffee,javascript,jade,yaml setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+autocmd filetype coffee,javascript,jade,yaml,html setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
 
 " filetypes
 autocmd BufRead,BufWrite *.jade setfiletype jade
+autocmd BufNewFile,BufRead *.vue setfiletype html
 
 " 勝手に改行しない
 set tw=0
@@ -154,6 +155,8 @@ if has('vim_starting')
         NeoBundle 'leafgarland/typescript-vim'
         NeoBundle 'Rykka/riv.vim'
         NeoBundle 'Quramy/vim-js-pretty-template'
+        NeoBundle 'Shougo/context_filetype.vim'
+        NeoBundle 'osyo-manga/vim-precious'
 
         call neobundle#end()
 endif
