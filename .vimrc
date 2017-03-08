@@ -19,7 +19,7 @@ set tabstop=4
 set shiftwidth=4
 
 " tab
-autocmd filetype coffee,javascript,jade,yaml,html setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+autocmd filetype coffee,javascript,jade,yaml,html,json setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
 
 " filetypes
 autocmd BufRead,BufWrite *.jade setfiletype jade
