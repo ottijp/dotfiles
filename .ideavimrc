@@ -1,0 +1,58 @@
+" highlighten matched
+set hlsearch
+
+" incremental search
+set incsearch
+
+" disable search highlight
+nnoremap <ESC><ESC> :nohlsearch<CR>
+nnoremap <C-g><C-g> :nohlsearch<CR>
+
+" case insensitive search
+set ignorecase
+
+" case sensitive search if search word contains large letter
+set smartcase
+
+" cursor movement in insert mode
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+"
+" editing in insert mode
+inoremap <silent> <C-h> <C-g>u<C-h>
+inoremap <silent> <C-d> <Del>
+inoremap <silent> <C-k> <Esc>lc$
+inoremap <silent> <C-a> <C-o>0
+inoremap <silent> <C-e> <C-o>$
+
+" Enter to insert new line
+nnoremap <CR> o<ESC>
+
+" space to add space
+nnoremap <Space> i<Space><Esc>
+
+" ^g to cancel at any mode
+inoremap <silent> <C-g> <ESC>
+nnoremap <silent> <C-g> <ESC>
+cnoremap <silent> <C-g> <ESC>
+
+
+"""""""""""""""""""""""""""""""""""""""
+" window operations
+"""""""""""""""""""""""""""""""""""""""
+nnoremap s <Nop>
+
+" devide
+nnoremap ss :<C-u>sp<CR><C-w>j
+nnoremap sv :<C-u>vs<CR><C-w>l
+
+" move cursor
+nnoremap sh <C-w>h
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sw <C-w>w
+
+" change tab
+nnoremap <C-l> gt
+nnoremap <C-h> gT
