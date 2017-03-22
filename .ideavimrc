@@ -19,7 +19,7 @@ inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 "
 " editing in insert mode
-inoremap <silent> <C-h> <C-g>u<C-h>
+inoremap <silent> <C-h> <BS>
 inoremap <silent> <C-d> <Del>
 inoremap <silent> <C-k> <Esc>lc$
 inoremap <silent> <C-a> <C-o>0
