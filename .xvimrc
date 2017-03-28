@@ -11,3 +11,7 @@ set ignorecase
 
 " change highlight color
 :highlight Search guibg=blue
+
+" tab operations
+nnoremap <C-h> :xccmd selectPreviousTab<CR>
+nnoremap <C-l> :xccmd selectNextTab<CR>
