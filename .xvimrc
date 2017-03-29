@@ -15,3 +15,4 @@ set ignorecase
 " tab operations
 nnoremap <C-h> :xccmd selectPreviousTab<CR>
 nnoremap <C-l> :xccmd selectNextTab<CR>
+nnoremap st :xccmd newTab<CR>
