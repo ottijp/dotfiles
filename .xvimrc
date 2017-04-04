@@ -11,3 +11,13 @@ set ignorecase
 
 " change highlight color
 :highlight Search guibg=blue
+
+" tab operations
+nnoremap <C-h> :xccmd selectPreviousTab<CR>
+nnoremap <C-l> :xccmd selectNextTab<CR>
+nnoremap st :xccmd newTab<CR>
+
+" history operations
+" (you must disable predefined keymap for C-i and C-o in XCode preference)
+nnoremap <C-i> :xccmd goBackInHistoryByCommand<CR>
+nnoremap <C-o> :xccmd goForwardInHistoryByCommand<CR>

@@ -195,6 +195,8 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 " NERDTreeの設定
 """"""""""""""""""""""""""""""
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
+" quit NERDTree on open
+let NERDTreeQuitOnOpen=1
 
 
 """"""""""""""""""""""""""""""
