@@ -61,7 +61,14 @@ inoremap <silent> <C-a> <C-o>0
 inoremap <silent> <C-e> <C-o>$
 
 " 通常モードEnterで空行挿入(S-CRは使うのにトリックが要る）
-nnoremap <CR> o<ESC>
+function! NewLineWithEnter()
+    if &modifiable
+        execute "normal! o\<ESC>"
+    else
+        execute "normal! \<CR>"
+    endif
+endfunction
+nnoremap <CR> :call NewLineWithEnter()<CR>
 
 " space to add space
 nnoremap <Space> i<Space><Esc>
