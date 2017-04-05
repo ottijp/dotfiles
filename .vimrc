@@ -19,8 +19,9 @@ set tabstop=2
 set shiftwidth=2
 
 " filetypes
-autocmd BufRead,BufWrite *.jade setfiletype jade
-autocmd BufNewFile,BufRead *.vue setfiletype html
+autocmd BufRead,BufWrite *.jade setfiletype pug
+autocmd BufRead,BufWrite *.pug setfiletype pug
+autocmd BufRead,BufWrite *.vue setfiletype html
 
 " 勝手に改行しない
 set tw=0
@@ -161,6 +162,7 @@ if has('vim_starting')
         NeoBundle 'Quramy/vim-js-pretty-template'
         NeoBundle 'Shougo/context_filetype.vim'
         NeoBundle 'osyo-manga/vim-precious'
+        NeoBundle 'digitaltoad/vim-pug'
 
         call neobundle#end()
 endif
@@ -421,6 +423,45 @@ autocmd FileType typescript syn clear foldBraces
 """" }
 """"""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""
+"""" context_filetype {
+if !exists('g:context_filetype#filetypes')
+    let g:context_filetype#filetypes = {}
+endif
+" vue single component file
+let g:context_filetype#filetypes.html =
+      \ [
+      \   {
+      \    'start': '<template\%( [^>]*\)\? lang="\(pug\|jade\)"\%( [^>]*\)\?>',
+      \    'end': '</template>', 'filetype': 'pug',
+      \   },
+      \   {
+      \    'start': '<style\%( [^>]*\)\? lang="s[ac]ss"\%( [^>]*\)\?>',
+      \    'end': '</style>', 'filetype': 'scss',
+      \   },
+      \   {
+      \    'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
+      \    'end': '</script>', 'filetype': 'javascript',
+      \   },
+      \   {
+      \    'start': '<script\%( [^>]*\)\? type="text/coffeescript"\%( [^>]*\)\?>',
+      \    'end': '</script>', 'filetype': 'coffee',
+      \   },
+      \   {
+      \    'start': '<script\%( [^>]*\)\?>',
+      \    'end': '</script>', 'filetype': 'javascript',
+      \   },
+      \   {
+      \    'start': '<style\%( [^>]*\)\?>',
+      \    'end': '</style>', 'filetype': 'css',
+      \   },
+      \   {
+      \    'start': '<[^>]\+ style="',
+      \    'end': '"', 'filetype': 'css',
+      \   },
+      \ ]
+"""" }
+""""""""""""""""""""""""""""""
 
 " read local setting
 if filereadable(expand('~/.vimrc.local'))
