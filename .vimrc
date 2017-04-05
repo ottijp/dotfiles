@@ -15,11 +15,8 @@ set undodir=$HOME/vimbackup
 set expandtab
 
 " タブ幅
-set tabstop=4
-set shiftwidth=4
-
-" tab
-autocmd filetype coffee,javascript,jade,yaml,html,json setlocal shiftwidth=2 softtabstop=2 tabstop=2 expandtab
+set tabstop=2
+set shiftwidth=2
 
 " filetypes
 autocmd BufRead,BufWrite *.jade setfiletype jade
