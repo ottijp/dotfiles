@@ -19,9 +19,12 @@ set tabstop=2
 set shiftwidth=2
 
 " filetypes
-autocmd BufRead,BufWrite *.jade setfiletype pug
-autocmd BufRead,BufWrite *.pug setfiletype pug
-autocmd BufRead,BufWrite *.vue setfiletype html
+augroup my_filetypes
+  autocmd!
+  autocmd BufRead,BufWrite *.jade setfiletype pug
+  autocmd BufRead,BufWrite *.pug setfiletype pug
+  autocmd BufRead *.vue setfiletype html
+augroup END
 
 " 勝手に改行しない
 set tw=0
