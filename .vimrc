@@ -201,11 +201,14 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 
 """"""""""""""""""""""""""""""
-" NERDTreeの設定
-""""""""""""""""""""""""""""""
+"""" NERDTree {
 nnoremap <silent><C-e> :NERDTreeToggle<CR>
 " quit NERDTree on open
-let NERDTreeQuitOnOpen=1
+let g:NERDTreeQuitOnOpen=1
+" ignore system files
+let g:NERDTreeIgnore=['\.DS_Store']
+"""" }
+""""""""""""""""""""""""""""""
 
 
 """"""""""""""""""""""""""""""
