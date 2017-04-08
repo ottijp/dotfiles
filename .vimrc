@@ -207,6 +207,8 @@ nnoremap <silent><C-e> :NERDTreeToggle<CR>
 let g:NERDTreeQuitOnOpen=1
 " ignore system files
 let g:NERDTreeIgnore=['\.DS_Store']
+" show hidden files on startup
+let g:NERDTreeShowHidden=1
 """" }
 """"""""""""""""""""""""""""""
 
