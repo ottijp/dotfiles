@@ -14,7 +14,6 @@ chmod +x .git-prompt
 ln -snf ~/dotfiles/.git-prompt.sh ~/.git-prompt.sh
 ln -snf ~/dotfiles/.ctags ~/.ctags
 ln -snf ~/dotfiles/karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml
-ln -snf ~/dotfiles/Keyhac/config.py ~/Library/Application\ Support/Keyhac/config.py
 
 mkdir -p ~/vimbackup
 mkdir -p ~/.vim
