@@ -209,6 +209,8 @@ let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeIgnore=['\.DS_Store']
 " show hidden files on startup
 let g:NERDTreeShowHidden=1
+" show bookmarks on startup
+let g:NERDTreeShowBookmarks=1
 " close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 """" }
