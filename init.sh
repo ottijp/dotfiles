@@ -16,6 +16,7 @@ ln -snf ~/dotfiles/.ctags ~/.ctags
 ln -snf ~/dotfiles/karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml
 mkdir -p ~/.hammerspoon
 ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
+ln -snf ~/dotfiles/.iterm2 ~/.iterm2
 
 mkdir -p ~/vimbackup
 mkdir -p ~/.vim
