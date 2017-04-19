@@ -166,6 +166,7 @@ if has('vim_starting')
         NeoBundle 'Shougo/context_filetype.vim'
         NeoBundle 'osyo-manga/vim-precious'
         NeoBundle 'digitaltoad/vim-pug'
+        NeoBundle 'tpope/vim-surround'
 
         call neobundle#end()
 endif
