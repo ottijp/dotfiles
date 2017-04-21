@@ -24,6 +24,8 @@ augroup my_filetypes
   autocmd BufRead,BufWrite *.jade setfiletype pug
   autocmd BufRead,BufWrite *.pug setfiletype pug
   autocmd BufRead *.vue setfiletype html
+  " Markdown
+  autocmd BufNewFile,BufRead *.md setlocal tabstop=4 shiftwidth=4
 augroup END
 
 " 勝手に改行しない
