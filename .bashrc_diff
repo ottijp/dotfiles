@@ -6,6 +6,8 @@ alias ls="ls -F"
 alias la="ls -Fa"
 alias ll="ls -Fl"
 alias lla="ls -Fal"
+alias tmux-changekey='tmux set-option -ag prefix C-b'
+alias tmux-revertkey='tmux set-option -ag prefix C-t'
 
 # locale
 export LC_ALL=en_US.UTF-8
