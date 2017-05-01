@@ -130,7 +130,18 @@ if has('syntax')
 endif
 """"""""""""""""""""""""""""""
 
-colorscheme hybrid
+" color scheme
+function UpdateColorScheme()
+  if &readonly && &buftype ==# ""
+    colorscheme morning
+  else
+    colorscheme hybrid
+  endif
+endfunction
+augroup my_colorscheme
+  autocmd!
+  autocmd BufReadPost,BufEnter * call UpdateColorScheme()
+augroup END
 
 
 filetype plugin indent off
