@@ -180,6 +180,7 @@ if has('vim_starting')
         NeoBundle 'osyo-manga/vim-precious'
         NeoBundle 'digitaltoad/vim-pug'
         NeoBundle 'tpope/vim-surround'
+        NeoBundle 'junegunn/fzf'
 
         call neobundle#end()
 endif

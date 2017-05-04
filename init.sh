@@ -17,6 +17,7 @@ ln -snf ~/dotfiles/karabiner/private.xml ~/Library/Application\ Support/Karabine
 mkdir -p ~/.hammerspoon
 ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
 ln -snf ~/dotfiles/.iterm2 ~/.iterm2
+ln -snf ~/dotfiles/.fzf.bash ~/.fzf.bash
 
 mkdir -p ~/vimbackup
 mkdir -p ~/.vim
