@@ -2,10 +2,10 @@
 stty stop undef
 
 # command alias
-alias ls="ls -F"
-alias la="ls -Fa"
-alias ll="ls -Fl"
-alias lla="ls -Fal"
+alias ls="ls -GF"
+alias la="ls -GFa"
+alias ll="ls -GFl"
+alias lla="ls -GFal"
 alias tmux-changekey='tmux set-option -ag prefix C-b'
 alias tmux-revertkey='tmux set-option -ag prefix C-t'
 
