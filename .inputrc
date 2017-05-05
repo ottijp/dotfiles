@@ -1,0 +1,24 @@
+set editing-mode vi
+
+set bell-style visible
+set completion-ignore-case on
+
+$if Bash
+  Space: magic-space
+$endif
+
+set keymap vi-command
+Control-p: previous-history
+Control-n: next-history
+
+set keymap vi-insert
+Control-a: beginning-of-line
+Control-b: backward-char
+Control-d: delete-char
+Control-e: end-of-line
+Control-f: forward-char
+Control-g: vi-movement-mode
+Control-k: kill-line
+Control-l: clear-screen
+Control-n: next-history
+Control-p: previous-history

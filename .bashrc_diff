@@ -92,5 +92,9 @@ function tmux_automatically_attach_session()
 }
 tmux_automatically_attach_session
 
+# vi mode
+set -o vi
+
+# fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_OPTS='--border --height 90%'
