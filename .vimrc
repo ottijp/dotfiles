@@ -131,11 +131,14 @@ endif
 """"""""""""""""""""""""""""""
 
 " color scheme
-function UpdateColorScheme()
-  if &readonly && &buftype ==# ""
+syntax enable
+function! UpdateColorScheme()
+  if &readonly && &buftype ==# "" && @% !~ "^fugitive:\/\/" && expand("%:p") !~ "\.git\/index$"
+    set background=light
     colorscheme morning
   else
-    colorscheme hybrid
+    set background=dark
+    colorscheme solarized
   endif
 endfunction
 augroup my_colorscheme
@@ -181,6 +184,7 @@ if has('vim_starting')
         NeoBundle 'digitaltoad/vim-pug'
         NeoBundle 'tpope/vim-surround'
         NeoBundle 'junegunn/fzf'
+        NeoBundle 'altercation/vim-colors-solarized'
 
         call neobundle#end()
 endif
