@@ -19,6 +19,7 @@ ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
 ln -snf ~/dotfiles/.iterm2 ~/.iterm2
 ln -snf ~/dotfiles/.fzf.bash ~/.fzf.bash
 ln -snf ~/dotfiles/.inputrc ~/.inputrc
+ln -snf ~/dotfiles/.bashrc ~/.bashrc
 
 mkdir -p ~/vimbackup
 mkdir -p ~/.vim
