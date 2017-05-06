@@ -1,6 +1,15 @@
 # undef console output stop (enable bash's incremental search)
 stty stop undef
 
+# functions
+function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
+function is_osx() { [[ $OSTYPE == darwin* ]]; }
+function is_screen_running() { [ ! -z "$STY" ]; }
+function is_tmux_runnning() { [ ! -z "$TMUX" ]; }
+function is_screen_or_tmux_running() { is_screen_running || is_tmux_runnning; }
+function shell_has_started_interactively() { [ ! -z "$PS1" ]; }
+function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
+
 # command alias
 alias ls="ls -GF"
 alias la="ls -GFa"
@@ -24,9 +33,12 @@ GIT_PS1_SHOWSTASHSTATE=1
 export PS1='\[\e[36m\]\u@\h:\[\e[35m\]\W\[\e[1;32m\]$(__git_ps1 " (%s)")\[\e[36m\] \$\[\e[0m\] '
 
 # editor for osx
-export EDITOR=/Applications/MacVim.app/Contents/MacOS/Vim
-alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+MACVIM_PATH="/Applications/MacVim.app"
+if is_osx and [ -f "$MACVIM_PATH" ]; then
+  export EDITOR="$MACVIM_PATH/Contents/MacOS/Vim"
+  alias vi='env LANG=ja_JP.UTF-8 '"$MACVIM_PATH"'/Contents/MacOS/Vim "$@"'
+  alias vim='env LANG=ja_JP.UTF-8 '"$MACVIM_PATH"'/Contents/MacOS/Vim "$@"'
+fi
 
 # ctags
 alias ctags=`brew --prefix`/bin/ctags
@@ -34,16 +46,10 @@ alias ctags=`brew --prefix`/bin/ctags
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
+# local bin path
 export PATH=$PATH:~/bin
 
-# functions
-function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
-function is_osx() { [[ $OSTYPE == darwin* ]]; }
-function is_screen_running() { [ ! -z "$STY" ]; }
-function is_tmux_runnning() { [ ! -z "$TMUX" ]; }
-function is_screen_or_tmux_running() { is_screen_running || is_tmux_runnning; }
-function shell_has_started_interactively() { [ ! -z "$PS1" ]; }
-function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
 
 # tmux auto start
 # http://qiita.com/b4b4r07/items/01359e8a3066d1c37edc
