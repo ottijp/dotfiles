@@ -103,6 +103,9 @@ export FZF_DEFAULT_OPTS='--reverse --border --height 50%'
 # ignore case in completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
+# no beep
+setopt NOBEEP
+
 
 #-----------------------------------
 # tmux auto start
