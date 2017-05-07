@@ -100,6 +100,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--reverse --border --height 50%'
 
+# ignore case in completion
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
 
 #-----------------------------------
 # tmux auto start
