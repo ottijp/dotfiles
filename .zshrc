@@ -11,7 +11,8 @@ function is_tmux_runnning() { [ ! -z "$TMUX" ]; }
 function is_screen_or_tmux_running() { is_screen_running || is_tmux_runnning; }
 function shell_has_started_interactively() { [ ! -z "$PROMPT" ]; }
 function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
-function cd () { builtin cd "$@" && ls }
+function cdls () { builtin cd "$@" && ls -GF }
+function mkdircd () { mkdir -p "$@" && builtin cd "$@" }
 
 # search src with fzf
 fzf-src() {
@@ -35,6 +36,7 @@ alias ls="ls -GF"
 alias la="ls -GFa"
 alias ll="ls -GFl"
 alias lla="ls -GFal"
+alias cd=cdls
 
 # tmux
 alias tmux-changekey='tmux set-option -ag prefix C-b'
