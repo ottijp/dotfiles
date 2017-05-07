@@ -46,6 +46,12 @@ if is_osx and [ -f "$MACVIM_PATH" ]; then
   alias vim='env LANG=ja_JP.UTF-8 '"$MACVIM_PATH"'/Contents/MacOS/Vim "$@"'
 fi
 
+# Go lang
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=$HOME
+export GOBIN=$HOME/bin/go
+export PATH=$PATH:$GOBIN
+
 
 #-----------------------------------
 # Others
