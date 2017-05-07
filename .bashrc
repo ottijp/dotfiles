@@ -1,7 +1,9 @@
 # undef console output stop (enable bash's incremental search)
 stty stop undef
 
+#-----------------------------------
 # functions
+#-----------------------------------
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
 function is_osx() { [[ $OSTYPE == darwin* ]]; }
 function is_screen_running() { [ ! -z "$STY" ]; }
@@ -10,27 +12,31 @@ function is_screen_or_tmux_running() { is_screen_running || is_tmux_runnning; }
 function shell_has_started_interactively() { [ ! -z "$PS1" ]; }
 function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
 
-# command alias
+
+#-----------------------------------
+# command alias and env vars
+#-----------------------------------
+# ls
 alias ls="ls -GF"
 alias la="ls -GFa"
 alias ll="ls -GFl"
 alias lla="ls -GFal"
+
+# tmux
 alias tmux-changekey='tmux set-option -ag prefix C-b'
 alias tmux-revertkey='tmux set-option -ag prefix C-t'
+
+# ctags
+alias ctags=`brew --prefix`/bin/ctags
 
 # locale
 export LC_ALL=en_US.UTF-8
 
-# git utilities
-source ~/.git-completion.bash
-source ~/.git-prompt.sh
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_PS1_SHOWUPSTREAM=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
-GIT_PS1_SHOWSTASHSTATE=1
-
 # prompt
 export PS1='\[\e[36m\]\u@\h:\[\e[35m\]\W\[\e[1;32m\]$(__git_ps1 " (%s)")\[\e[36m\] \$\[\e[0m\] '
+
+# local bin path
+export PATH=$PATH:~/bin
 
 # editor for osx
 MACVIM_PATH="/Applications/MacVim.app"
@@ -40,18 +46,33 @@ if is_osx and [ -f "$MACVIM_PATH" ]; then
   alias vim='env LANG=ja_JP.UTF-8 '"$MACVIM_PATH"'/Contents/MacOS/Vim "$@"'
 fi
 
-# ctags
-alias ctags=`brew --prefix`/bin/ctags
+
+#-----------------------------------
+# Others
+#-----------------------------------
+# git utilities
+source ~/.git-completion.bash
+source ~/.git-prompt.sh
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUPSTREAM=1
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWSTASHSTATE=1
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
-# local bin path
-export PATH=$PATH:~/bin
+# vi mode
+set -o vi
+
+# fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_OPTS='--reverse --border --height 50%'
 
 
+#-----------------------------------
 # tmux auto start
+#-----------------------------------
 # http://qiita.com/b4b4r07/items/01359e8a3066d1c37edc
 function tmux_automatically_attach_session()
 {
@@ -110,10 +131,3 @@ function tmux_automatically_attach_session()
   fi
 }
 tmux_automatically_attach_session
-
-# vi mode
-set -o vi
-
-# fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_OPTS='--reverse --border --height 50%'
