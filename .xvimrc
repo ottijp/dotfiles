@@ -21,3 +21,9 @@ nnoremap st :xccmd newTab<CR>
 " (you must disable predefined keymap for C-i and C-o in XCode preference)
 nnoremap <C-i> :xccmd goBackInHistoryByCommand<CR>
 nnoremap <C-o> :xccmd goForwardInHistoryByCommand<CR>
+
+# window operations
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sh <C-w>h
+nnoremap sl <C-w>l
