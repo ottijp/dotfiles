@@ -106,6 +106,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # no beep
 setopt NOBEEP
 
+# read local rc
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
 
 #-----------------------------------
 # tmux auto start
