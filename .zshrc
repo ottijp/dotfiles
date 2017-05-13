@@ -11,7 +11,7 @@ function is_tmux_runnning() { [ ! -z "$TMUX" ]; }
 function is_screen_or_tmux_running() { is_screen_running || is_tmux_runnning; }
 function shell_has_started_interactively() { [ ! -z "$PROMPT" ]; }
 function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
-function cdls () { builtin cd "$@" && ls -GF }
+function chpwd () { ls -GF }
 function mkdircd () { mkdir -p "$@" && builtin cd "$@" }
 
 # search src with fzf
@@ -24,8 +24,6 @@ fzf-src() {
   fi
   zle reset-prompt
 }
-zle -N fzf-src
-bindkey '^]' fzf-src
 
 
 #-----------------------------------
@@ -36,7 +34,6 @@ alias ls="ls -GF"
 alias la="ls -GFa"
 alias ll="ls -GFl"
 alias lla="ls -GFal"
-alias cd=cdls
 
 # tmux
 alias tmux-changekey='tmux set-option -ag prefix C-b'
@@ -52,6 +49,24 @@ export LC_ALL=en_US.UTF-8
 setopt PROMPT_SUBST
 source ~/.zsh/completion/git-prompt.sh
 export PROMPT=$'%{\e[36m%}%n@%m:%{\e[35m%}%c%{\e[0;34m%}$(__git_ps1 " (%s)")%{\e[36m%} \$%{\e[0m%} '
+
+# command histories
+export HISTFILE=~/.zhistory
+touch ~/.zhistory
+export HISTSIZE=1000
+export SAVEHIST=100000
+setopt hist_ignore_dups
+setopt EXTENDED_HISTORY
+setopt share_history
+setopt hist_reduce_blanks
+
+# report time of long task
+export REPORTTIME=10
+
+# cd completion
+export DIRSTACKSIZE=100
+setopt auto_cd
+setopt auto_pushd
 
 # local bin path
 export PATH=$PATH:~/bin
@@ -88,6 +103,8 @@ bindkey -M viins '^P'  up-line-or-history
 bindkey -M viins '^U'  backward-kill-line
 bindkey -M viins '^W'  backward-kill-word
 bindkey -M viins '^Y'  yank
+zle -N fzf-src
+bindkey '^]' fzf-src
 
 #-----------------------------------
 # Others
