@@ -53,6 +53,17 @@ setopt PROMPT_SUBST
 source ~/.zsh/completion/git-prompt.sh
 export PROMPT=$'%{\e[36m%}%n@%m:%{\e[35m%}%c%{\e[0;34m%}$(__git_ps1 " (%s)")%{\e[36m%} \$%{\e[0m%} '
 
+# command histories
+export HISTFILE=~/.zhistory
+touch ~/.zhistory
+export HISTSIZE=1000
+export SAVEHIST=100000
+setopt hist_ignore_dups
+setopt EXTENDED_HISTORY
+setopt share_history
+setopt hist_reduce_blanks
+
+
 # local bin path
 export PATH=$PATH:~/bin
 
