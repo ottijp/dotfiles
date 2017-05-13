@@ -24,8 +24,6 @@ fzf-src() {
   fi
   zle reset-prompt
 }
-zle -N fzf-src
-bindkey '^]' fzf-src
 
 
 #-----------------------------------
@@ -65,6 +63,10 @@ setopt hist_reduce_blanks
 # report time of long task
 export REPORTTIME=10
 
+# cd completion
+export DIRSTACKSIZE=100
+setopt auto_cd
+setopt auto_pushd
 
 # local bin path
 export PATH=$PATH:~/bin
@@ -101,6 +103,8 @@ bindkey -M viins '^P'  up-line-or-history
 bindkey -M viins '^U'  backward-kill-line
 bindkey -M viins '^W'  backward-kill-word
 bindkey -M viins '^Y'  yank
+zle -N fzf-src
+bindkey '^]' fzf-src
 
 #-----------------------------------
 # Others
