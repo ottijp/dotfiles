@@ -62,6 +62,9 @@ setopt EXTENDED_HISTORY
 setopt share_history
 setopt hist_reduce_blanks
 
+# report time of long task
+export REPORTTIME=10
+
 
 # local bin path
 export PATH=$PATH:~/bin
