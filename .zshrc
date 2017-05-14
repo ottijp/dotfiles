@@ -63,6 +63,9 @@ setopt hist_reduce_blanks
 # report time of long task
 export REPORTTIME=10
 
+# command correction
+setopt correct
+
 # cd completion
 export DIRSTACKSIZE=100
 setopt auto_cd
