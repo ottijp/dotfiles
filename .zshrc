@@ -70,6 +70,7 @@ setopt correct
 export DIRSTACKSIZE=100
 setopt auto_cd
 setopt auto_pushd
+setopt pushd_ignore_dups
 
 # local bin path
 export PATH=$PATH:~/bin
