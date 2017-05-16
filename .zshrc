@@ -35,6 +35,9 @@ alias la="ls -GFa"
 alias ll="ls -GFl"
 alias lla="ls -GFal"
 
+# mkdir
+alias mkdir='mkdir -p'
+
 # tmux
 alias tmux-changekey='tmux set-option -ag prefix C-b'
 alias tmux-revertkey='tmux set-option -ag prefix C-t'
