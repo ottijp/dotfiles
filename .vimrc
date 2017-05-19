@@ -81,15 +81,6 @@ nnoremap <CR> :call NewLineWithEnter()<CR>
 " space to add space
 nnoremap <Space> i<Space><Esc>
 
-
-" 引用符、括弧の自動補完
-"inoremap { {}<Left>
-"inoremap [ []<Left>
-"inoremap ( ()<Left>
-"inoremap " ""<Left>
-"inoremap ' ''<Left>
-"inoremap <> <><Left> 
-
 " キャンセル
 inoremap <silent> <C-g> <ESC>
 nnoremap <silent> <C-g> <ESC>
