@@ -45,6 +45,10 @@ alias tmux-revertkey='tmux set-option -ag prefix C-t'
 # ctags
 alias ctags=`brew --prefix`/bin/ctags
 
+# git
+alias gs="git status"
+alias gf="git diff"
+
 # locale
 export LC_ALL=en_US.UTF-8
 
