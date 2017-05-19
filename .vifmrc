@@ -1,0 +1,2 @@
+" single stroke to access command line
+nnoremap ; :
