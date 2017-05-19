@@ -92,6 +92,9 @@ export GOPATH=$HOME
 export GOBIN=$HOME/bin/go
 export PATH=$PATH:$GOBIN
 
+# vifm
+export MYVIFMRC=~/.vifmrc
+
 #-----------------------------------
 # Key bindings
 #-----------------------------------

@@ -44,6 +44,11 @@ set showmatch
 set hlsearch
 " インクリメンタルサーチ
 set incsearch
+
+
+" single stroke to access command line
+nnoremap ; :
+
 " disable search highlight
 nnoremap <ESC><ESC> :nohlsearch<CR>
 nnoremap <C-g><C-g> :nohlsearch<CR>
