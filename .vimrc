@@ -4,7 +4,7 @@ set autoindent
 set smarttab
 
 " ファイルのあるディレクトリをカレントディレクトリにする
-set autochdir
+" set autochdir
 
 " バックアップ、スワップファイルの変更
 set backupdir=$HOME/vimbackup
@@ -181,6 +181,7 @@ if has('vim_starting')
         NeoBundle 'tpope/vim-surround'
         NeoBundle 'junegunn/fzf'
         NeoBundle 'altercation/vim-colors-solarized'
+        NeoBundle 'Shougo/vimfiler'
 
         call neobundle#end()
 endif
