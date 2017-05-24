@@ -1,8 +1,3 @@
-" 新しい行のインデントを現在行と同じにする
-set autoindent
-" 新しい行で高度な自動インデント
-set smarttab
-
 " ファイルのあるディレクトリをカレントディレクトリにする
 " set autochdir
 
@@ -11,21 +6,46 @@ set backupdir=$HOME/vimbackup
 set directory=$HOME/vimbackup
 set undodir=$HOME/vimbackup
 
-" タブの代わりに空白文字を指定
+
+""""""""""""""""""""""""""""""
+"""" tab and indent {
+" space instead of tab
 set expandtab
 
-" タブ幅
+" default tab width
 set tabstop=2
 set shiftwidth=2
+set softtabstop=2
+
+" change tab width
+function! ChangeTabWidth(w)
+  let &l:tabstop = a:w
+  let &l:shiftwidth = a:w
+  let &l:softtabstop = a:w
+  echo "ChangeTabWidth " a:w
+endfunction
+
+" indent on new line
+set autoindent
+
+" block indentation
+set smarttab
+
+" extension customize
+augroup aug_tab_indent
+  autocmd!
+  autocmd BufRead,BufWrite *.md call ChangeTabWidth(4)
+augroup END
+
+"""" }
+""""""""""""""""""""""""""""""
 
 " filetypes
-augroup my_filetypes
+augroup aug_filetypes
   autocmd!
   autocmd BufRead,BufWrite *.jade setfiletype pug
   autocmd BufRead,BufWrite *.pug setfiletype pug
   autocmd BufRead *.vue setfiletype html
-  " Markdown
-  autocmd BufNewFile,BufRead *.md setlocal tabstop=4 shiftwidth=4
 augroup END
 
 " 勝手に改行しない
