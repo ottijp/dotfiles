@@ -170,8 +170,6 @@ if has('vim_starting')
         set runtimepath+=$HOME/.vim/bundle/neobundle.vim
         call neobundle#begin(expand('~/.vim/bundle/'))
         NeoBundleFetch 'Shougo/neobundle.vim'
-
-        NeoBundle "sudar/vim-arduino-syntax"
         NeoBundle "Shougo/unite.vim"
         NeoBundle "Shougo/neomru.vim"
         NeoBundle "scrooloose/nerdtree"
