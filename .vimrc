@@ -172,11 +172,17 @@ if has('vim_starting')
         NeoBundleFetch 'Shougo/neobundle.vim'
         NeoBundle "Shougo/unite.vim"
         NeoBundle "Shougo/neomru.vim"
-        NeoBundle "scrooloose/nerdtree"
+        NeoBundleLazy 'scrooloose/nerdtree', {
+              \   'commands' : 'NERDTree'
+              \}
         NeoBundle "tomtom/tcomment_vim"
         "NeoBundle "h1mesuke/vim-alignta"
-        NeoBundle 'plasticboy/vim-markdown'
-        NeoBundle 'kannokanno/previm'
+        NeoBundleLazy 'plasticboy/vim-markdown', {
+              \   'autoload' : { 'filetypes' : ['markdown'] }
+              \}
+        NeoBundleLazy 'kannokanno/previm', {
+              \   'autoload' : { 'filetypes' : ['markdown'] }
+              \}
         NeoBundle 'tyru/open-browser.vim'
         NeoBundle 'xolox/vim-session', { 'depends' : 'xolox/vim-misc' }
         NeoBundle 'kana/vim-submode'
@@ -191,8 +197,12 @@ if has('vim_starting')
         NeoBundle 'cohama/lexima.vim'
         NeoBundle 'Shougo/neocomplete.vim'
         NeoBundle 'majutsushi/tagbar'
-        NeoBundle 'leafgarland/typescript-vim'
-        NeoBundle 'Rykka/riv.vim'
+        NeoBundleLazy 'leafgarland/typescript-vim', {
+              \   'autoload' : { 'filename_patterns' : '.*\.ts' }
+              \}
+        NeoBundleLazy 'Rykka/riv.vim', {
+              \   'autoload' : { 'filetypes' : ['rst'] }
+              \}
         NeoBundle 'Quramy/vim-js-pretty-template'
         NeoBundle 'Shougo/context_filetype.vim'
         NeoBundle 'osyo-manga/vim-precious'
