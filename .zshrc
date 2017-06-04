@@ -49,6 +49,9 @@ alias ctags=`brew --prefix`/bin/ctags
 alias gs="git status"
 alias gf="git diff"
 
+# tree
+alias tree="tree -I node_modules -L 3"
+
 # locale
 export LC_ALL=en_US.UTF-8
 
