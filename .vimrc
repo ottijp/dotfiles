@@ -212,6 +212,7 @@ if has('vim_starting')
         NeoBundle 'altercation/vim-colors-solarized'
         NeoBundle 'Shougo/vimfiler'
         NeoBundle 'mattn/benchvimrc-vim'
+        NeoBundle 'junegunn/vim-easy-align'
 
         call neobundle#end()
 endif
@@ -520,6 +521,12 @@ let g:context_filetype#filetypes.html =
       \    'end': '"', 'filetype': 'css',
       \   },
       \ ]
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" vim-easy-align {
+xmap ga <Plug>(EasyAlign)
 """" }
 """"""""""""""""""""""""""""""
 
