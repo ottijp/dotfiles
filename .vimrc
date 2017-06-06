@@ -527,6 +527,9 @@ let g:context_filetype#filetypes.html =
 """"""""""""""""""""""""""""""
 """" vim-easy-align {
 xmap ga <Plug>(EasyAlign)
+let g:easy_align_delimiters = {
+\  ':': { 'pattern': ':', 'left_margin': 0, 'right_margin': 1, 'stick_to_left': 0 }
+\ }
 """" }
 """"""""""""""""""""""""""""""
 
