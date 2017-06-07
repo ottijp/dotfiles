@@ -2,22 +2,22 @@
 "General
 "================
 
-"入力時に自動フォーカスしない
+" do not focus on textbox automatically
 set focuscontent
-" ビジュアルベルを表示しない
+" use visual bell instead of beep
 set visualbell
 highlight Bell display:none
-" :oなどでの補完候補をサーチエンジン、履歴に限定
+" restrict to search engine and history in ':o' completion
 set complete=sl
-" Hintモードでアルファベット使用
+" chars in hint mode
 "set hintchars=lsjdkfgh
 set hintchars=ghfjdkslatyrueiwoqpbnvmcxz
-" ツールバーはアドオンとタブのみ表示
+" display only addon and tab
 "set gui=nonavigation
-" commandモードでIMEオフ
+" disable IME in command mode
 style! -name=commandline-ime chrome://* #liberator-commandline-command input {ime-mode: inactive;}
 
-" エディタ設定
+" use vim for editor
 set editor='/Applications/MacVim.app/Contents/MacOS/mvim -f'
 
 " main_coon
@@ -28,40 +28,40 @@ let g:maine_coon_style = "height: 1em; margin:0; padding: 3px; border: 1px solid
 " Key mapping
 "============================
 
-" google検索を手早くする
+" shortcut for google
 noremap s :open<Space>google<Space>
 noremap ,s :tabopen<Space>google<Space>
 
-" スクロール移動量を7倍に
+" scroll x7
 noremap j 7<C-e>
 noremap k 7<C-y>
 
-" タブ移動
+" swtiching tab
 noremap <C-h> gT
 noremap <C-l> gt
 
-" ウィンドウ閉じる
+" close tab
 noremap x d
 
-" undo一覧から開く
+" open from undo list
 nnoremap U :undo<Space>
 
-" ページタイトルをクリップボードにコピー
-nnoremap ct :js util.copyToClipboard(buffer.title);<CR>:echo 'titleのコピー完了!'<CR>
+" copy page title to clipboard
+nnoremap ct :js util.copyToClipboard(buffer.title);<CR>:echo 'title copied!'<CR>
 
-" URLをクリップボードにコピー
-nnoremap cu :js util.copyToClipboard(buffer.URL);<CR>:echo 'urlのコピー完了!'<CR>
+" copy URL to clipboard
+nnoremap cu :js util.copyToClipboard(buffer.URL);<CR>:echo 'url copied!'<CR>
 
 "============================
 " colorscheme
 "============================
 "hi Hint z-index:5000; font-family:Menlo; font-size:14px; color:white; background-color:red; border-color:ButtonShadow; border-width:0px; border-style:solid; padding:0px 2px 0px 2px; position:absolute;
 
-" デフォルトのヒント派手すぎ＞＜
+" smooth hint style
 hi Hint font-family: Arial; font-size: 19px; font-weight: regular; text-shadow: -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black, 1px 1px 1px black; color: #33cccc;
 hi HintElem color: gray; background-color: #a1e4e6;
 hi HintActive color: black; background-color: #ff8700;
 
-" デフォルトのエラー赤くてこわい＞＜
+" smooth error style
 hi ErrorMsg color:white; background-color: #ec6aa1;
 

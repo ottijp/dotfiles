@@ -1,7 +1,7 @@
-" ファイルのあるディレクトリをカレントディレクトリにする
+" change current directory to file directory automatically
 " set autochdir
 
-" バックアップ、スワップファイルの変更
+" backup/swap/undo directories
 set backupdir=$HOME/vimbackup
 set directory=$HOME/vimbackup
 set undodir=$HOME/vimbackup
@@ -48,21 +48,21 @@ augroup aug_filetypes
   autocmd BufRead *.vue setfiletype html
 augroup END
 
-" 勝手に改行しない
+" prevent auto line feeding
 set tw=0
 
 " UI
-" 行番号
+" show number of line
 set number
-" ルーラー
+" show ruler
 set ruler
-" 対応する括弧の強調表示
+" highlight corresponding parenthesis
 set showmatch
 
-" 検索
-" ハイライト
+" search
+" highlight matched
 set hlsearch
-" インクリメンタルサーチ
+" enable incremental search
 set incsearch
 
 
@@ -73,23 +73,23 @@ nnoremap q; q:
 " disable search highlight
 nnoremap <ESC><ESC> :nohlsearch<CR>
 nnoremap <C-g><C-g> :nohlsearch<CR>
-" 大文字小文字無視
+" case insensitive
 set ignorecase
 
-" 挿入モードでのカーソル移動
+" cursor movement in insert mode
 " inoremap <C-n> <Down>
 " inoremap <C-p> <Up>
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 
-" 挿入モードでの編集
+" editing in insert mode
 inoremap <silent> <C-h> <C-g>u<C-h>
 inoremap <silent> <C-d> <Del>
 inoremap <silent> <C-k> <Esc>lc$
 inoremap <silent> <C-a> <C-o>0
 inoremap <silent> <C-e> <C-o>$
 
-" 通常モードEnterで空行挿入(S-CRは使うのにトリックが要る）
+" Enter to feed line (S-CR needs some trick)
 function! NewLineWithEnter()
     if &modifiable
         execute "normal! o\<ESC>"
@@ -102,12 +102,12 @@ nnoremap <CR> :call NewLineWithEnter()<CR>
 " space to add space
 nnoremap <Space> i<Space><Esc>
 
-" キャンセル
+" escape keymaps
 inoremap <silent> <C-g> <ESC>
 nnoremap <silent> <C-g> <ESC>
 cnoremap <silent> <C-g> <ESC>
 
-" Make系
+" Make
 nnoremap <silent> <F5> :w <CR> :make <CR>
 nnoremap <silent> <F6> :w <CR> :make run <CR>
 
@@ -131,7 +131,7 @@ inoremap <silent> <F7> :call OpenCloseQuickfix() <CR>
 
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 """"""""""""""""""""""""""""""
-" 全角スペースの表示
+" highlight full-width space
 """"""""""""""""""""""""""""""
 function! ZenkakuSpace()
     highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
@@ -223,25 +223,25 @@ filetype plugin indent on
 
 " http://blog.remora.cx/2010/12/vim-ref-with-unite.html
 """"""""""""""""""""""""""""""
-" Unite.vimの設定
+" Unite.vim
 """"""""""""""""""""""""""""""
-" 入力モードで開始する
+" start with insert mode
 "let g:unite_enable_start_insert=1
-" バッファ一覧
+" show buffer
 noremap <C-P> :Unite buffer<CR>
-" ファイル一覧
+" show files
 noremap <C-N> :Unite -buffer-name=file file<CR>
-" 最近使ったファイルの一覧
+" show most recently used
 noremap <C-X> :Unite file_mru<CR>
-" sourcesを「今開いているファイルのディレクトリ」とする
+" sources as directory of opening file
 noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-" ウィンドウを分割して開く
+" open with splitting window
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-" ウィンドウを縦に分割して開く
+" open with vertical-splitting window
 au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
 au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-" ESCキーを2回押すと終了する
+" close Unite with ESCx2
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 " set default action to vimfiler in bookmark
@@ -267,27 +267,27 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 
 """"""""""""""""""""""""""""""
-" PreVimの設定
+" PreVim
 """"""""""""""""""""""""""""""
-" .mdをマークダウン拡張子にする
+" .md as markdown
 au BufRead,BufNewFile *.md set filetype=markdown
 let g:previm_disable_default_css = 1
 let g:previm_custom_css_path = '$HOME/github.css'
 
 """"""""""""""""""""""""""""""
-" vim-sessionの設定
+" vim-session
 """"""""""""""""""""""""""""""
-" 現在のディレクトリ直下の .vimsessions/ を取得 
+" use .'vimsessions/' of current directory
 let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
-" 存在すれば
+" if it exists
 if isdirectory(s:local_session_directory)
-  " session保存ディレクトリをそのディレクトリの設定
+  " './vimsessions/' as session directory
   let g:session_directory = s:local_session_directory
-  " vimを辞める時に自動保存
+  " save on exit automatically
   let g:session_autosave = 'yes'
-  " 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
+  " open 'default.vim' on startup with no arguments
   let g:session_autoload = 'yes'
-  " 1分間に1回自動保存
+  " save automatically every 1min
   let g:session_autosave_periodic = 1
 else
   let g:session_autosave = 'no'
@@ -296,9 +296,9 @@ endif
 unlet s:local_session_directory
 
 """"""""""""""""""""""""""""""
-" quickrunの設定
+" quickrun
 """"""""""""""""""""""""""""""
-" 下部に結果を表示
+" show result at bottom
 let g:quickrun_config = {
 \   "_" : {
 \       "outputter/buffer/split" : ":botright"
@@ -307,7 +307,7 @@ let g:quickrun_config = {
 let g:quickrun_config.coffeejs = {'command': 'coffee', 'cmdopt': '-pb'}
 
 """"""""""""""""""""""""""""""
-" nodejs-completeの設定
+" nodejs-complete
 """"""""""""""""""""""""""""""
 autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
 if !exists('g:neocomplcache_omni_functions')
@@ -318,30 +318,30 @@ let g:node_usejscomplete = 1
 inoremap <Nul> <C-x><C-o>
 
 """"""""""""""""""""""""""""""
-" plantumlの設定
+" plantuml
 """"""""""""""""""""""""""""""
 let g:plantuml_executable_script="~/bin/plantuml"
 
 
-" ウィンドウ操作
+" window operations
 nnoremap s <Nop>
-" 分割
+" split
 nnoremap ss :<C-u>sp<CR><C-w>j
 nnoremap sv :<C-u>vs<CR><C-w>l
-" カーソル移動
+" cursor movement
 nnoremap sh <C-w>h
 nnoremap sj <C-w>j
 nnoremap sk <C-w>k
 nnoremap sl <C-w>l
 nnoremap sw <C-w>w
-" ウィンドウ移動
+" window switching
 nnoremap sH <C-w>H
 nnoremap sJ <C-w>J
 nnoremap sK <C-w>K
 nnoremap sL <C-w>L
 nnoremap sr <C-w>r
 nnoremap sq :<C-u>q<CR>
-" ウィンドウサイズ変更
+" window size changing
 nnoremap so <C-w>_<C-w>|
 nnoremap sO <C-w>=
 nnoremap s= <C-w>=

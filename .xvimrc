@@ -1,12 +1,12 @@
-" 検索
-" ハイライト
+" search
+" highlight matched
 set hlsearch
-" インクリメンタルサーチ
+" enable incremental search
 set incsearch
-" ハイライトをC-g連打でクリアする
+" turn off highlighting with ESCx2
 nnoremap <C-g><C-g> :nohl<CR>
 nnoremap <ESC><ESC> :nohl<CR>
-" 大文字小文字無視
+" case insensitive
 set ignorecase
 
 " change highlight color
