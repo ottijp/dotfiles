@@ -229,12 +229,10 @@ filetype plugin indent on
 "let g:unite_enable_start_insert=1
 " show buffer
 noremap <C-P> :Unite buffer<CR>
-" show files
-noremap <C-N> :Unite -buffer-name=file file<CR>
+" show files of current file's directory
+noremap <C-N> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 " show most recently used
 noremap <C-X> :Unite file_mru<CR>
-" sources as directory of opening file
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 " open with splitting window
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
