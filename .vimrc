@@ -58,6 +58,8 @@ set number
 set ruler
 " highlight corresponding parenthesis
 set showmatch
+" statusline
+set statusline=%f\ %m\%r%h%w%q%=%l/%L(%3.3p%%)\ %3.c\ [0x%04.4B]\ %y\ [%{&fileencoding}]
 
 " search
 " highlight matched
