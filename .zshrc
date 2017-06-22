@@ -57,6 +57,7 @@ export LC_ALL=en_US.UTF-8
 
 # prompt
 setopt PROMPT_SUBST
+
 source ~/.zsh/completion/git-prompt.sh
 export PROMPT=$'%{\e[36m%}%n@%m:%{\e[35m%}%c%{\e[0;34m%}$(__git_ps1 " (%s)")%{\e[36m%} \$%{\e[0m%} '
 
@@ -136,6 +137,12 @@ export FZF_DEFAULT_OPTS='--reverse --border --height 50%'
 
 # ignore case in completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# enable completion in the middle of word
+setopt complete_in_word
+
+# enable completion in command option
+setopt magic_equal_subst
 
 # no beep
 setopt NOBEEP
