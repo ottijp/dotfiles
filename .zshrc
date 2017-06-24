@@ -103,6 +103,10 @@ export PATH=$PATH:$GOBIN
 # vifm
 export MYVIFMRC=~/.vifmrc
 
+# less
+# invert only current hit, ignore case, detail prompt, ANSI color, highlight new line, window size -5
+export LESS='-g -i -M -R -W -z-5'
+
 #-----------------------------------
 # Key bindings
 #-----------------------------------
