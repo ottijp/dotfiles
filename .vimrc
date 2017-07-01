@@ -127,6 +127,8 @@ endfunction
 nnoremap <silent> <F7> :call OpenCloseQuickfix() <CR>
 inoremap <silent> <F7> :call OpenCloseQuickfix() <CR>
 
+" smart concatenation of comment lines
+set formatoptions+=j
 
 
 
