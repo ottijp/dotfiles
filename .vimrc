@@ -133,6 +133,11 @@ set formatoptions+=j
 " unnamed register as clipboard
 set clipboard+=unnamed
 
+" Git related
+augroup git
+  autocmd!
+  autocmd VimEnter COMMIT_EDITMSG setlocal spell
+augroup END
 
 
 " http://inari.hatenablog.com/entry/2014/05/05/231307
