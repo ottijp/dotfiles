@@ -137,6 +137,7 @@ set clipboard+=unnamed
 augroup git
   autocmd!
   autocmd VimEnter COMMIT_EDITMSG setlocal spell
+  autocmd VimEnter COMMIT_EDITMSG setlocal spelllang=en,cjk
 augroup END
 
 
