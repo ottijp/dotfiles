@@ -70,7 +70,9 @@ set incsearch
 
 " single stroke to access command line
 nnoremap ; :
+vnoremap ; :
 nnoremap q; q:
+vnoremap q; q:
 
 " disable search highlight
 nnoremap <ESC><ESC> :nohlsearch<CR>
