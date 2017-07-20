@@ -250,7 +250,7 @@ noremap <C-P> :Unite buffer<CR>
 " show files of current file's directory
 noremap <C-N> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 " show most recently used
-noremap <C-X> :Unite file_mru<CR>
+noremap <C-Z><C-Z> :Unite file_mru<CR>
 " open with splitting window
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
