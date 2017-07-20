@@ -99,6 +99,11 @@ function! NewLineWithEnter()
     endif
 endfunction
 nnoremap <CR> :call NewLineWithEnter()<CR>
+augroup cmdwindow
+  autocmd!
+  autocmd CmdwinLeave * nnoremap <buffer> <CR> :call NewLineWithEnter()<CR>
+  autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
+augroup END
 
 " space to add space
 nnoremap <Space> i<Space><Esc>
