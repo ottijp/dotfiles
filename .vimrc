@@ -142,6 +142,10 @@ augroup END
 " command history
 set history=1000
 
+" command history with filter
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
 
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 """"""""""""""""""""""""""""""
