@@ -139,6 +139,9 @@ augroup git
   autocmd VimEnter COMMIT_EDITMSG setlocal spelllang=en,cjk
 augroup END
 
+" command history
+set history=1000
+
 
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 """"""""""""""""""""""""""""""
