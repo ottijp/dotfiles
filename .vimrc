@@ -589,6 +589,15 @@ endif
 """" }
 """"""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""
+"""" vim-commentary {
+augroup vim_commentary
+  autocmd!
+  autocmd FileType text setlocal commentstring=//\ %s
+augroup END
+"""" }
+""""""""""""""""""""""""""""""
+
 " read local setting
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
