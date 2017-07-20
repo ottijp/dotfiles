@@ -68,11 +68,8 @@ set hlsearch
 set incsearch
 
 
-" single stroke to access command line
-nnoremap ; :
-vnoremap ; :
-nnoremap q; q:
-vnoremap q; q:
+" save shortcut
+nnoremap gw :w<CR>
 
 " disable search highlight
 nnoremap <ESC><ESC> :nohlsearch<CR>
