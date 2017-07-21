@@ -151,6 +151,9 @@ set history=1000
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
+" working directory completion
+cnoremap <expr> %% getcmdtype() == ":" ? expand('%:h') : "%%"
+
 
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 """"""""""""""""""""""""""""""
