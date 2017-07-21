@@ -86,9 +86,6 @@ inoremap <C-f> <Right>
 " editing in insert mode
 inoremap <silent> <C-h> <C-g>u<C-h>
 inoremap <silent> <C-d> <Del>
-inoremap <silent> <C-k> <Esc>lc$
-inoremap <silent> <C-a> <C-o>0
-inoremap <silent> <C-e> <C-o>$
 
 " Enter to feed line (S-CR needs some trick)
 function! NewLineWithEnter()
