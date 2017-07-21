@@ -68,11 +68,8 @@ set hlsearch
 set incsearch
 
 
-" single stroke to access command line
-nnoremap ; :
-vnoremap ; :
-nnoremap q; q:
-vnoremap q; q:
+" save shortcut
+nnoremap gw :w<CR>
 
 " disable search highlight
 nnoremap <ESC><ESC> :nohlsearch<CR>
@@ -89,9 +86,6 @@ inoremap <C-f> <Right>
 " editing in insert mode
 inoremap <silent> <C-h> <C-g>u<C-h>
 inoremap <silent> <C-d> <Del>
-inoremap <silent> <C-k> <Esc>lc$
-inoremap <silent> <C-a> <C-o>0
-inoremap <silent> <C-e> <C-o>$
 
 " Enter to feed line (S-CR needs some trick)
 function! NewLineWithEnter()
@@ -102,6 +96,11 @@ function! NewLineWithEnter()
     endif
 endfunction
 nnoremap <CR> :call NewLineWithEnter()<CR>
+augroup cmdwindow
+  autocmd!
+  autocmd CmdwinLeave * nnoremap <buffer> <CR> :call NewLineWithEnter()<CR>
+  autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
+augroup END
 
 " space to add space
 nnoremap <Space> i<Space><Esc>
@@ -141,6 +140,16 @@ augroup git
   autocmd VimEnter COMMIT_EDITMSG setlocal spell
   autocmd VimEnter COMMIT_EDITMSG setlocal spelllang=en,cjk
 augroup END
+
+" command history
+set history=1000
+
+" command history with filter
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+" working directory completion
+cnoremap <expr> %% getcmdtype() == ":" ? expand('%:h') : "%%"
 
 
 " http://inari.hatenablog.com/entry/2014/05/05/231307
@@ -231,6 +240,7 @@ if has('vim_starting')
         NeoBundle 'kana/vim-textobj-jabraces'
         NeoBundle 'osyo-manga/vim-textobj-multiblock'
         NeoBundle 'osyo-manga/vim-textobj-multitextobj'
+        NeoBundle 'tpope/vim-commentary'
 
         call neobundle#end()
 endif
@@ -250,7 +260,7 @@ noremap <C-P> :Unite buffer<CR>
 " show files of current file's directory
 noremap <C-N> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 " show most recently used
-noremap <C-X> :Unite file_mru<CR>
+noremap <C-Z><C-Z> :Unite file_mru<CR>
 " open with splitting window
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
@@ -585,6 +595,15 @@ if neobundle#tap('vim-textobj-multiblock')
     vmap ab <Plug>(textobj-multitextobj-a)
     vmap ib <Plug>(textobj-multitextobj-i)
 endif
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" vim-commentary {
+augroup vim_commentary
+  autocmd!
+  autocmd FileType text setlocal commentstring=//\ %s
+augroup END
 """" }
 """"""""""""""""""""""""""""""
 
