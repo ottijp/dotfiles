@@ -28,5 +28,5 @@ nnoremap sk <C-w>k
 nnoremap sh <C-w>h
 nnoremap sl <C-w>l
 
-" single stroke to access command line
-nnoremap ; :
+" single stroke to write file
+nnoremap gw :w
