@@ -34,3 +34,6 @@ nnoremap gw :w<CR>
 " CR to insert new line
 nnoremap <CR> o<C-o>0<C-o>d$<ESC>
 nnoremap <S-CR> O<C-o>0<C-o>d$<C-o>j<ESC>
+
+" Space to insert space
+nnoremap <Space> i<Space><ESC><Right>
