@@ -103,7 +103,7 @@ augroup cmdwindow
 augroup END
 
 " space to add space
-nnoremap <Space> i<Space><Esc>
+nnoremap <Space> i<Space><Esc>l
 
 " escape keymaps
 inoremap <silent> <C-g> <ESC>
