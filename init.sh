@@ -4,6 +4,7 @@
 mkdir -p ~/.hammerspoon
 mkdir -p ~/vimbackup
 mkdir -p ~/.vim
+mkdir -p ~/.docker
 
 for f in .??*
 do
@@ -17,6 +18,7 @@ done
 ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
 ln -snf ~/dotfiles/karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml
 ln -snf ~/dotfiles/colors ~/.vim/colors
+ln -snf ~/dotfiles/.docker/config.json ~/.docker/config.json
 
 
 # init
