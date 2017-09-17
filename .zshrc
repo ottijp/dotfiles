@@ -25,6 +25,21 @@ fzf-src() {
   zle reset-prompt
 }
 
+# search commands and shell functions
+fzf-cmd() {
+  local selected
+  selected=`(for p in ${(@s/:/)PATH}; do
+    find $p -depth 1 -perm +111 -type f -or -type l 2>/dev/null
+    done;
+    print -l ${(ok)functions} | grep '^[^_]') |\
+      sed 's|.*/||' | fzf --query="$LBUFFER"`
+  if [ -n "$selected" ]; then
+    BUFFER="$selected"
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+
 
 #-----------------------------------
 # command alias and env vars
@@ -127,6 +142,8 @@ bindkey -M viins '^W'  backward-kill-word
 bindkey -M viins '^Y'  yank
 zle -N fzf-src
 bindkey '^]' fzf-src
+zle -N fzf-cmd
+bindkey '^[' fzf-cmd
 
 #-----------------------------------
 # Others
