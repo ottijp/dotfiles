@@ -34,8 +34,7 @@ fzf-cmd() {
     print -l ${(ok)functions} | grep '^[^_]') |\
       sed 's|.*/||' | fzf --query="$LBUFFER"`
   if [ -n "$selected" ]; then
-    BUFFER="$selected"
-    zle accept-line
+    LBUFFER="$selected "
   fi
   zle reset-prompt
 }
