@@ -48,3 +48,11 @@ if [ ! -f $ZSH_COMPLETION_PATH/git-prompt.sh ]; then
 fi
 rm -f ~/.zcompdump
 which compinit && compinit
+
+
+# vim neobundle
+
+mkdir -p ~/.vim/bundle
+if [ ! -d ~/.vim/bundle/neobundle.vim ]; then
+  git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+fi
