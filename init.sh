@@ -1,8 +1,22 @@
 #!/usr/bin/env bash
 
+function is_osx() {
+  case ${OSTYPE} in
+    darwin*)
+      return 0
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+}
+
+
 # deploy dotfiles
 
-mkdir -p ~/.hammerspoon
+if is_osx; then
+  mkdir -p ~/.hammerspoon
+fi
 mkdir -p ~/vimbackup
 mkdir -p ~/.vim
 mkdir -p ~/.docker
@@ -16,8 +30,10 @@ do
     ln -snf ~/dotfiles/$f ~/$f
 done
 
-ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
-ln -snf ~/dotfiles/karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml
+if is_osx; then
+  ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
+  ln -snf ~/dotfiles/karabiner/private.xml ~/Library/Application\ Support/Karabiner/private.xml
+fi
 ln -snf ~/dotfiles/colors ~/.vim/colors
 ln -snf ~/dotfiles/.docker/config.json ~/.docker/config.json
 
@@ -47,7 +63,7 @@ if [ ! -f $ZSH_COMPLETION_PATH/git-prompt.sh ]; then
   curl -L -o $ZSH_COMPLETION_PATH/git-prompt.sh https://github.com/git/git/raw/master/contrib/completion/git-prompt.sh
 fi
 rm -f ~/.zcompdump
-which compinit && compinit
+type compinit >/dev/null 2>&1 && compinit
 
 
 # vim neobundle
