@@ -22,7 +22,6 @@ function! ChangeTabWidth(w)
   let &l:tabstop = a:w
   let &l:shiftwidth = a:w
   let &l:softtabstop = a:w
-  echo "ChangeTabWidth " a:w
 endfunction
 
 " indent on new line
@@ -34,7 +33,7 @@ set smarttab
 " extension customize
 augroup aug_tab_indent
   autocmd!
-  autocmd BufRead,BufWrite *.md call ChangeTabWidth(4)
+  autocmd Filetype markdown call ChangeTabWidth(4)
 augroup END
 
 """" }
