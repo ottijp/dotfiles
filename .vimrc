@@ -604,6 +604,18 @@ augroup END
 """" }
 """"""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""
+"""" lexima {
+  " avoid complementation except end of line
+  call lexima#add_rule({'char': '(', 'at': '\%#[^$]', 'leave': 1})
+  call lexima#add_rule({'char': '{', 'at': '\%#[^$]', 'leave': 1})
+  call lexima#add_rule({'char': '[', 'at': '\%#[^$]', 'leave': 1})
+  call lexima#add_rule({'char': '"', 'at': '\%#[^$]', 'leave': 1})
+  call lexima#add_rule({'char': "'", 'at': '\%#[^$]', 'leave': 1})
+  call lexima#add_rule({'char': "`", 'at': '\%#[^$]', 'leave': 1})
+"""" }
+""""""""""""""""""""""""""""""
+
 " read local setting
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
