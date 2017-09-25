@@ -98,7 +98,7 @@ setopt auto_pushd
 setopt pushd_ignore_dups
 
 # local bin path
-export PATH=$PATH:~/bin
+export PATH=$PATH:~/bin:~/bin.local
 
 # editor for osx
 MACVIM_PATH="/Applications/MacVim.app"
