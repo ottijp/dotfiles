@@ -21,7 +21,7 @@ mkdir -p ~/vimbackup
 mkdir -p ~/.vim
 mkdir -p ~/.docker
 
-for f in .??*
+for f in .??* bin
 do
     [[ "$f" == ".git" ]] && continue
     [[ "$f" == ".gitignore" ]] && continue
