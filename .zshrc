@@ -111,7 +111,7 @@ fi
 # Go lang
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME
-export GOBIN=$HOME/bin/go
+export GOBIN=$HOME/bin.local/go
 export PATH=$PATH:$GOBIN
 
 # vifm
