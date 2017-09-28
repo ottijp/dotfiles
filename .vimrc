@@ -50,6 +50,9 @@ augroup END
 " prevent auto line feeding
 set tw=0
 
+" show line-break sign
+set showbreak=↪\ 
+
 " UI
 " show number of line
 set number
