@@ -241,6 +241,7 @@ if has('vim_starting')
         NeoBundle 'osyo-manga/vim-textobj-multitextobj'
         NeoBundle 'tpope/vim-commentary'
         NeoBundle 'kana/vim-textobj-line'
+        NeoBundle 'deton/jasegment.vim'
 
         call neobundle#end()
 endif
