@@ -620,6 +620,22 @@ augroup END
 """" }
 """"""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""
+"""" vim-surround {
+  " add japanese surrounds
+  let g:surround_{char2nr("「")} = "「 \r 」"
+  let g:surround_{char2nr("」")} = "「\r」"
+  let g:surround_{char2nr("【")} = "【 \r 】"
+  let g:surround_{char2nr("】")} = "【\r】"
+  let g:surround_{char2nr("（")} = "（ \r ）"
+  let g:surround_{char2nr("（")} = "（\r）"
+  let g:surround_{char2nr("＜")} = "＜ \r ＞"
+  let g:surround_{char2nr("＞")} = "＜\r＞"
+  let g:surround_{char2nr("｛")} = "｛ \r ｝"
+  let g:surround_{char2nr("｝")} = "｛\r｝"
+"""" }
+""""""""""""""""""""""""""""""
+
 " read local setting
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
