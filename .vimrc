@@ -150,6 +150,17 @@ cnoremap <C-n> <Down>
 " working directory completion
 cnoremap <expr> %% getcmdtype() == ":" ? expand('%:h') : "%%"
 
+" digraphs for vowel of hiragana
+dig aa 12354 "あ
+dig ii 12356 "い
+dig uu 12358 "う
+dig ee 12360 "え
+dig oo 12362 "お
+dig AA 12353 "ぁ
+dig II 12355 "ぃ
+dig UU 12357 "ぅ
+dig EE 12359 "ぇ
+dig OO 12361 "ぉ
 
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 """"""""""""""""""""""""""""""
