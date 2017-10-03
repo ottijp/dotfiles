@@ -68,7 +68,9 @@ set statusline=%f\ %m\%r%h%w%q%=%l/%L(%3.3p%%)\ %3.c\ [0x%04.4B]\ %y\ [%{&fileen
 set hlsearch
 " enable incremental search
 set incsearch
-
+" use very magic as default
+nnoremap / /\v
+cnoremap %s/ %s/\v
 
 " save shortcut
 nnoremap gw :w<CR>
