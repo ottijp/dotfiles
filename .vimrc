@@ -162,6 +162,9 @@ dig UU 12357 "ぅ
 dig EE 12359 "ぇ
 dig OO 12361 "ぉ
 
+" add match pairs
+set matchpairs+=「:」,【:】,（:）,＜:＞,｛:｝
+
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 """"""""""""""""""""""""""""""
 " highlight full-width space
