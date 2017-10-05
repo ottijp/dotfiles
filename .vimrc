@@ -50,6 +50,9 @@ augroup END
 " prevent auto line feeding
 set tw=0
 
+" show line-break sign
+set showbreak=↪\ 
+
 " UI
 " show number of line
 set number
@@ -65,7 +68,9 @@ set statusline=%f\ %m\%r%h%w%q%=%l/%L(%3.3p%%)\ %3.c\ [0x%04.4B]\ %y\ [%{&fileen
 set hlsearch
 " enable incremental search
 set incsearch
-
+" use very magic as default
+nnoremap / /\v
+cnoremap %s/ %s/\v
 
 " save shortcut
 nnoremap gw :w<CR>
@@ -147,6 +152,20 @@ cnoremap <C-n> <Down>
 " working directory completion
 cnoremap <expr> %% getcmdtype() == ":" ? expand('%:h') : "%%"
 
+" digraphs for vowel of hiragana
+dig aa 12354 "あ
+dig ii 12356 "い
+dig uu 12358 "う
+dig ee 12360 "え
+dig oo 12362 "お
+dig AA 12353 "ぁ
+dig II 12355 "ぃ
+dig UU 12357 "ぅ
+dig EE 12359 "ぇ
+dig OO 12361 "ぉ
+
+" add match pairs
+set matchpairs+=「:」,【:】,（:）,＜:＞,｛:｝
 
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 """"""""""""""""""""""""""""""
@@ -238,6 +257,7 @@ if has('vim_starting')
         NeoBundle 'osyo-manga/vim-textobj-multitextobj'
         NeoBundle 'tpope/vim-commentary'
         NeoBundle 'kana/vim-textobj-line'
+        NeoBundle 'deton/jasegment.vim'
 
         call neobundle#end()
 endif
@@ -613,6 +633,34 @@ augroup END
   call lexima#add_rule({'char': '"', 'at': '\%#[^$]', 'leave': 1})
   call lexima#add_rule({'char': "'", 'at': '\%#[^$]', 'leave': 1})
   call lexima#add_rule({'char': "`", 'at': '\%#[^$]', 'leave': 1})
+
+  " japanese surrounds
+  call lexima#add_rule({'char': '「', 'input_after': '」', 'at': '\%#$'})
+  call lexima#add_rule({'char': '」', 'at': '\%#」', 'leave': 1})
+  call lexima#add_rule({'char': '【', 'input_after': '】', 'at': '\%#$'})
+  call lexima#add_rule({'char': '】', 'at': '\%#】', 'leave': 1})
+  call lexima#add_rule({'char': '（', 'input_after': '）', 'at': '\%#$'})
+  call lexima#add_rule({'char': '）', 'at': '\%#）', 'leave': 1})
+  call lexima#add_rule({'char': '＜', 'input_after': '＞', 'at': '\%#$'})
+  call lexima#add_rule({'char': '＞', 'at': '\%#＞', 'leave': 1})
+  call lexima#add_rule({'char': '｛', 'input_after': '｝', 'at': '\%#$'})
+  call lexima#add_rule({'char': '｝', 'at': '\%#｝', 'leave': 1})
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" vim-surround {
+  " add japanese surrounds
+  let g:surround_{char2nr("「")} = "「 \r 」"
+  let g:surround_{char2nr("」")} = "「\r」"
+  let g:surround_{char2nr("【")} = "【 \r 】"
+  let g:surround_{char2nr("】")} = "【\r】"
+  let g:surround_{char2nr("（")} = "（ \r ）"
+  let g:surround_{char2nr("（")} = "（\r）"
+  let g:surround_{char2nr("＜")} = "＜ \r ＞"
+  let g:surround_{char2nr("＞")} = "＜\r＞"
+  let g:surround_{char2nr("｛")} = "｛ \r ｝"
+  let g:surround_{char2nr("｝")} = "｛\r｝"
 """" }
 """"""""""""""""""""""""""""""
 
