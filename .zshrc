@@ -66,6 +66,10 @@ alias gf="git diff"
 # tree
 alias tree="tree -I node_modules -L 3"
 
+# grep
+alias grep="grep --color=auto"
+
+
 # locale
 export LC_ALL=en_US.UTF-8
 
