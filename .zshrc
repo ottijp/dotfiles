@@ -46,8 +46,8 @@ fzf-cmd() {
 # ls
 alias ls="ls -GF"
 alias la="ls -GFa"
-alias ll="ls -GFl"
-alias lla="ls -GFal"
+alias ll="ls -GFlh"
+alias lla="ls -GFalh"
 
 # mkdir
 alias mkdir='mkdir -p'
@@ -68,6 +68,9 @@ alias tree="tree -I node_modules -L 3"
 
 # grep
 alias grep="grep --color=auto"
+
+# df
+alias df="df -h"
 
 
 # locale
