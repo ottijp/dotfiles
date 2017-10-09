@@ -11,6 +11,16 @@ function is_osx() {
   esac
 }
 
+function link_files() {
+  for f in $*
+  do
+      [[ "$f" == ".git" ]] && continue
+      [[ "$f" == ".gitignore" ]] && continue
+      [[ "$f" == ".DS_Store" ]] && continue
+
+      ln -snf ~/dotfiles/$f ~/$f
+  done
+}
 
 # deploy dotfiles
 
@@ -21,14 +31,9 @@ mkdir -p ~/vimbackup
 mkdir -p ~/.vim
 mkdir -p ~/.docker
 
-for f in .??* bin
-do
-    [[ "$f" == ".git" ]] && continue
-    [[ "$f" == ".gitignore" ]] && continue
-    [[ "$f" == ".DS_Store" ]] && continue
-
-    ln -snf ~/dotfiles/$f ~/$f
-done
+link_files '.??*'
+link_files bin
+link_files templates
 
 if is_osx; then
   ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
@@ -37,6 +42,9 @@ fi
 ln -snf ~/dotfiles/colors ~/.vim/colors
 ln -snf ~/dotfiles/.docker/config.json ~/.docker/config.json
 
+# pandoc
+mkdir -p ~/.pandoc
+ln -snf ~/dotfiles/templates/pandoc ~/.pandoc/templates
 
 # bash git completion
 

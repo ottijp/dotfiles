@@ -13,6 +13,7 @@ function shell_has_started_interactively() { [ ! -z "$PROMPT" ]; }
 function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
 function chpwd () { ls -GF }
 function mkdircd () { mkdir -p "$@" && builtin cd "$@" }
+function md2html () { pandoc "$1" -s --self-contained --template=github -c ~/.pandoc/templates/github.css -o "${1%.*}.html" }
 
 # search src with fzf
 fzf-src() {
