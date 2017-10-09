@@ -315,7 +315,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " .md as markdown
 au BufRead,BufNewFile *.md set filetype=markdown
 let g:previm_disable_default_css = 1
-let g:previm_custom_css_path = '$HOME/github.css'
+let g:previm_custom_css_path = '$HOME/templates/previm/github.css'
 
 """"""""""""""""""""""""""""""
 " vim-session
