@@ -47,8 +47,8 @@ fzf-cmd() {
 # ls
 alias ls="ls -GF"
 alias la="ls -GFa"
-alias ll="ls -GFl"
-alias lla="ls -GFal"
+alias ll="ls -GFlh"
+alias lla="ls -GFalh"
 
 # mkdir
 alias mkdir='mkdir -p'
@@ -66,6 +66,17 @@ alias gf="git diff"
 
 # tree
 alias tree="tree -I node_modules -L 3"
+
+# grep
+alias grep="grep --color=auto"
+
+# df
+alias df="df -h"
+
+# frequently used file
+alias vimrc="vim ~/.vimrc"
+alias zshrc="vim ~/.zshrc"
+
 
 # locale
 export LC_ALL=en_US.UTF-8
