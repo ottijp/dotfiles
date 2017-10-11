@@ -72,6 +72,10 @@ alias grep="grep --color=auto"
 # df
 alias df="df -h"
 
+# frequently used file
+alias vimrc="vim ~/.vimrc"
+alias zshrc="vim ~/.zshrc"
+
 
 # locale
 export LC_ALL=en_US.UTF-8
