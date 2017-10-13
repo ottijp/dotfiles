@@ -77,6 +77,10 @@ alias df="df -h"
 alias vimrc="vim ~/.vimrc"
 alias zshrc="vim ~/.zshrc"
 
+# tar
+alias tgz="tar czvf"
+alias untgz="tar xzvf"
+
 
 # locale
 export LC_ALL=en_US.UTF-8
