@@ -11,6 +11,25 @@
   fp = !git fetch -p && git delete-merged-branches
   pp = !git pull -p && git delete-merged-branches
   tree = !git log --graph --all --format=' [%ad] %C(yellow)%h%Creset %C(cyan bold)%an%Creset %s %C(magenta reverse)%d%Creset' --date=short
+  st = status
+  ci = commit
+  pu = push
+  # checkout
+  co = checkout
+  com = checkout master
+  cob = checkout -b
+  # branch
+  br = branch
+  ba = branch -a
+  bm = branch --merged
+  bn = branch --no-merged
+  # log
+  ls = log --stat
+  lp = log -p
+  lr = log origin
+  ranking = shortlog -s -n --no-merges
+  # grep
+  gr = grep -n
 [include]
   path = ~/.gitconfig.local
 [ghq]
