@@ -156,9 +156,9 @@ bindkey -M viins '^U'  backward-kill-line
 bindkey -M viins '^W'  backward-kill-word
 bindkey -M viins '^Y'  yank
 zle -N fzf-src
-bindkey '^]' fzf-src
+bindkey '^Xs' fzf-src
 zle -N fzf-cmd
-bindkey '^[' fzf-cmd
+bindkey '^Xc' fzf-cmd
 
 #-----------------------------------
 # Others
