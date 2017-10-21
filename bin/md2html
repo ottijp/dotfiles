@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd "$(dirname $1)"
+pandoc "$1" -s --self-contained --template=github -c ~/.pandoc/templates/github.css -o "${1%.*}.html"
