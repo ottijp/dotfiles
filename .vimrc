@@ -80,6 +80,8 @@ nnoremap <ESC><ESC> :nohlsearch<CR>
 nnoremap <C-g><C-g> :nohlsearch<CR>
 " case insensitive
 set ignorecase
+" infer case on completion
+set infercase
 
 " cursor movement in insert mode
 " inoremap <C-n> <Down>
