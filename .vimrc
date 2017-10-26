@@ -628,14 +628,6 @@ augroup END
 
 """"""""""""""""""""""""""""""
 """" lexima {
-  " avoid complementation except end of line
-  call lexima#add_rule({'char': '(', 'at': '\%#[^$]', 'leave': 1})
-  call lexima#add_rule({'char': '{', 'at': '\%#[^$]', 'leave': 1})
-  call lexima#add_rule({'char': '[', 'at': '\%#[^$]', 'leave': 1})
-  call lexima#add_rule({'char': '"', 'at': '\%#[^$]', 'leave': 1})
-  call lexima#add_rule({'char': "'", 'at': '\%#[^$]', 'leave': 1})
-  call lexima#add_rule({'char': "`", 'at': '\%#[^$]', 'leave': 1})
-
   " japanese surrounds
   call lexima#add_rule({'char': '「', 'input_after': '」', 'at': '\%#$'})
   call lexima#add_rule({'char': '」', 'at': '\%#」', 'leave': 1})
