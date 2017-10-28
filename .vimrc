@@ -571,6 +571,9 @@ let g:context_filetype#filetypes.vue =
       \    'end': '</style>', 'filetype': 'css',
       \   }
       \ ]
+" disable defaults
+let g:context_filetype#filetypes.help = []
+let g:context_filetype#filetypes.markdown = []
 """" }
 """"""""""""""""""""""""""""""
 
