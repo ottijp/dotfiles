@@ -31,8 +31,10 @@ set autoindent
 set smarttab
 
 " extension customize
-augroup aug_tab_indent
+augroup aug_markdown
   autocmd!
+  " .md as markdown
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
   autocmd Filetype markdown call ChangeTabWidth(4)
 augroup END
 
@@ -168,6 +170,10 @@ dig OO 12361 "ぉ
 
 " add match pairs
 set matchpairs+=「:」,【:】,（:）,＜:＞,｛:｝
+
+" disable fold by default
+set nofoldenable
+
 
 " http://inari.hatenablog.com/entry/2014/05/05/231307
 """"""""""""""""""""""""""""""
@@ -314,8 +320,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 """"""""""""""""""""""""""""""
 " PreVim
 """"""""""""""""""""""""""""""
-" .md as markdown
-au BufRead,BufNewFile *.md set filetype=markdown
 let g:previm_disable_default_css = 1
 let g:previm_custom_css_path = '$HOME/templates/previm/github.css'
 
