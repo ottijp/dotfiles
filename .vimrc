@@ -44,9 +44,8 @@ augroup END
 " filetypes
 augroup aug_filetypes
   autocmd!
-  autocmd BufRead,BufWrite *.jade setfiletype pug
-  autocmd BufRead,BufWrite *.pug setfiletype pug
-  autocmd BufRead *.vue setfiletype html
+  autocmd BufRead,BufWrite,BufNew *.jade,*.pug setfiletype pug
+  autocmd BufRead,BufWrite,BufNew *.vue setfiletype vue
 augroup END
 
 " prevent auto line feeding
@@ -538,23 +537,25 @@ autocmd FileType typescript syn clear foldBraces
 if !exists('g:context_filetype#filetypes')
     let g:context_filetype#filetypes = {}
 endif
-" vue single component file
-let g:context_filetype#filetypes.html =
+" for vue single file component
+let g:context_filetype#filetypes.vue =
       \ [
       \   {
       \    'start': '<template\%( [^>]*\)\? lang="\(pug\|jade\)"\%( [^>]*\)\?>',
       \    'end': '</template>', 'filetype': 'pug',
       \   },
       \   {
-      \    'start': '<style\%( [^>]*\)\? lang="s[ac]ss"\%( [^>]*\)\?>',
-      \    'end': '</style>', 'filetype': 'scss',
+      \    'start': '<template\%( [^>]*\)\?>',
+      \    'end': '</template>', 'filetype': 'html',
       \   },
       \   {
-      \    'start': '<script\%( [^>]*\)\? type="text/javascript"\%( [^>]*\)\?>',
-      \    'end': '</script>', 'filetype': 'javascript',
+      \    'start':
+      \     '<script\%( [^>]*\)\? \%(ts\|lang="\%(ts\|typescript\)"\)\%( [^>]*\)\?>',
+      \    'end': '</script>', 'filetype': 'typescript',
       \   },
       \   {
-      \    'start': '<script\%( [^>]*\)\? type="text/coffeescript"\%( [^>]*\)\?>',
+      \    'start':
+      \     '<script\%( [^>]*\)\? lang="\%(coffeescript\)"\%( [^>]*\)\?>',
       \    'end': '</script>', 'filetype': 'coffee',
       \   },
       \   {
@@ -562,13 +563,13 @@ let g:context_filetype#filetypes.html =
       \    'end': '</script>', 'filetype': 'javascript',
       \   },
       \   {
-      \    'start': '<style\%( [^>]*\)\?>',
-      \    'end': '</style>', 'filetype': 'css',
+      \    'start': '<style\%( [^>]*\)\? lang="s[ac]ss"\%( [^>]*\)\?>',
+      \    'end': '</style>', 'filetype': 'scss',
       \   },
       \   {
-      \    'start': '<[^>]\+ style="',
-      \    'end': '"', 'filetype': 'css',
-      \   },
+      \    'start': '<style\%( [^>]*\)\?>',
+      \    'end': '</style>', 'filetype': 'css',
+      \   }
       \ ]
 """" }
 """"""""""""""""""""""""""""""
