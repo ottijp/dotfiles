@@ -266,6 +266,7 @@ if has('vim_starting')
         NeoBundle 'kana/vim-textobj-line'
         NeoBundle 'deton/jasegment.vim'
         NeoBundle 'vim-syntastic/syntastic'
+        NeoBundle 'rhysd/clever-f.vim'
 
         call neobundle#end()
 endif
