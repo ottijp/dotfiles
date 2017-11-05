@@ -213,6 +213,13 @@ filetype plugin indent off
 
 if has('vim_starting')
         set runtimepath+=$HOME/.vim/bundle/neobundle.vim
+
+        " install neobundle if it's not installed
+        if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
+          echo "install NeoBundle..."
+          :call system("git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
+        endif
+
         call neobundle#begin(expand('~/.vim/bundle/'))
         NeoBundleFetch 'Shougo/neobundle.vim'
         NeoBundle "Shougo/unite.vim"
@@ -272,6 +279,9 @@ if has('vim_starting')
 endif
 
 filetype plugin indent on
+
+" confirm uninstalled plugins
+NeoBundleCheck
 
 
 
