@@ -73,10 +73,3 @@ fi
 rm -f ~/.zcompdump
 type compinit >/dev/null 2>&1 && compinit
 
-
-# vim neobundle
-
-mkdir -p ~/.vim/bundle
-if [ ! -d ~/.vim/bundle/neobundle.vim ]; then
-  git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-fi
