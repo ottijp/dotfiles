@@ -62,7 +62,8 @@ set ruler
 " highlight corresponding parenthesis
 set showmatch
 " statusline
-set statusline=%f\ %m\%r%h%w%q%=%l/%L(%3.3p%%)\ %3.c\ [0x%04.4B]\ %y\ [%{&fileencoding}]
+set noshowmode
+
 
 " search
 " highlight matched
@@ -192,23 +193,6 @@ if has('syntax')
 endif
 """"""""""""""""""""""""""""""
 
-" color scheme
-syntax enable
-function! UpdateColorScheme()
-  if &readonly && &buftype ==# "" && @% !~ "^fugitive:\/\/" && expand("%:p") !~ "\.git\/index$"
-    set background=light
-    colorscheme morning
-  else
-    set background=dark
-    colorscheme solarized
-  endif
-endfunction
-augroup my_colorscheme
-  autocmd!
-  autocmd BufReadPost,BufEnter * call UpdateColorScheme()
-augroup END
-
-
 filetype plugin indent off
 
 if has('vim_starting')
@@ -274,6 +258,7 @@ if has('vim_starting')
         NeoBundle 'deton/jasegment.vim'
         NeoBundle 'vim-syntastic/syntastic'
         NeoBundle 'rhysd/clever-f.vim'
+        NeoBundle 'itchyny/lightline.vim'
 
         call neobundle#end()
 endif
@@ -283,7 +268,18 @@ filetype plugin indent on
 " confirm uninstalled plugins
 NeoBundleCheck
 
+" color scheme
+syntax enable
+set background=dark
+colorscheme solarized
+let g:lightline = { 'colorscheme': 'solarized' }
 
+" prevent editing readonly file
+autocmd BufRead * let &modifiable = !&readonly
+
+
+" confirm uninstalled plugins
+NeoBundleCheck
 
 " http://blog.remora.cx/2010/12/vim-ref-with-unite.html
 """"""""""""""""""""""""""""""
