@@ -284,6 +284,8 @@ filetype plugin indent on
 NeoBundleCheck
 
 
+" confirm uninstalled plugins
+NeoBundleCheck
 
 " http://blog.remora.cx/2010/12/vim-ref-with-unite.html
 """"""""""""""""""""""""""""""
