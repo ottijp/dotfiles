@@ -8,8 +8,7 @@ set nowrapscan
 set columns=100
 set lines=48
 
-
-colorscheme hybrid
+colorscheme solarized
 
 " read local setting
 if filereadable(expand('~/.gvimrc.local'))
