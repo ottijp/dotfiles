@@ -272,7 +272,17 @@ NeoBundleCheck
 syntax enable
 set background=dark
 colorscheme solarized
-let g:lightline = { 'colorscheme': 'solarized' }
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'right': [ [ 'lineinfo' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
+      \ },
+      \ 'component': {
+      \   'charvaluehex': '0x%B'
+      \ },
+      \ }
 
 " prevent editing readonly file
 autocmd BufRead * let &modifiable = !&readonly
