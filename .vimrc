@@ -275,12 +275,15 @@ colorscheme solarized
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filepath', 'modified'] ],
       \   'right': [ [ 'lineinfo' ],
       \              [ 'percent' ],
       \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
       \ },
       \ 'component': {
-      \   'charvaluehex': '0x%B'
+      \   'charvaluehex': '0x%B',
+      \   'filepath': '%f'
       \ },
       \ }
 
