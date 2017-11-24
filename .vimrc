@@ -260,6 +260,7 @@ if has('vim_starting')
         NeoBundle 'vim-syntastic/syntastic'
         NeoBundle 'rhysd/clever-f.vim'
         NeoBundle 'itchyny/lightline.vim'
+        NeoBundle 'bronson/vim-trailing-whitespace'
 
         call neobundle#end()
 endif
