@@ -213,6 +213,7 @@ if has('vim_starting')
               \}
         NeoBundle "tomtom/tcomment_vim"
         "NeoBundle "h1mesuke/vim-alignta"
+        NeoBundle 'godlygeek/tabular'
         NeoBundleLazy 'plasticboy/vim-markdown', {
               \   'autoload' : { 'filetypes' : ['markdown'] }
               \}
