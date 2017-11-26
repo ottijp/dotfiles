@@ -233,6 +233,8 @@ if has('vim_starting')
         NeoBundle 'othree/yajs.vim'
         NeoBundle 'cohama/lexima.vim'
         NeoBundle 'Shougo/neocomplete.vim'
+        NeoBundle 'Shougo/neosnippet'
+        NeoBundle 'Shougo/neosnippet-snippets'
         NeoBundle 'majutsushi/tagbar'
         NeoBundleLazy 'leafgarland/typescript-vim', {
               \   'autoload' : { 'filename_patterns' : '.*\.ts' }
