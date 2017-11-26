@@ -114,7 +114,6 @@ augroup END
 nnoremap <Space> i<Space><Esc>l
 
 " escape keymaps
-inoremap <silent> <C-g> <ESC>
 nnoremap <silent> <C-g> <ESC>
 cnoremap <silent> <C-g> <ESC>
 
@@ -476,8 +475,25 @@ let g:vim_markdown_new_list_item_indent = 0
 """" }
 """"""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""
+"""" lexima {
+  call lexima#init()
+  " japanese surrounds
+  call lexima#add_rule({'char': '「', 'input_after': '」', 'at': '\%#$'})
+  call lexima#add_rule({'char': '」', 'at': '\%#」', 'leave': 1})
+  call lexima#add_rule({'char': '【', 'input_after': '】', 'at': '\%#$'})
+  call lexima#add_rule({'char': '】', 'at': '\%#】', 'leave': 1})
+  call lexima#add_rule({'char': '（', 'input_after': '）', 'at': '\%#$'})
+  call lexima#add_rule({'char': '）', 'at': '\%#）', 'leave': 1})
+  call lexima#add_rule({'char': '＜', 'input_after': '＞', 'at': '\%#$'})
+  call lexima#add_rule({'char': '＞', 'at': '\%#＞', 'leave': 1})
+  call lexima#add_rule({'char': '｛', 'input_after': '｝', 'at': '\%#$'})
+  call lexima#add_rule({'char': '｝', 'at': '\%#｝', 'leave': 1})
+"""" }
+""""""""""""""""""""""""""""""
 
-
+""""""""""""""""""""""""""""""
+"""" neocomplete, neosnippet {
 "Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
@@ -501,24 +517,18 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-" Plugin key-mappings.
-"inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  "return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
+" completion
+inoremap <expr><C-l> neocomplete#complete_common_string()
+" cancel completion and close popup
+imap <expr><C-u> pumvisible() ? "<C-e>" : "<C-u>"
+" expand snippet, completion or <CR>
+imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : lexima#expand('<LT>CR>', 'i')
+" select next item, jump to next snippet item or <TAB>
+imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
+" close popup and delete backward char
 inoremap <expr><C-h> pumvisible() ? "\<C-y><BS>" : "\<BS>"
 inoremap <expr><BS> pumvisible() ? "\<C-y><BS>" : "\<BS>"
-" Close popup by <Space> with inserting space.
+" close popup and inserting space
 inoremap <expr><Space> pumvisible() ? "\<C-y><Space>" : "\<Space>"
 
 " AutoComplPop like behavior.
@@ -548,6 +558,8 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 "let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+"""" }
+""""""""""""""""""""""""""""""
 
 
 """"""""""""""""""""""""""""""
@@ -656,22 +668,6 @@ augroup vim_commentary
   autocmd!
   autocmd FileType text setlocal commentstring=//\ %s
 augroup END
-"""" }
-""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""
-"""" lexima {
-  " japanese surrounds
-  call lexima#add_rule({'char': '「', 'input_after': '」', 'at': '\%#$'})
-  call lexima#add_rule({'char': '」', 'at': '\%#」', 'leave': 1})
-  call lexima#add_rule({'char': '【', 'input_after': '】', 'at': '\%#$'})
-  call lexima#add_rule({'char': '】', 'at': '\%#】', 'leave': 1})
-  call lexima#add_rule({'char': '（', 'input_after': '）', 'at': '\%#$'})
-  call lexima#add_rule({'char': '）', 'at': '\%#）', 'leave': 1})
-  call lexima#add_rule({'char': '＜', 'input_after': '＞', 'at': '\%#$'})
-  call lexima#add_rule({'char': '＞', 'at': '\%#＞', 'leave': 1})
-  call lexima#add_rule({'char': '｛', 'input_after': '｝', 'at': '\%#$'})
-  call lexima#add_rule({'char': '｝', 'at': '\%#｝', 'leave': 1})
 """" }
 """"""""""""""""""""""""""""""
 
