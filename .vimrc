@@ -259,6 +259,7 @@ if has('vim_starting')
         NeoBundle 'kana/vim-textobj-line'
         NeoBundle 'deton/jasegment.vim'
         NeoBundle 'vim-syntastic/syntastic'
+        NeoBundle 'mtscout6/syntastic-local-eslint.vim'
         NeoBundle 'rhysd/clever-f.vim'
         NeoBundle 'itchyny/lightline.vim'
         NeoBundle 'bronson/vim-trailing-whitespace'
