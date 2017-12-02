@@ -78,8 +78,8 @@ cnoremap %s/ %s/\v
 nnoremap gw :w<CR>
 
 " disable search highlight
-nnoremap <ESC><ESC> :set nohlsearch!<CR>
-nnoremap <C-g><C-g> :set nohlsearch!<CR>
+nnoremap <silent><ESC><ESC> :set nohlsearch!<CR>
+nnoremap <silent><C-g><C-g> :set nohlsearch!<CR>
 " case insensitive
 set ignorecase
 " infer case on completion
