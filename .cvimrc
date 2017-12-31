@@ -1,0 +1,81 @@
+let locale = 'jp'
+set smoothscroll
+set noautofocus
+let scrollstep = 150
+let hintcharacters = 'asdfgwertxcvbhjklyuiobnm'
+let fullpagescrollpercent = 95
+let scrollduration = 250
+set scalehints
+set cncpcompletion
+" not work even if I set ctrl-n key binding in chrome extension page
+" set cncpcompletion
+set noinsertmappings
+set showtabindices
+let previousmatchpattern = '((?!last)(prev(ious)?|newer|back|«|less|<|‹|前のページ|前へ| )+)'
+let nextmatchpattern = '((?!first)(next|older|more|>|›|»|forward|次のページ|次へ| )+)'
+let barposition = 'bottom'
+
+""""""""""""""""""""""
+" Key Bindings
+""""""""""""""""""""""
+unmap s
+unmap w
+unmap d
+unmap u
+unmap e
+unmap W
+unmap A
+unmap gr
+unmap cr
+unmap gt
+unmap K
+unmap R
+unmap gT
+unmap J
+unmap E
+unmap <C-S-h>
+unmap <C-S-l>
+unmap gxT
+unmap gxt
+unmap gx0
+unmap gx$
+unmap X
+unmap S
+unmap D
+unmap <C-6>
+" movement
+map h scrollLeft
+map l scrollRight
+map <C-d> scrollPageDown
+map <C-u> scrollPageUp
+map <C-f> scrollFullPageDown
+map <C-b> scrollFullPageUp
+" link hints
+map im fullImageHint
+" miscellaneous
+map R reloadTabUncached
+" tab
+map <C-h> previousTab
+map <C-l> nextTab
+map u lastClosedTab
+" Switch between alphabetical hint characters and numeric hints
+map <C-i> :set numerichints!<CR>
+" search word in clipboard
+map sp :tabnew google @"<CR>
+
+
+""""""""""""""""""""""
+" Web Seach
+""""""""""""""""""""""
+" completionengines
+let completionengines = ['google']
+" defaultengine
+let defaultengine = 'google'
+" Amazon jp
+let searchengine amazon = 'https://www.amazon.co.jp/s/ref=nb_sb_noss_2?__mk_ja_JP=%s&url=search-alias%3Daps&field-keywords=%s'
+" Wikipedia jp
+let searchengine wiki = 'https://ja.wikipedia.org/wiki/%s'
+" alias
+let searchalias a = 'amazon'
+let searchalias w = 'wiki'
+
