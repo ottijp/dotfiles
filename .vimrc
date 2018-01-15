@@ -45,7 +45,8 @@ augroup END
 augroup aug_filetypes
   autocmd!
   autocmd BufRead,BufWrite,BufNew *.jade,*.pug setfiletype pug
-  autocmd BufRead,BufWrite,BufNew *.vue setfiletype vue
+  autocmd BufRead,BufNew *.vue setfiletype vue
+  autocmd BufWrite *.vue setfiletype context_filetype#get_filetype()
 augroup END
 
 " prevent auto line feeding
