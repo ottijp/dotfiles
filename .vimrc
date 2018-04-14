@@ -49,6 +49,27 @@ augroup aug_filetypes
   autocmd BufEnter * :PreciousReset | :PreciousSwitch
 augroup END
 
+" filetype: javascript
+augroup ft_javascript
+  autocmd!
+  " lint maker for neomake
+  " define myeslint because default maker 'eslint' not work for me
+  function! s:GetEslintExe()
+    let l:eslintExe = GetNpmBin('eslint')
+    if empty(l:eslintExe)
+      return 'eslint'
+    else
+      return l:eslintExe
+    endif
+  endfunction
+  autocmd FileType javascript let g:neomake_javascript_myeslint_maker = {
+        \ 'exe': s:GetEslintExe(),
+        \ 'args': ['-f', 'compact', '--no-ignore'],
+        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+        \ '%W%f: line %l\, col %c\, Warning - %m'
+        \ }
+augroup END
+
 " prevent auto line feeding
 set tw=0
 
@@ -259,8 +280,8 @@ if has('vim_starting')
         NeoBundle 'tpope/vim-commentary'
         NeoBundle 'kana/vim-textobj-line'
         NeoBundle 'deton/jasegment.vim'
-        NeoBundle 'vim-syntastic/syntastic'
-        NeoBundle 'mtscout6/syntastic-local-eslint.vim'
+        NeoBundle 'benjie/local-npm-bin.vim'
+        NeoBundle 'neomake/neomake'
         NeoBundle 'rhysd/clever-f.vim'
         NeoBundle 'itchyny/lightline.vim'
         NeoBundle 'bronson/vim-trailing-whitespace'
@@ -690,16 +711,13 @@ augroup END
 """"""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
-"""" syntastic {
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_error_symbol = '❌'
-let g:syntastic_style_error_symbol = '⁉️'
-let g:syntastic_warning_symbol = '⚠️'
-let g:syntastic_style_warning_symbol = '💩'
+"""" neomake {
+" let g:neomake_verbose = 3
+" let g:neomake_logfile = '/tmp/neomake.log'
+let g:neomake_javascript_enabled_makers = ['myeslint']
+let g:neomake_error_sign = {'text': '>>', 'texthl': 'Error'}
+let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Todo'}
+call neomake#configure#automake('nrw', 750)
 """" }
 """"""""""""""""""""""""""""""
 
