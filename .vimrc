@@ -49,6 +49,28 @@ augroup aug_filetypes
   autocmd BufEnter * :PreciousReset | :PreciousSwitch
 augroup END
 
+" filetype: javascript
+augroup ft_javascript
+  autocmd!
+  " get eslint path of current environment
+  function! s:GetEslintExe()
+    let l:eslintExe = GetNpmBin('eslint')
+    if empty(l:eslintExe)
+      return 'eslint'
+    else
+      return l:eslintExe
+    endif
+  endfunction
+
+  " set exe of neomake eslint
+  autocmd FileType javascript let g:neomake_javascript_myeslint_maker = {
+        \ 'exe': s:GetEslintExe(),
+        \ 'args': ['-f', 'compact'],
+        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+        \ '%W%f: line %l\, col %c\, Warning - %m'
+        \ }
+augroup END
+
 " prevent auto line feeding
 set tw=0
 
@@ -260,6 +282,7 @@ if has('vim_starting')
         NeoBundle 'kana/vim-textobj-line'
         NeoBundle 'deton/jasegment.vim'
         NeoBundle 'neomake/neomake'
+        NeoBundle 'benjie/local-npm-bin.vim'
         NeoBundle 'rhysd/clever-f.vim'
         NeoBundle 'itchyny/lightline.vim'
         NeoBundle 'bronson/vim-trailing-whitespace'
@@ -271,67 +294,6 @@ filetype plugin indent on
 
 " confirm uninstalled plugins
 NeoBundleCheck
-
-" fork from
-" https://github.com/benjie/local-npm-bin.vim/
-"
-" The MIT License (MIT)
-"
-" Copyright (c) 2015 Matt Smith
-"
-" Permission is hereby granted, free of charge, to any person obtaining a copy
-" of this software and associated documentation files (the "Software"), to
-" deal
-" in the Software without restriction, including without limitation the rights
-" to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-" copies of the Software, and to permit persons to whom the Software is
-" furnished to do so, subject to the following conditions:
-"
-" The above copyright notice and this permission notice shall be included in
-" all
-" copies or substantial portions of the Software.
-"
-" THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-" IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-" FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-" AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-" LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-" FROM,
-" OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-" THE
-" SOFTWARE.
-"
-" Navigate up the tree looking for node_module/.bin/{binname}; falling back to
-" `npm bin` directory
-function! GetNpmBin(binname)
-  let dir = getcwd()
-  while ! isdirectory(dir . '/node_modules')
-    let dir = fnamemodify(dir, ':h')
-    if dir == '/'
-      break
-    end
-  endwhile
-
-  let binpath = ''
-  if dir != '/'
-    let binpath = dir . '/node_modules/.bin/' . a:binname
-    if ! filereadable(binpath)
-      let binpath = ''
-    end
-  endif
-
-  if empty(binpath)
-    let binpath = system('echo -n $(npm bin)') . '/' . a:binname
-    if v:shell_error == 0
-      let binpath = substitute(binpath, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-    endif
-    if ! filereadable(binpath)
-      let binpath = ''
-    end
-  endif
-
-  return binpath
-endfunction
 
 " color scheme
 syntax enable
@@ -753,7 +715,7 @@ augroup END
 """" neomake {
 " let g:neomake_verbose = 3
 " let g:neomake_logfile = '/tmp/neomake.log'
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['myeslint']
 let g:neomake_error_sign = {'text': '>>', 'texthl': 'Error'}
 let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Todo'}
 call neomake#configure#automake('nrw', 750)
