@@ -64,7 +64,7 @@ augroup ft_javascript
   endfunction
   autocmd FileType javascript let g:neomake_javascript_myeslint_maker = {
         \ 'exe': s:GetEslintExe(),
-        \ 'args': ['-f', 'compact', '--no-ignore'],
+        \ 'args': ['-f', 'compact'],
         \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
         \ '%W%f: line %l\, col %c\, Warning - %m'
         \ }
