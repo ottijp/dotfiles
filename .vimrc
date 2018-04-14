@@ -751,8 +751,8 @@ augroup END
 
 """"""""""""""""""""""""""""""
 """" neomake {
-let g:neomake_verbose = 3
-let g:neomake_logfile = '/tmp/neomake.log'
+" let g:neomake_verbose = 3
+" let g:neomake_logfile = '/tmp/neomake.log'
 let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_javascript_eslint_exe = empty(GetNpmBin('eslint')) ? 'eslint' : GetNpmBin('eslint')
 let g:neomake_error_sign = {'text': '>>', 'texthl': 'Error'}
