@@ -44,9 +44,8 @@ augroup END
 " filetypes
 augroup aug_filetypes
   autocmd!
-  autocmd BufRead,BufWrite,BufNew *.jade,*.pug setfiletype pug
-  autocmd BufRead,BufNew,BufNewFile *.vue setfiletype vue
-  autocmd BufEnter * :PreciousReset | :PreciousSwitch
+  autocmd BufRead,BufNewFile *.jade,*.pug setfiletype pug
+  autocmd BufRead,BufNewFile *.vue setfiletype vue
 augroup END
 
 " filetype: javascript
@@ -65,7 +64,7 @@ augroup ft_javascript
   " set exe of neomake eslint
   autocmd FileType javascript let g:neomake_javascript_myeslint_maker = {
         \ 'exe': s:GetEslintExe(),
-        \ 'args': ['-f', 'compact'],
+        \ 'args': ['-f', 'compact', '--no-ignore'],
         \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
         \ '%W%f: line %l\, col %c\, Warning - %m'
         \ }
