@@ -46,6 +46,7 @@ augroup aug_filetypes
   autocmd!
   autocmd BufRead,BufNewFile *.jade,*.pug setfiletype pug
   autocmd BufRead,BufNewFile *.vue setfiletype vue
+  autocmd BufWinEnter * :PreciousReset | :PreciousSwitch
 augroup END
 
 " filetype: javascript
