@@ -55,6 +55,7 @@ alias mkdir='mkdir -p'
 # tmux
 alias tmux-changekey='tmux set-option -ag prefix C-b'
 alias tmux-revertkey='tmux set-option -ag prefix C-t'
+alias tmux-new-session-currentpath='tmux new-session -c "$PWD"'
 
 # ctags
 alias ctags=`brew --prefix`/bin/ctags
