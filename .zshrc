@@ -160,8 +160,11 @@ bindkey '^Xc' fzf-cmd
 # Others
 #-----------------------------------
 # nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+# nodebrew
+export PATH=$PATH:$HOME/.nodebrew/current/bin
+mkdir -p $HOME/.nodebrew/src
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
