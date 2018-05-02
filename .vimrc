@@ -245,26 +245,39 @@ if has('vim_starting')
         NeoBundle 'tyru/open-browser.vim'
         NeoBundle 'xolox/vim-session', { 'depends' : 'xolox/vim-misc' }
         NeoBundle 'kana/vim-submode'
-        NeoBundle 'fatih/vim-go'
+        NeoBundleLazy 'fatih/vim-go', {
+              \   'autoload' : { 'filetypes' : ['go'] }
+              \}
         NeoBundle "aklt/plantuml-syntax"
         NeoBundle 'thinca/vim-quickrun'
-        NeoBundle 'myhere/vim-nodejs-complete'
-        NeoBundle 'kchmck/vim-coffee-script'
+        NeoBundleLazy 'myhere/vim-nodejs-complete', {
+              \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
+              \}
+        NeoBundleLazy 'kchmck/vim-coffee-script', {
+              \   'autoload' : { 'filetypes' : ['coffee'] }
+              \}
         NeoBundle 'tpope/vim-fugitive'
         NeoBundle 'szw/vim-tags'
-        NeoBundle 'othree/yajs.vim'
+        NeoBundleLazy 'othree/yajs.vim', {
+              \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
+              \}
+        NeoBundleLazy 'othree/es.next.syntax.vim', {
+              \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
+              \}
         NeoBundle 'cohama/lexima.vim'
         NeoBundle 'Shougo/neocomplete.vim'
         NeoBundle 'Shougo/neosnippet'
         NeoBundle 'Shougo/neosnippet-snippets'
         NeoBundle 'majutsushi/tagbar'
         NeoBundleLazy 'leafgarland/typescript-vim', {
-              \   'autoload' : { 'filename_patterns' : '.*\.ts' }
+              \   'autoload' : { 'filetypes' : ['typescript'] }
               \}
         NeoBundleLazy 'Rykka/riv.vim', {
               \   'autoload' : { 'filetypes' : ['rst'] }
               \}
-        NeoBundle 'Quramy/vim-js-pretty-template'
+        NeoBundleLazy 'Quramy/vim-js-pretty-template', {
+              \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
+              \}
         NeoBundle 'Shougo/context_filetype.vim'
         NeoBundle 'osyo-manga/vim-precious'
         NeoBundle 'digitaltoad/vim-pug'
