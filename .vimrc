@@ -250,9 +250,6 @@ if has('vim_starting')
               \}
         NeoBundle "aklt/plantuml-syntax"
         NeoBundle 'thinca/vim-quickrun'
-        NeoBundleLazy 'myhere/vim-nodejs-complete', {
-              \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
-              \}
         NeoBundleLazy 'kchmck/vim-coffee-script', {
               \   'autoload' : { 'filetypes' : ['coffee'] }
               \}
@@ -414,17 +411,6 @@ let g:quickrun_config = {
 \   },
 \}
 let g:quickrun_config.coffeejs = {'command': 'coffee', 'cmdopt': '-pb'}
-
-""""""""""""""""""""""""""""""
-" nodejs-complete
-""""""""""""""""""""""""""""""
-autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
-if !exists('g:neocomplcache_omni_functions')
-    let g:neocomplcache_omni_functions = {}
-endif
-let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
-let g:node_usejscomplete = 1
-inoremap <Nul> <C-x><C-o>
 
 """"""""""""""""""""""""""""""
 " plantuml
