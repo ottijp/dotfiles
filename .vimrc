@@ -120,7 +120,7 @@ inoremap <silent> <C-d> <Del>
 
 " Enter to feed line (S-CR needs some trick)
 function! NewLineWithEnter()
-    if &modifiable
+    if &modifiable && &buftype != 'quickfix'
         execute "normal! o\<ESC>"
     else
         execute "normal! \<CR>"
@@ -250,9 +250,6 @@ if has('vim_starting')
               \}
         NeoBundle "aklt/plantuml-syntax"
         NeoBundle 'thinca/vim-quickrun'
-        NeoBundleLazy 'myhere/vim-nodejs-complete', {
-              \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
-              \}
         NeoBundleLazy 'kchmck/vim-coffee-script', {
               \   'autoload' : { 'filetypes' : ['coffee'] }
               \}
@@ -263,6 +260,9 @@ if has('vim_starting')
               \}
         NeoBundleLazy 'othree/es.next.syntax.vim', {
               \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
+              \}
+        NeoBundleLazy 'ternjs/tern_for_vim', {
+              \   'autoload' : { 'filetypes' : ['javascript'] }
               \}
         NeoBundle 'cohama/lexima.vim'
         NeoBundle 'Shougo/neocomplete.vim'
@@ -414,17 +414,6 @@ let g:quickrun_config = {
 \   },
 \}
 let g:quickrun_config.coffeejs = {'command': 'coffee', 'cmdopt': '-pb'}
-
-""""""""""""""""""""""""""""""
-" nodejs-complete
-""""""""""""""""""""""""""""""
-autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
-if !exists('g:neocomplcache_omni_functions')
-    let g:neocomplcache_omni_functions = {}
-endif
-let g:neocomplcache_omni_functions.javascript = 'nodejscomplete#CompleteJS'
-let g:node_usejscomplete = 1
-inoremap <Nul> <C-x><C-o>
 
 """"""""""""""""""""""""""""""
 " plantuml
@@ -732,6 +721,13 @@ let g:neomake_javascript_enabled_makers = ['myeslint']
 let g:neomake_error_sign = {'text': '>>', 'texthl': 'Error'}
 let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Todo'}
 call neomake#configure#automake('nrw', 750)
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" tern {
+let g:tern_show_signature_in_pum = 1
+let g:tern_show_argument_hints = 'on_move'
 """" }
 """"""""""""""""""""""""""""""
 
