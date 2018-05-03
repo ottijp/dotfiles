@@ -261,6 +261,9 @@ if has('vim_starting')
         NeoBundleLazy 'othree/es.next.syntax.vim', {
               \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
               \}
+        NeoBundleLazy 'ternjs/tern_for_vim', {
+              \   'autoload' : { 'filetypes' : ['javascript'] }
+              \}
         NeoBundle 'cohama/lexima.vim'
         NeoBundle 'Shougo/neocomplete.vim'
         NeoBundle 'Shougo/neosnippet'
@@ -718,6 +721,13 @@ let g:neomake_javascript_enabled_makers = ['myeslint']
 let g:neomake_error_sign = {'text': '>>', 'texthl': 'Error'}
 let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Todo'}
 call neomake#configure#automake('nrw', 750)
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" tern {
+let g:tern_show_signature_in_pum = 1
+let g:tern_show_argument_hints = 'on_move'
 """" }
 """"""""""""""""""""""""""""""
 
