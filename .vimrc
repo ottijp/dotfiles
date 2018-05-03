@@ -120,7 +120,7 @@ inoremap <silent> <C-d> <Del>
 
 " Enter to feed line (S-CR needs some trick)
 function! NewLineWithEnter()
-    if &modifiable
+    if &modifiable && &buftype != 'quickfix'
         execute "normal! o\<ESC>"
     else
         execute "normal! \<CR>"
