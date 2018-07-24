@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $# -gt 1 ]; then
+  find "$1" -path "$1/node_modules" -prune -o -path "$1/build" -prune -o -path "$1/.git" -prune -o -type f -print0 | xargs -0 grep -n --color=auto "$2"
+else
+  cmd_name=$(basename "$0")
+  echo "$cmd_name <root_directory> <search word>"
+fi
