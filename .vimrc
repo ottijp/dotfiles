@@ -283,6 +283,7 @@ if has('vim_starting')
         NeoBundle 'digitaltoad/vim-pug'
         NeoBundle 'tpope/vim-surround'
         NeoBundle 'junegunn/fzf'
+        NeoBundle 'junegunn/fzf.vim'
         NeoBundle 'altercation/vim-colors-solarized'
         NeoBundle 'Shougo/vimfiler'
         NeoBundle 'mattn/benchvimrc-vim'
