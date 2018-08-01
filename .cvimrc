@@ -10,7 +10,7 @@ set cncpcompletion
 " not work even if I set ctrl-n key binding in chrome extension page
 " set cncpcompletion
 set noinsertmappings
-set showtabindices
+set noshowtabindices
 let previousmatchpattern = '((?!last)(prev(ious)?|newer|back|«|less|<|‹|前のページ|前へ| )+)'
 let nextmatchpattern = '((?!first)(next|older|more|>|›|»|forward|次のページ|次へ| )+)'
 let barposition = 'bottom'
