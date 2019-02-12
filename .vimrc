@@ -47,6 +47,7 @@ augroup aug_filetypes
   autocmd BufRead,BufNewFile *.jade,*.pug setfiletype pug
   autocmd BufRead,BufNewFile *.vue setfiletype vue
   autocmd BufRead,BufNewFile *.sol setfiletype solidity
+  autocmd BufRead,BufNewFile *.swift setfiletype swift
   autocmd BufWinEnter * :PreciousReset | :PreciousSwitch
 augroup END
 
@@ -303,6 +304,9 @@ if has('vim_starting')
         NeoBundle 'bronson/vim-trailing-whitespace'
         NeoBundleLazy 'tomlion/vim-solidity', {
               \   'autoload' : { 'filetypes' : ['solidity'] }
+              \}
+        NeoBundleLazy 'keith/swift.vim', {
+              \   'autoload' : { 'filetypes' : ['swift'] }
               \}
 
         call neobundle#end()
