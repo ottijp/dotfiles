@@ -267,7 +267,6 @@ if has('vim_starting')
               \   'autoload' : { 'filetypes' : ['javascript'] }
               \}
         NeoBundle 'cohama/lexima.vim'
-        NeoBundle 'Shougo/neocomplete.vim'
         NeoBundle 'Shougo/neosnippet'
         NeoBundle 'Shougo/neosnippet-snippets'
         NeoBundle 'majutsushi/tagbar'
@@ -526,76 +525,6 @@ let g:vim_markdown_new_list_item_indent = 0
   call lexima#add_rule({'char': '｝', 'at': '\%#｝', 'leave': 1})
 """" }
 """"""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""
-"""" neocomplete, neosnippet {
-"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" completion
-inoremap <expr><C-l> neocomplete#complete_common_string()
-" cancel completion and close popup
-imap <expr><C-u> pumvisible() ? "<C-e>" : "<C-u>"
-" expand snippet, completion or <CR>
-imap <expr><CR> neosnippet#expandable() ? "<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "<C-y>" : lexima#expand('<LT>CR>', 'i')
-" select next item, jump to next snippet item or <TAB>
-imap <expr><TAB> pumvisible() ? "<C-n>" : neosnippet#jumpable() ? "<Plug>(neosnippet_expand_or_jump)" : "<TAB>"
-" close popup and delete backward char
-inoremap <expr><C-h> pumvisible() ? "\<C-y><BS>" : "\<BS>"
-inoremap <expr><BS> pumvisible() ? "\<C-y><BS>" : "\<BS>"
-" close popup and inserting space
-inoremap <expr><Space> pumvisible() ? "\<C-y><Space>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-"let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-"""" }
-""""""""""""""""""""""""""""""
-
 
 """"""""""""""""""""""""""""""
 """" vim-js-pretty-template {
