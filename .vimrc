@@ -740,6 +740,13 @@ let g:tern_show_argument_hints = 'on_move'
 """" }
 """"""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""
+"""" clever-f {
+map ; <Plug>(clever-f-repeat-forward)
+map , <Plug>(clever-f-repeat-back)
+"""" }
+""""""""""""""""""""""""""""""
+
 " read local setting
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
