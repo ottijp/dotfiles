@@ -192,6 +192,8 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then source "$HOME/google-cloud
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
+# swiftenv
+if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 
 #-----------------------------------
 # tmux auto start
