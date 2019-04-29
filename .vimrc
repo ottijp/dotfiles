@@ -428,44 +428,28 @@ let g:quickrun_config.coffeejs = {'command': 'coffee', 'cmdopt': '-pb'}
 let g:plantuml_executable_script="~/bin/plantuml"
 
 
-" window operations
-nnoremap s <Nop>
-" split
-nnoremap ss :<C-u>sp<CR><C-w>j
-nnoremap sv :<C-u>vs<CR><C-w>l
-" cursor movement
-nnoremap sh <C-w>h
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sw <C-w>w
-" window switching
-nnoremap sH <C-w>H
-nnoremap sJ <C-w>J
-nnoremap sK <C-w>K
-nnoremap sL <C-w>L
-nnoremap sr <C-w>r
-nnoremap sq :<C-u>q<CR>
-" window size changing
-nnoremap so <C-w>_<C-w>|
-nnoremap sO <C-w>=
-nnoremap s= <C-w>=
-call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
-call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
-call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
-call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
+""""""""""""""""""""""""""""""
+" tab and window operations
+""""""""""""""""""""""""""""""
+" new tab
+nnoremap <C-w>t :<C-U>tabnew<CR>
+nnoremap <C-w><C-t> :<C-U>tabnew<CR>
+" move tab
+nnoremap <C-l> gt
+nnoremap <C-h> gT
+" maximize/minimize window
+nnoremap <C-w>o <C-w>_<C-w>|
+nnoremap <C-w><C-o> <C-w>_<C-w>|
+nnoremap <C-w>O <C-w>_<C-w>=
+" change window size repeatably
+call submode#enter_with('bufmove', 'n', '', '<C-w>>', '<C-w>>')
+call submode#enter_with('bufmove', 'n', '', '<C-w><', '<C-w><')
+call submode#enter_with('bufmove', 'n', '', '<C-w>+', '<C-w>+')
+call submode#enter_with('bufmove', 'n', '', '<C-w>-', '<C-w>-')
 call submode#map('bufmove', 'n', '', '>', '<C-w>>')
 call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')
 call submode#map('bufmove', 'n', '', '-', '<C-w>-')
-" list tab
-nnoremap sT :<C-u>Unite tab<CR>
-" new tab
-nnoremap st :<C-U>tabnew<CR>
-" change tab
-nnoremap <C-l> gt
-nnoremap <C-h> gT
-
 
 
 """"""""""""""""""""""""""""""
