@@ -257,7 +257,6 @@ if has('vim_starting')
               \   'autoload' : { 'filetypes' : ['coffee'] }
               \}
         NeoBundle 'tpope/vim-fugitive'
-        NeoBundle 'szw/vim-tags'
         NeoBundleLazy 'othree/yajs.vim', {
               \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
               \}
@@ -270,7 +269,6 @@ if has('vim_starting')
         NeoBundle 'cohama/lexima.vim'
         NeoBundle 'Shougo/neosnippet'
         NeoBundle 'Shougo/neosnippet-snippets'
-        NeoBundle 'majutsushi/tagbar'
         NeoBundleLazy 'leafgarland/typescript-vim', {
               \   'autoload' : { 'filetypes' : ['typescript'] }
               \}
@@ -467,32 +465,6 @@ nnoremap st :<C-U>tabnew<CR>
 " change tab
 nnoremap <C-l> gt
 nnoremap <C-h> gT
-
-
-
-""""""""""""""""""""""""""""""
-" tag operation
-""""""""""""""""""""""""""""""
-" jump to definition
-nnoremap ] g<C-]>
-nnoremap s] <C-w>]
-" set tags path
-set tags+=./tags,tags;$HOME
-
-""""""""""""""""""""""""""""""
-"""" vim-tags {
-let g:vim_tags_auto_generate = 1
-"""" }
-""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""
-"""" tagbar {
-nnoremap <C-t> :TagbarToggle<CR>
-let g:tagbar_autoshowtag = 1
-let g:tagbar_width = 30
-let g:tagbar_map_togglesort = 'S'
-"""" }
-""""""""""""""""""""""""""""""
 
 
 
