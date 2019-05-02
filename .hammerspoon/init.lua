@@ -21,7 +21,7 @@ end
 
 
 -- disable IME on escaping
-remapKey({ 'ctrl' }, '[',  keyCodeSet({
+remapKey({ 'ctrl' }, 'g',  keyCodeSet({
   keyCode('escape'),
   keyCode(102)
 }))
