@@ -352,6 +352,9 @@ call submode#enter_with('indent', 'i', '', '<C-a>,', '<C-d>')
 call submode#map('indent', 'i', '', '.', '<C-t>')
 call submode#map('indent', 'i', '', ',', '<C-d>')
 
+" convert punctuation marks
+nnoremap <Leader>cp :%s/、/，/g<CR> \| :%s/。/．/g<CR>
+vnoremap <Leader>cp :s/、/，/g<CR> \| gv \| :s/。/．/g<CR>
 
 " http://blog.remora.cx/2010/12/vim-ref-with-unite.html
 """"""""""""""""""""""""""""""
