@@ -355,16 +355,13 @@ noremap <C-P> :Unite buffer<CR>
 " show files of current file's directory
 noremap <C-N> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 " show most recently used
-noremap <C-Z><C-Z> :Unite file_mru<CR>
+noremap <Leader>m :Unite file_mru<CR>
 " open with splitting window
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 " open with vertical-splitting window
 au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
 au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-" close Unite with ESCx2
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 " set default action to vimfiler in bookmark
 call unite#custom_default_action('source/bookmark/directory' , 'vimfiler')
 """"""""""""""""""""""""""""""
