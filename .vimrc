@@ -6,6 +6,8 @@ set backupdir=$HOME/vimbackup
 set directory=$HOME/vimbackup
 set undodir=$HOME/vimbackup
 
+" space key for <Leader>
+let mapleader = "\<Space>"
 
 """"""""""""""""""""""""""""""
 """" tab and indent {
@@ -100,12 +102,13 @@ set incsearch
 nnoremap / /\v
 cnoremap %s/ %s/\v
 
-" save shortcut
+" save buffer
 nnoremap gw :w<CR>
+" close buffer
+nnoremap gq :q<CR>
 
 " disable search highlight
-nnoremap <silent><ESC><ESC> :set nohlsearch!<CR>
-nnoremap <silent><C-g><C-g> :set nohlsearch!<CR>
+nnoremap <Leader>h :set nohlsearch!<CR>
 " case insensitive
 set ignorecase
 " infer case on completion
@@ -118,7 +121,6 @@ inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 
 " editing in insert mode
-inoremap <silent> <C-h> <C-g>u<C-h>
 inoremap <silent> <C-d> <Del>
 
 " Enter to feed line (S-CR needs some trick)
@@ -136,12 +138,8 @@ augroup cmdwindow
   autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
 augroup END
 
-" space to add space
-nnoremap <Space> i<Space><Esc>l
-
-" escape keymaps
-nnoremap <silent> <C-g> <ESC>
-cnoremap <silent> <C-g> <ESC>
+" add space
+nnoremap g<Space> i<Space><Esc>l
 
 " Make
 nnoremap <silent> <F5> :w <CR> :make <CR>
@@ -160,6 +158,13 @@ function! OpenCloseQuickfix()
 endfunction
 nnoremap <silent> <F7> :call OpenCloseQuickfix() <CR>
 inoremap <silent> <F7> :call OpenCloseQuickfix() <CR>
+
+" Quickfix list movement
+nnoremap [q :cprevious<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [Q :<C-u>cfirst<CR>
+nnoremap ]Q :<C-u>clast<CR>
+
 
 " smart concatenation of comment lines
 set formatoptions+=j
@@ -257,7 +262,6 @@ if has('vim_starting')
               \   'autoload' : { 'filetypes' : ['coffee'] }
               \}
         NeoBundle 'tpope/vim-fugitive'
-        NeoBundle 'szw/vim-tags'
         NeoBundleLazy 'othree/yajs.vim', {
               \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
               \}
@@ -270,7 +274,6 @@ if has('vim_starting')
         NeoBundle 'cohama/lexima.vim'
         NeoBundle 'Shougo/neosnippet'
         NeoBundle 'Shougo/neosnippet-snippets'
-        NeoBundle 'majutsushi/tagbar'
         NeoBundleLazy 'leafgarland/typescript-vim', {
               \   'autoload' : { 'filetypes' : ['typescript'] }
               \}
@@ -343,6 +346,16 @@ autocmd BufRead * let &modifiable = !&readonly
 " confirm uninstalled plugins
 NeoBundleCheck
 
+" increment/decrement indent repeatably
+call submode#enter_with('indent', 'i', '', '<C-a>.', '<C-t>')
+call submode#enter_with('indent', 'i', '', '<C-a>,', '<C-d>')
+call submode#map('indent', 'i', '', '.', '<C-t>')
+call submode#map('indent', 'i', '', ',', '<C-d>')
+
+" convert punctuation marks
+nnoremap <Leader>cp :%s/、/，/g<CR> \| :%s/。/．/g<CR>
+vnoremap <Leader>cp :s/、/，/g<CR> \| gv \| :s/。/．/g<CR>
+
 " http://blog.remora.cx/2010/12/vim-ref-with-unite.html
 """"""""""""""""""""""""""""""
 " Unite.vim
@@ -354,16 +367,13 @@ noremap <C-P> :Unite buffer<CR>
 " show files of current file's directory
 noremap <C-N> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 " show most recently used
-noremap <C-Z><C-Z> :Unite file_mru<CR>
+noremap <Leader>m :Unite file_mru<CR>
 " open with splitting window
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 " open with vertical-splitting window
 au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
 au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-" close Unite with ESCx2
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 " set default action to vimfiler in bookmark
 call unite#custom_default_action('source/bookmark/directory' , 'vimfiler')
 """"""""""""""""""""""""""""""
@@ -430,70 +440,28 @@ let g:quickrun_config.coffeejs = {'command': 'coffee', 'cmdopt': '-pb'}
 let g:plantuml_executable_script="~/bin/plantuml"
 
 
-" window operations
-nnoremap s <Nop>
-" split
-nnoremap ss :<C-u>sp<CR><C-w>j
-nnoremap sv :<C-u>vs<CR><C-w>l
-" cursor movement
-nnoremap sh <C-w>h
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sw <C-w>w
-" window switching
-nnoremap sH <C-w>H
-nnoremap sJ <C-w>J
-nnoremap sK <C-w>K
-nnoremap sL <C-w>L
-nnoremap sr <C-w>r
-nnoremap sq :<C-u>q<CR>
-" window size changing
-nnoremap so <C-w>_<C-w>|
-nnoremap sO <C-w>=
-nnoremap s= <C-w>=
-call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
-call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
-call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
-call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
+""""""""""""""""""""""""""""""
+" tab and window operations
+""""""""""""""""""""""""""""""
+" new tab
+nnoremap <C-w>t :<C-U>tabnew<CR>
+nnoremap <C-w><C-t> :<C-U>tabnew<CR>
+" move tab
+nnoremap <C-l> gt
+nnoremap <C-h> gT
+" maximize/minimize window
+nnoremap <C-w>o <C-w>_<C-w>|
+nnoremap <C-w><C-o> <C-w>_<C-w>|
+nnoremap <C-w>O <C-w>_<C-w>=
+" change window size repeatably
+call submode#enter_with('bufmove', 'n', '', '<C-w>>', '<C-w>>')
+call submode#enter_with('bufmove', 'n', '', '<C-w><', '<C-w><')
+call submode#enter_with('bufmove', 'n', '', '<C-w>+', '<C-w>+')
+call submode#enter_with('bufmove', 'n', '', '<C-w>-', '<C-w>-')
 call submode#map('bufmove', 'n', '', '>', '<C-w>>')
 call submode#map('bufmove', 'n', '', '<', '<C-w><')
 call submode#map('bufmove', 'n', '', '+', '<C-w>+')
 call submode#map('bufmove', 'n', '', '-', '<C-w>-')
-" list tab
-nnoremap sT :<C-u>Unite tab<CR>
-" new tab
-nnoremap st :<C-U>tabnew<CR>
-" change tab
-nnoremap <C-l> gt
-nnoremap <C-h> gT
-
-
-
-""""""""""""""""""""""""""""""
-" tag operation
-""""""""""""""""""""""""""""""
-" jump to definition
-nnoremap ] g<C-]>
-nnoremap s] <C-w>]
-" set tags path
-set tags+=./tags,tags;$HOME
-
-""""""""""""""""""""""""""""""
-"""" vim-tags {
-let g:vim_tags_auto_generate = 1
-"""" }
-""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""
-"""" tagbar {
-nnoremap <C-t> :TagbarToggle<CR>
-let g:tagbar_autoshowtag = 1
-let g:tagbar_width = 30
-let g:tagbar_map_togglesort = 'S'
-"""" }
-""""""""""""""""""""""""""""""
-
 
 
 """"""""""""""""""""""""""""""
