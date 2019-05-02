@@ -106,8 +106,7 @@ cnoremap %s/ %s/\v
 nnoremap gw :w<CR>
 
 " disable search highlight
-nnoremap <silent><ESC><ESC> :set nohlsearch!<CR>
-nnoremap <silent><C-g><C-g> :set nohlsearch!<CR>
+nnoremap <Leader>h :set nohlsearch!<CR>
 " case insensitive
 set ignorecase
 " infer case on completion
@@ -140,10 +139,6 @@ augroup END
 
 " add space
 nnoremap g<Space> i<Space><Esc>l
-
-" escape keymaps
-nnoremap <silent> <C-g> <ESC>
-cnoremap <silent> <C-g> <ESC>
 
 " Make
 nnoremap <silent> <F5> :w <CR> :make <CR>
