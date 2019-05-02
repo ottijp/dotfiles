@@ -159,6 +159,13 @@ endfunction
 nnoremap <silent> <F7> :call OpenCloseQuickfix() <CR>
 inoremap <silent> <F7> :call OpenCloseQuickfix() <CR>
 
+" Quickfix list movement
+nnoremap [q :cprevious<CR>
+nnoremap ]q :cnext<CR>
+nnoremap [Q :<C-u>cfirst<CR>
+nnoremap ]Q :<C-u>clast<CR>
+
+
 " smart concatenation of comment lines
 set formatoptions+=j
 
