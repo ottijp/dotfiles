@@ -119,7 +119,6 @@ inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 
 " editing in insert mode
-inoremap <silent> <C-h> <C-g>u<C-h>
 inoremap <silent> <C-d> <Del>
 
 " Enter to feed line (S-CR needs some trick)
