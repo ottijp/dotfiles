@@ -102,8 +102,10 @@ set incsearch
 nnoremap / /\v
 cnoremap %s/ %s/\v
 
-" save shortcut
+" save buffer
 nnoremap gw :w<CR>
+" close buffer
+nnoremap gq :q<CR>
 
 " disable search highlight
 nnoremap <Leader>h :set nohlsearch!<CR>
