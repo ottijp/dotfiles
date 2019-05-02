@@ -6,6 +6,8 @@ set backupdir=$HOME/vimbackup
 set directory=$HOME/vimbackup
 set undodir=$HOME/vimbackup
 
+" space key for <Leader>
+let mapleader = "\<Space>"
 
 """"""""""""""""""""""""""""""
 """" tab and indent {
@@ -136,8 +138,8 @@ augroup cmdwindow
   autocmd CmdwinEnter * nnoremap <buffer> <CR> <CR>
 augroup END
 
-" space to add space
-nnoremap <Space> i<Space><Esc>l
+" add space
+nnoremap g<Space> i<Space><Esc>l
 
 " escape keymaps
 nnoremap <silent> <C-g> <ESC>
