@@ -341,6 +341,13 @@ autocmd BufRead * let &modifiable = !&readonly
 " confirm uninstalled plugins
 NeoBundleCheck
 
+" increment/decrement indent repeatably
+call submode#enter_with('indent', 'i', '', '<C-a>.', '<C-t>')
+call submode#enter_with('indent', 'i', '', '<C-a>,', '<C-d>')
+call submode#map('indent', 'i', '', '.', '<C-t>')
+call submode#map('indent', 'i', '', ',', '<C-d>')
+
+
 " http://blog.remora.cx/2010/12/vim-ref-with-unite.html
 """"""""""""""""""""""""""""""
 " Unite.vim
