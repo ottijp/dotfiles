@@ -195,6 +195,15 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/google
 # swiftenv
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 
+# pyenv
+PYENV_ROOT=${HOME}/.pyenv
+if [ -d "${PYENV_ROOT}" ]; then
+    export PYENV_ROOT
+    export PATH=${PYENV_ROOT}/bin:$PATH
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
+
 #-----------------------------------
 # tmux auto start
 #-----------------------------------
