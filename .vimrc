@@ -46,7 +46,7 @@ augroup END
 " filetypes
 augroup aug_filetypes
   autocmd!
-  autocmd BufNew,VimEnter * if &filetype == "" | setlocal ft=markdown | endif
+  autocmd BufEnter,VimEnter * if expand("%") == "" && &filetype == "" | setlocal ft=markdown | endif
   autocmd BufRead,BufNewFile *.jade,*.pug setfiletype pug
   autocmd BufRead,BufNewFile *.vue setfiletype vue
   autocmd BufRead,BufNewFile *.sol setfiletype solidity
