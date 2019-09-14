@@ -81,6 +81,60 @@
           ]
         }
       ]
+    },
+    {
+      "description": "⌘S（テキストを書き出す）の無効化",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "s",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Terminal$"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "⌘O（インポート）の無効化",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "o",
+            "modifiers": {
+              "mandatory": [
+                "command"
+              ],
+              "optional": [
+                "caps_lock"
+              ]
+            }
+          },
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [
+                "^com\\.apple\\.Terminal$"
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
