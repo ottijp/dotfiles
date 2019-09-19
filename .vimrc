@@ -339,6 +339,9 @@ let g:lightline = {
       \ },
       \ }
 
+" light color for MatchParen background
+highlight MatchParen ctermbg=0
+
 " prevent editing readonly file
 autocmd BufRead * let &modifiable = !&readonly
 
