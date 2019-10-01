@@ -113,6 +113,9 @@ nnoremap <Leader>h :set nohlsearch!<CR>
 set ignorecase
 " infer case on completion
 set infercase
+" change split position
+set splitbelow
+set splitright
 
 " cursor movement in insert mode
 " inoremap <C-n> <Down>
