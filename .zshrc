@@ -94,8 +94,8 @@ export PROMPT=$'%{\e[36m%}%n@%m:%{\e[35m%}%c%{\e[0;34m%}$(__git_ps1 " (%s)")%{\e
 # command histories
 export HISTFILE=~/.zhistory
 touch ~/.zhistory
-export HISTSIZE=1000
-export SAVEHIST=100000
+export HISTSIZE=10000
+export SAVEHIST=9000000
 setopt hist_ignore_dups
 setopt EXTENDED_HISTORY
 setopt share_history
