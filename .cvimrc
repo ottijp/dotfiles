@@ -14,6 +14,7 @@ set noshowtabindices
 let previousmatchpattern = '((?!last)(prev(ious)?|newer|back|«|less|<|‹|前のページ|前へ| )+)'
 let nextmatchpattern = '((?!first)(next|older|more|>|›|»|forward|次のページ|次へ| )+)'
 let barposition = 'bottom'
+let mapleader = ","
 
 """"""""""""""""""""""
 " Key Bindings
@@ -60,8 +61,8 @@ map <C-l> nextTab
 map u lastClosedTab
 " Switch between alphabetical hint characters and numeric hints
 map <C-i> :set numerichints!<CR>
-" search word in clipboard
-map sp :tabnew google @"<CR>
+" search word in clipboard whether it's URL
+map <Leader>p :tabnew google @"<CR>
 
 
 """"""""""""""""""""""
