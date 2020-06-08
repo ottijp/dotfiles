@@ -655,7 +655,31 @@ map , <Plug>(clever-f-repeat-back)
 """" }
 """"""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""
+"""" fzf {
+function! s:FzfBookmark()
+  let l:BS = "\u08" " <C-h>
+  let l:cmdtype = getcmdtype()
+  let l:args = {
+  \   'source': 'cat $HOME/bookmarks',
+  \   'sink': { lines -> lines }
+  \ } " sink does nothing
+  if l:cmdtype == ':'
+    let l:list = fzf#run(fzf#wrap(l:args))
+    if len(list)
+      return escape(substitute(list[0], '^.\{-,},', '', ''), ' ')
+    else
+      return 'a' . l:BS " workaround for redraw problem
+    endif
+  endif
+endfunction
+
+cnoremap <expr> <C-x>b <SID>FzfBookmark()
+"""" }
+""""""""""""""""""""""""""""""
+
 " read local setting
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
 endif
+
