@@ -680,7 +680,7 @@ function! s:FzfFile()
   let l:cmdline = getcmdline()
   let l:dir = substitute(l:cmdline, '^[^\\]\+ \(.\{-1,}\)/\?$', '\1', '')
   let l:args = {
-  \   'source': 'find ' . l:dir,
+  \   'source': 'find ' . l:dir . ' -follow',
   \   'sink': { lines -> lines }
   \ } " sink does nothing
   if l:cmdtype == ':'
