@@ -44,7 +44,7 @@ fzf-bookmark() {
   local selected
   selected=`(cat ~/bookmarks 2>/dev/null) | fzf`
   if [ -n "$selected" ]; then
-    LBUFFER=${LBUFFER}"`awk 'BEGIN{FS=","}{print $2}' <<<"$selected"` "
+    LBUFFER=${LBUFFER}"`awk 'BEGIN{FS=","}{print $2}' <<<"$selected" | sed 's/ /\\\\ /g'` "
   fi
   zle reset-prompt
 }
