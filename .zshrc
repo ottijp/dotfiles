@@ -39,6 +39,16 @@ fzf-cmd() {
   zle reset-prompt
 }
 
+# search bookmarks functions
+fzf-bookmark() {
+  local selected
+  selected=`(cat ~/bookmarks 2>/dev/null) | fzf`
+  if [ -n "$selected" ]; then
+    LBUFFER=${LBUFFER}"`awk 'BEGIN{FS=","}{print $2}' <<<"$selected"` "
+  fi
+  zle reset-prompt
+}
+
 
 #-----------------------------------
 # command alias and env vars
@@ -159,6 +169,8 @@ zle -N fzf-src
 bindkey '^Xs' fzf-src
 zle -N fzf-cmd
 bindkey '^Xc' fzf-cmd
+zle -N fzf-bookmark
+bindkey '^Xb' fzf-bookmark
 
 #-----------------------------------
 # Others

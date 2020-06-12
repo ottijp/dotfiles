@@ -655,7 +655,52 @@ map , <Plug>(clever-f-repeat-back)
 """" }
 """"""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""
+"""" fzf {
+function! s:FzfBookmark()
+  let l:BS = "\u08" " <C-h>
+  let l:cmdtype = getcmdtype()
+  let l:args = {
+  \   'source': 'cat $HOME/bookmarks',
+  \   'sink': { lines -> lines }
+  \ } " sink does nothing
+  if l:cmdtype == ':'
+    let l:list = fzf#run(fzf#wrap(l:args))
+    if len(list)
+      return escape(substitute(list[0], '^.\{-,},', '', ''), ' ')
+    else
+      return 'a' . l:BS " workaround for redraw problem
+    endif
+  endif
+endfunction
+
+function! s:FzfFile()
+  let l:BS = "\u08" " <C-h>
+  let l:cmdtype = getcmdtype()
+  let l:cmdline = getcmdline()
+  let l:dir = substitute(l:cmdline, '^[^\\]\+ \(.\{-1,}\)/\?$', '\1', '')
+  let l:args = {
+  \   'source': 'find ' . l:dir . ' -follow',
+  \   'sink': { lines -> lines }
+  \ } " sink does nothing
+  if l:cmdtype == ':'
+    let l:list = fzf#run(fzf#wrap(l:args))
+    if len(list)
+      return "\<C-u>" . substitute(l:cmdline, '^\([^\\]\+ \)\(.\{-1,}\)$', '\1' . escape(list[0], ' '), '')
+    else
+      return 'a' . l:BS " workaround for redraw problem
+    endif
+  endif
+  return ''
+endfunction
+
+cnoremap <expr> <C-x>b <SID>FzfBookmark()
+cnoremap <expr> <C-x>f <SID>FzfFile()
+"""" }
+""""""""""""""""""""""""""""""
+
 " read local setting
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
 endif
+
