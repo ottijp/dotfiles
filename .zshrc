@@ -1,6 +1,9 @@
 # undef console output stop (enable incremental search)
 stty stop undef
 
+# avoid duplicated PATHs
+typeset -U path PATH
+
 #-----------------------------------
 # functions
 #-----------------------------------
