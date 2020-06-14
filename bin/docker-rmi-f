@@ -1,0 +1,5 @@
+#!/bin/bash
+
+selected=$(docker images | sed 1d | fzf -m | awk '{print $3}')
+
+[ -n "$selected" ] && docker rmi "$selected"
