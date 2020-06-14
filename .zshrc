@@ -214,7 +214,6 @@ _gen_fzf_default_opts() {
     --bind 'ctrl-f:page-down'
     --bind 'ctrl-b:page-up'
     --bind 'ctrl-u:page-up'
-    --bind 'ctrl-a:select-all'
   "
 }
 _gen_fzf_default_opts
