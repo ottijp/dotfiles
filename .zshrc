@@ -207,6 +207,14 @@ _gen_fzf_default_opts() {
     --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
     --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
     --reverse --border
+    --bind 'up:preview-up'
+    --bind 'down:preview-down'
+    --bind 'ctrl-d:half-page-down'
+    --bind 'ctrl-u:half-page-up'
+    --bind 'ctrl-f:page-down'
+    --bind 'ctrl-b:page-up'
+    --bind 'ctrl-u:page-up'
+    --bind 'ctrl-a:select-all'
   "
 }
 _gen_fzf_default_opts
