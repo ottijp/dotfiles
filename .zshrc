@@ -206,7 +206,7 @@ _gen_fzf_default_opts() {
   export FZF_DEFAULT_OPTS="
     --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
     --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
-    --reverse --border --height 50%
+    --reverse --border
   "
 }
 _gen_fzf_default_opts
