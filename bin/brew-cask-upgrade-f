@@ -1,0 +1,16 @@
+#!/bin/bash
+
+candidates=$(brew cask upgrade --dry-run | sort | sed '/^==>/d')
+
+if [ -z "$candidates" ]; then
+  echo "No Casks to upgrade"
+  exit 1
+fi
+
+selected=$(echo "$candidates" | fzf -m | awk '{print $1}')
+
+if [[ "$selected" ]]; then
+  for prog in $(echo "$selected"); do
+    brew cask upgrade $prog
+  done
+fi
