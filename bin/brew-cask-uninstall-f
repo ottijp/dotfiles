@@ -1,0 +1,10 @@
+#!/bin/bash
+
+selected=$(brew cask list | sort | fzf -m)
+
+if [[ "$selected" ]]; then
+  for prog in $(echo "$selected"); do
+    brew uninstall $prog
+  done
+fi
+

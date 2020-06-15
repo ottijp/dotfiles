@@ -1,0 +1,13 @@
+#!/bin/bash
+
+pattern=$(brew leaves | xargs -I{} echo "^{} ")
+upgrades=$(brew upgrade -n)
+candidates=$(grep -E "$pattern" <<<"$upgrades" | sort)
+
+selected=$(echo "$candidates" | fzf -m | awk '{print $1}')
+
+if [[ "$selected" ]]; then
+  for prog in $(echo "$selected"); do
+    brew upgrade $prog
+  done
+fi
