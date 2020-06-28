@@ -1,7 +1,7 @@
 #!/bin/bash
 set -eu
 
-readonly INKSCAPE_PATH=/Applications/Inkscape.app/Contents/Resources/bin/inkscape
+readonly INKSCAPE_PATH=/Applications/Inkscape.app/Contents/MacOS/inkscape
 
 if [ $# -lt 1 ]; then
   >&2 echo "usage: $0 <svg-file-path>"
@@ -33,21 +33,21 @@ INKSCAPE_PID=$!
 
 # inkscapeシェルへのリクエストを構築
 cat <<-EOF > "$TMP_PIPE_FILE"
-"$1" --export-png="$PNG_PATH/icon-20.png" --export-width=20 --export-height=20
-"$1" --export-png="$PNG_PATH/icon-20@2x.png" --export-width=40 --export-height=40
-"$1" --export-png="$PNG_PATH/icon-20@3x.png" --export-width=60 --export-height=60
-"$1" --export-png="$PNG_PATH/icon-29.png" --export-width=29 --export-height=29
-"$1" --export-png="$PNG_PATH/icon-29@2x.png" --export-width=58 --export-height=58
-"$1" --export-png="$PNG_PATH/icon-29@3x.png" --export-width=87 --export-height=87
-"$1" --export-png="$PNG_PATH/icon-40.png" --export-width=40 --export-height=40
-"$1" --export-png="$PNG_PATH/icon-40@2x.png" --export-width=80 --export-height=80
-"$1" --export-png="$PNG_PATH/icon-40@3x.png" --export-width=120 --export-height=120
-"$1" --export-png="$PNG_PATH/icon-60@2x.png" --export-width=120 --export-height=120
-"$1" --export-png="$PNG_PATH/icon-60@3x.png" --export-width=180 --export-height=180
-"$1" --export-png="$PNG_PATH/icon-76.png" --export-width=76 --export-height=76
-"$1" --export-png="$PNG_PATH/icon-76@2x.png" --export-width=152 --export-height=152
-"$1" --export-png="$PNG_PATH/icon-83.5@2x.png" --export-width=167 --export-height=167
-"$1" --export-png="$PNG_PATH/icon-1024.png" --export-width=1024 --export-height=1024
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-20.png; export-width:20; export-height:20; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-20@2x.png; export-width:40; export-height:40; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-20@3x.png; export-width:60; export-height:60; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-29.png; export-width:29; export-height:29; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-29@2x.png; export-width:58; export-height:58; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-29@3x.png; export-width:87; export-height:87; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-40.png; export-width:40; export-height:40; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-40@2x.png; export-width:80; export-height:80; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-40@3x.png; export-width:120; export-height:120; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-60@2x.png; export-width:120; export-height:120; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-60@3x.png; export-width:180; export-height:180; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-76.png; export-width:76; export-height:76; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-76@2x.png; export-width:152; export-height:152; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-83.5@2x.png; export-width:167; export-height:167; export-do
+file-open:$1; export-file-type:png; export-filename:$PNG_PATH/icon-1024.png; export-width:1024; export-height:1024; export-do
 quit
 EOF
 
