@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "usage: $0 PID"
+  exit
+fi
+
+pid=$1
+
+if command ps $pid >/dev/null; then
+  pdesc=$(command ps $pid | sed 1d | awk '{print $1, $5}')
+else
+  echo PID:$pid not found
+  exit 1
+fi
+
+if type terminal-notifier >/dev/null; then
+  while true; do
+    if command ps $pid >/dev/null; then
+      sleep 1
+    else
+      terminal-notifier -title "Process finished" -message "$pdesc"
+      exit
+    fi
+  done
+else
+  echo "terminal-notifier not found"
+  exit 1
+fi
