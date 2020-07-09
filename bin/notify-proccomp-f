@@ -1,0 +1,7 @@
+#!/bin/bash
+
+selected=$(command ps -ef | fzf --preview 'echo {}' --preview-window down:3:wrap | awk '{print $2}')
+
+if [[ "$selected" ]]; then
+  notify-proccomp $selected
+fi
