@@ -42,6 +42,9 @@ fi
 ln -snf ~/dotfiles/colors ~/.vim/colors
 ln -snf ~/dotfiles/.docker/config.json ~/.docker/config.json
 
+mkdir -p ~/.config
+ln -sf ~/dotfiles/ranger ~/.config
+
 # pandoc
 mkdir -p ~/.pandoc
 ln -snf ~/dotfiles/templates/pandoc ~/.pandoc/templates
