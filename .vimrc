@@ -115,8 +115,8 @@ nnoremap <Leader>p "*p
 nnoremap <Leader>P "*P
 " case insensitive
 set ignorecase
-" infer case on completion
-set infercase
+" no infer case on completion
+set noinfercase
 " change split position
 set splitbelow
 set splitright
