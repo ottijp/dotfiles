@@ -78,7 +78,7 @@ alias gs="git status"
 alias gf="git diff"
 
 # tree
-alias tree="tree -I node_modules -L 3"
+alias tree="tree -N -I node_modules -L 3"
 
 # grep
 alias grep="grep --color=auto"
