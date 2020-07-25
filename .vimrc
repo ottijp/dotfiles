@@ -51,6 +51,7 @@ augroup aug_filetypes
   autocmd BufRead,BufNewFile *.vue setfiletype vue
   autocmd BufRead,BufNewFile *.sol setfiletype solidity
   autocmd BufRead,BufNewFile *.swift setfiletype swift
+  autocmd BufRead,BufNewFile *.uml,*.pu,*plantuml setfiletype plantuml
   autocmd BufWinEnter * :PreciousReset | :PreciousSwitch
 augroup END
 
@@ -210,99 +211,86 @@ endif
 
 filetype plugin indent off
 
-if has('vim_starting')
-        set runtimepath+=$HOME/.vim/bundle/neobundle.vim
+""""""""""""""""""""""""""""""
+" plugin
+""""""""""""""""""""""""""""""
+if &compatible
+  set nocompatible
+endif
+" dein dir path
+let s:dein_dir = expand('~/.vim/bundles')
+" dein.vim path
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-        " install neobundle if it's not installed
-        if !isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
-          echo "install NeoBundle..."
-          :call system("git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim")
-        endif
-
-        call neobundle#begin(expand('~/.vim/bundle/'))
-        NeoBundleFetch 'Shougo/neobundle.vim'
-        NeoBundle "Shougo/unite.vim"
-        NeoBundle "Shougo/neomru.vim"
-        NeoBundleLazy 'scrooloose/nerdtree', {
-              \   'commands' : 'NERDTree'
-              \}
-        NeoBundle "tomtom/tcomment_vim"
-        "NeoBundle "h1mesuke/vim-alignta"
-        NeoBundle 'godlygeek/tabular'
-        NeoBundleLazy 'plasticboy/vim-markdown', {
-              \   'autoload' : { 'filetypes' : ['markdown'] }
-              \}
-        NeoBundleLazy 'kannokanno/previm', {
-              \   'autoload' : { 'filetypes' : ['markdown'] }
-              \}
-        NeoBundle 'tyru/open-browser.vim'
-        NeoBundle 'xolox/vim-session', { 'depends' : 'xolox/vim-misc' }
-        NeoBundle 'kana/vim-submode'
-        NeoBundleLazy 'fatih/vim-go', {
-              \   'autoload' : { 'filetypes' : ['go'] }
-              \}
-        NeoBundle "aklt/plantuml-syntax"
-        NeoBundle 'thinca/vim-quickrun'
-        NeoBundleLazy 'kchmck/vim-coffee-script', {
-              \   'autoload' : { 'filetypes' : ['coffee'] }
-              \}
-        NeoBundle 'tpope/vim-fugitive'
-        NeoBundleLazy 'othree/yajs.vim', {
-              \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
-              \}
-        NeoBundleLazy 'othree/es.next.syntax.vim', {
-              \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
-              \}
-        NeoBundleLazy 'ternjs/tern_for_vim', {
-              \   'autoload' : { 'filetypes' : ['javascript'] }
-              \}
-        NeoBundle 'cohama/lexima.vim'
-        NeoBundle 'Shougo/neosnippet'
-        NeoBundle 'Shougo/neosnippet-snippets'
-        NeoBundleLazy 'leafgarland/typescript-vim', {
-              \   'autoload' : { 'filetypes' : ['typescript'] }
-              \}
-        NeoBundleLazy 'Rykka/riv.vim', {
-              \   'autoload' : { 'filetypes' : ['rst'] }
-              \}
-        NeoBundleLazy 'Quramy/vim-js-pretty-template', {
-              \   'autoload' : { 'filetypes' : ['javascript', 'typescript'] }
-              \}
-        NeoBundle 'Shougo/context_filetype.vim'
-        NeoBundle 'osyo-manga/vim-precious'
-        NeoBundle 'digitaltoad/vim-pug'
-        NeoBundle 'tpope/vim-surround'
-        NeoBundle 'junegunn/fzf'
-        NeoBundle 'junegunn/fzf.vim'
-        NeoBundle 'altercation/vim-colors-solarized'
-        NeoBundle 'Shougo/vimfiler'
-        NeoBundle 'mattn/benchvimrc-vim'
-        NeoBundle 'junegunn/vim-easy-align'
-        NeoBundle 'kana/vim-textobj-user'
-        NeoBundle 'kana/vim-textobj-jabraces'
-        NeoBundle 'osyo-manga/vim-textobj-multiblock'
-        NeoBundle 'osyo-manga/vim-textobj-multitextobj'
-        NeoBundle 'tpope/vim-commentary'
-        NeoBundle 'kana/vim-textobj-line'
-        NeoBundle 'deton/jasegment.vim'
-        NeoBundle 'neomake/neomake'
-        NeoBundle 'rhysd/clever-f.vim'
-        NeoBundle 'itchyny/lightline.vim'
-        NeoBundle 'bronson/vim-trailing-whitespace'
-        NeoBundleLazy 'tomlion/vim-solidity', {
-              \   'autoload' : { 'filetypes' : ['solidity'] }
-              \}
-        NeoBundleLazy 'keith/swift.vim', {
-              \   'autoload' : { 'filetypes' : ['swift'] }
-              \}
-
-        call neobundle#end()
+" if dein.vim not found, install it
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
-filetype plugin indent on
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-" confirm uninstalled plugins
-NeoBundleCheck
+  call dein#add(s:dein_repo_dir)
+  call dein#add('Shougo/deoplete.nvim')
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/neomru.vim')
+  call dein#add('Shougo/context_filetype.vim')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('altercation/vim-colors-solarized')
+  call dein#add('tomtom/tcomment_vim')
+  call dein#add('tyru/open-browser.vim')
+  call dein#add('godlygeek/tabular')
+  call dein#add('cohama/lexima.vim')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('tpope/vim-surround')
+  call dein#add('junegunn/fzf', { 'build': './install --all' })
+  call dein#add('junegunn/fzf.vim')
+  call dein#add('rhysd/clever-f.vim')
+  call dein#add('kana/vim-submode')
+  call dein#add('kana/vim-textobj-line')
+  call dein#add('kana/vim-textobj-user')
+  call dein#add('kana/vim-textobj-jabraces')
+  call dein#add('osyo-manga/vim-textobj-multiblock')
+  call dein#add('osyo-manga/vim-textobj-multitextobj')
+  call dein#add('osyo-manga/vim-precious')
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('junegunn/vim-easy-align')
+  call dein#add('deton/jasegment.vim')
+  call dein#add('neomake/neomake')
+  call dein#add('bronson/vim-trailing-whitespace')
+  " call dein#add('mattn/benchvimrc-vim')
+
+  call dein#add('plasticboy/vim-markdown', { 'lazy': 1, 'on_ft': 'markdown' })
+  call dein#add('fatih/vim-go', { 'lazy': 1, 'on_ft': 'go' })
+  call dein#add('Rykka/riv.vim', { 'lazy': 1, 'on_ft': 'rst' })
+  call dein#add('leafgarland/typescript-vim', { 'lazy': 1, 'on_ft': 'typescript' })
+  call dein#add('othree/yajs.vim', { 'lazy': 1, 'on_ft': ['typescript', 'javascript'] })
+  call dein#add('othree/es.next.syntax.vim', { 'lazy': 1, 'on_ft': ['typescript', 'javascript'] })
+  call dein#add('Quramy/vim-js-pretty-template', { 'lazy': 1, 'on_ft': ['typescript', 'javascript'] })
+  call dein#add('kannokanno/previm', { 'lazy': 1, 'on_ft': 'markdown' })
+  call dein#add('aklt/plantuml-syntax', { 'lazy': 1, 'on_ft': 'plantuml' })
+  call dein#add('digitaltoad/vim-pug', { 'lazy': 1, 'on_ft': 'pug' })
+  call dein#add('keith/swift.vim', { 'lazy': 1, 'on_ft': 'swift' })
+  call dein#add('tomlion/vim-solidity', { 'lazy': 1, 'on_ft': 'solidity' })
+
+  call dein#end()
+  if dein#check_install()
+    call dein#install()
+  endif
+  call dein#save_state()
+endif
+""""""""""""""""""""""""""""""
+
+filetype plugin indent on
+syntax enable
 
 " color scheme
 syntax enable
@@ -328,10 +316,6 @@ highlight MatchParen ctermbg=0
 
 " prevent editing readonly file
 autocmd BufRead * let &modifiable = !&readonly
-
-
-" confirm uninstalled plugins
-NeoBundleCheck
 
 " increment/decrement indent repeatably
 call submode#enter_with('indent', 'i', '', '<C-a>.', '<C-t>')
@@ -388,27 +372,6 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 """"""""""""""""""""""""""""""
 let g:previm_disable_default_css = 1
 let g:previm_custom_css_path = '$HOME/templates/previm/github.css'
-
-""""""""""""""""""""""""""""""
-" vim-session
-""""""""""""""""""""""""""""""
-" use .'vimsessions/' of current directory
-let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
-" if it exists
-if isdirectory(s:local_session_directory)
-  " './vimsessions/' as session directory
-  let g:session_directory = s:local_session_directory
-  " save on exit automatically
-  let g:session_autosave = 'yes'
-  " open 'default.vim' on startup with no arguments
-  let g:session_autoload = 'yes'
-  " save automatically every 1min
-  let g:session_autosave_periodic = 1
-else
-  let g:session_autosave = 'no'
-  let g:session_autoload = 'no'
-endif
-unlet s:local_session_directory
 
 """"""""""""""""""""""""""""""
 " quickrun
@@ -511,11 +474,6 @@ let g:context_filetype#filetypes.vue =
       \    'end': '</script>', 'filetype': 'typescript',
       \   },
       \   {
-      \    'start':
-      \     '<script\%( [^>]*\)\? lang="\%(coffeescript\)"\%( [^>]*\)\?>',
-      \    'end': '</script>', 'filetype': 'coffee',
-      \   },
-      \   {
       \    'start': '<script\%( [^>]*\)\?>',
       \    'end': '</script>', 'filetype': 'javascript',
       \   },
@@ -545,7 +503,7 @@ let g:easy_align_delimiters = {
 
 """"""""""""""""""""""""""""""
 """" vim-textobj-multiblock {
-if neobundle#tap('vim-textobj-multiblock')
+if dein#tap('vim-textobj-multiblock')
     let g:textobj_multitextobj_textobjects_i = [
     \ "\<Plug>(textobj-multiblock-i)",
     \ "\<Plug>(textobj-jabraces-parens-i)",
