@@ -1,0 +1,15 @@
+# show commit ID in main view
+set main-view = id date author commit-title:graph=yes,refs=yes
+
+# page control
+bind generic G none
+bind main G none
+bind generic g move-first-line
+bind generic G move-last-line
+bind main G move-last-line
+
+# display
+set line-graphics = utf-8
+
+# search
+set ignore-case = true
