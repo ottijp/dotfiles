@@ -633,6 +633,15 @@ cnoremap <expr> <C-x>f <SID>FzfFile()
 """" }
 """"""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""
+"""" MarkuPrev {
+function! OpenWithMarkuPrev()
+  echo system('open /Applications/MarkuPrev.app' . ' -n --args ' . shellescape(expand('%:p')))
+endfunction
+command! MarkuPrev call OpenWithMarkuPrev()
+"""" }
+""""""""""""""""""""""""""""""
+
 " read local setting
 if filereadable(expand('~/.vimrc.local'))
     source ~/.vimrc.local
