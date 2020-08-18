@@ -1,13 +1,15 @@
 #!/bin/bash
 
-pattern=$(brew leaves | xargs -I{} echo "^{} ")
-upgrades=$(brew upgrade -n)
-candidates=$(grep -E "$pattern" <<<"$upgrades" | sort)
+brew update > /dev/null
+
+outdated=$(brew outdated --verbose)
+pattern=$(brew leaves | awk '{print $1}' | sed -e 's/\+/\\\+/g' -e 's/\(.*\)/\^\1/')
+candidates=$(grep -E "$pattern" <<<"$outdated" | sort)
 
 selected=$(echo "$candidates" | fzf -m | awk '{print $1}')
 
-if [[ "$selected" ]]; then
-  for prog in $(echo "$selected"); do
-    brew upgrade $prog
+if [[ $selected ]]; then
+  for formula in $selected; do
+    brew upgrade "$formula"
   done
 fi
