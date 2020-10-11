@@ -87,7 +87,10 @@ let defaultengine = 'google'
 let searchengine amazon = 'https://www.amazon.co.jp/s/ref=nb_sb_noss_2?__mk_ja_JP=%s&url=search-alias%3Daps&field-keywords=%s'
 " Wikipedia jp
 let searchengine wiki = 'https://ja.wikipedia.org/wiki/%s'
+" Yodobashi
+let searchengine yodobashi = 'https://www.yodobashi.com/?word=%s'
 " alias
 let searchalias a = 'amazon'
 let searchalias w = 'wiki'
+let searchalias y = 'yodobashi'
 
