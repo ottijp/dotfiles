@@ -73,6 +73,9 @@ map <Leader>ym :call clipboardCopy(`[${document.title.replace(/(\])/g, '\\$1')}]
 " copy URL as plain text
 map <Leader>yp :call clipboardCopy(`${document.title}\n${location.href}`)<CR>
 
+" blacklists
+let blacklists = ["https://drive.google.com/*"]
+
 """"""""""""""""""""""
 " Web Seach
 """"""""""""""""""""""
