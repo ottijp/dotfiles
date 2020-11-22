@@ -76,6 +76,7 @@ alias ctags=`brew --prefix`/bin/ctags
 # git
 alias gs="git status"
 alias gf="git diff"
+alias gfc="git diff --cached"
 
 # tree
 alias tree="tree -N -I node_modules -L 3"
