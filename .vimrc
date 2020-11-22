@@ -267,6 +267,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('neomake/neomake')
   call dein#add('bronson/vim-trailing-whitespace')
   call dein#add('editorconfig/editorconfig-vim')
+  call dein#add('airblade/vim-gitgutter')
   " call dein#add('mattn/benchvimrc-vim')
 
   call dein#add('plasticboy/vim-markdown', { 'lazy': 1, 'on_ft': 'markdown' })
@@ -640,6 +641,12 @@ function! OpenWithMarkuPrev()
   echo system('open /Applications/MarkuPrev.app' . ' -n --args ' . shellescape(expand('%:p')))
 endfunction
 command! MarkuPrev call OpenWithMarkuPrev()
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" gitgutter {
+highlight! link SignColumn LineNr
 """" }
 """"""""""""""""""""""""""""""
 
