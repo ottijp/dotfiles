@@ -357,7 +357,7 @@ call unite#custom_default_action('source/bookmark/directory' , 'vimfiler')
 
 """"""""""""""""""""""""""""""
 """" NERDTree {
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
+nnoremap <silent><Leader>f :NERDTreeToggle<CR>
 " quit NERDTree on open
 let g:NERDTreeQuitOnOpen=1
 " ignore system files
