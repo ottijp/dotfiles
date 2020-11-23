@@ -268,6 +268,8 @@ if dein#load_state(s:dein_dir)
   call dein#add('bronson/vim-trailing-whitespace')
   call dein#add('editorconfig/editorconfig-vim')
   call dein#add('airblade/vim-gitgutter')
+  call dein#add('tpope/vim-repeat')
+  call dein#add('tpope/vim-speeddating')
   " call dein#add('mattn/benchvimrc-vim')
 
   call dein#add('plasticboy/vim-markdown', { 'lazy': 1, 'on_ft': 'markdown' })
@@ -288,6 +290,7 @@ if dein#load_state(s:dein_dir)
     call dein#install()
   endif
   call dein#save_state()
+  call map(dein#check_clean(), "delete(v:val, 'rf')")
 endif
 """"""""""""""""""""""""""""""
 
