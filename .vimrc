@@ -323,10 +323,10 @@ highlight MatchParen ctermbg=0
 autocmd BufRead * let &modifiable = !&readonly
 
 " increment/decrement indent repeatably
-call submode#enter_with('indent', 'i', '', '<C-a>.', '<C-t>')
-call submode#enter_with('indent', 'i', '', '<C-a>,', '<C-d>')
-call submode#map('indent', 'i', '', '.', '<C-t>')
-call submode#map('indent', 'i', '', ',', '<C-d>')
+call submode#enter_with('indent', 'i', '', '<C-a>>', '<C-t>')
+call submode#enter_with('indent', 'i', '', '<C-a><', '<C-d>')
+call submode#map('indent', 'i', '', '>', '<C-t>')
+call submode#map('indent', 'i', '', '<', '<C-d>')
 
 " convert punctuation marks
 nnoremap <Leader>cp :%s/、/，/ge<CR>:%s/。/．/ge<CR>
