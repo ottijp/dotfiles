@@ -421,7 +421,10 @@ call submode#map('bufmove', 'n', '', '-', '<C-w>-')
 
 """"""""""""""""""""""""""""""
 """" diff {
-" show in vertical window
+" show diff vertically
+if &diff
+  set diffopt-=internal
+endif
 set diffopt+=vertical
 """" }
 """"""""""""""""""""""""""""""
