@@ -323,10 +323,10 @@ highlight MatchParen ctermbg=0
 autocmd BufRead * let &modifiable = !&readonly
 
 " increment/decrement indent repeatably
-call submode#enter_with('indent', 'i', '', '<C-a>.', '<C-t>')
-call submode#enter_with('indent', 'i', '', '<C-a>,', '<C-d>')
-call submode#map('indent', 'i', '', '.', '<C-t>')
-call submode#map('indent', 'i', '', ',', '<C-d>')
+call submode#enter_with('indent', 'i', '', '<C-a>>', '<C-t>')
+call submode#enter_with('indent', 'i', '', '<C-a><', '<C-d>')
+call submode#map('indent', 'i', '', '>', '<C-t>')
+call submode#map('indent', 'i', '', '<', '<C-d>')
 
 " convert punctuation marks
 nnoremap <Leader>cp :%s/、/，/ge<CR>:%s/。/．/ge<CR>
@@ -357,7 +357,7 @@ call unite#custom_default_action('source/bookmark/directory' , 'vimfiler')
 
 """"""""""""""""""""""""""""""
 """" NERDTree {
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
+nnoremap <silent><Leader>f :NERDTreeToggle<CR>
 " quit NERDTree on open
 let g:NERDTreeQuitOnOpen=1
 " ignore system files
@@ -421,7 +421,10 @@ call submode#map('bufmove', 'n', '', '-', '<C-w>-')
 
 """"""""""""""""""""""""""""""
 """" diff {
-" show in vertical window
+" show diff vertically
+if &diff
+  set diffopt-=internal
+endif
 set diffopt+=vertical
 """" }
 """"""""""""""""""""""""""""""
