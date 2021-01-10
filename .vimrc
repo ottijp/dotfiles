@@ -70,6 +70,7 @@ set ruler
 set showmatch
 " statusline
 set noshowmode
+set laststatus=2
 
 
 " search
