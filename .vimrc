@@ -241,8 +241,6 @@ if dein#load_state(s:dein_dir)
     call dein#add('roxma/vim-hug-neovim-rpc')
   endif
 
-  call dein#add('Shougo/unite.vim')
-  call dein#add('Shougo/neomru.vim')
   call dein#add('Shougo/context_filetype.vim')
   call dein#add('scrooloose/nerdtree')
   call dein#add('altercation/vim-colors-solarized')
@@ -332,28 +330,6 @@ call submode#map('indent', 'i', '', '<', '<C-d>')
 " convert punctuation marks
 nnoremap <Leader>cp :%s/、/，/ge<CR>:%s/。/．/ge<CR>
 vnoremap <Leader>cp :s/、/，/ge<CR>gv:s/。/．/ge<CR>
-
-" http://blog.remora.cx/2010/12/vim-ref-with-unite.html
-""""""""""""""""""""""""""""""
-" Unite.vim
-""""""""""""""""""""""""""""""
-" start with insert mode
-"let g:unite_enable_start_insert=1
-" show buffer
-noremap <C-P> :Unite buffer<CR>
-" show files of current file's directory
-noremap <C-N> :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-" show most recently used
-noremap <Leader>m :Unite file_mru<CR>
-" open with splitting window
-au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-" open with vertical-splitting window
-au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-" set default action to vimfiler in bookmark
-call unite#custom_default_action('source/bookmark/directory' , 'vimfiler')
-""""""""""""""""""""""""""""""
 
 
 """"""""""""""""""""""""""""""
@@ -639,8 +615,39 @@ function! s:FzfFile()
   return ''
 endfunction
 
+function! s:list_buffers()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+  execute 'bdelete' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+" delete buffer
+command! BD call fzf#run(fzf#wrap({
+      \ 'source': s:list_buffers(),
+      \ 'sink*': { lines -> s:delete_buffers(lines) },
+      \ 'options': '--multi --reverse --bind ctrl-a:select-all'
+      \ }))
+
+" open sibiling file
+command! -bang SFiles call fzf#vim#files(expand('%:p:h'), {
+      \ 'source': 'find . -depth 1 -type f',
+      \ 'options': ['--info=inline', '--preview', 'cat {}']
+      \ }, <bang>0)
+
 cnoremap <expr> <C-x>b <SID>FzfBookmark()
 cnoremap <expr> <C-x>f <SID>FzfFile()
+nnoremap <C-P> :Buffers<CR>
+nnoremap <C-N> :SFiles<CR>
+noremap <Leader>m :History<CR>
+
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 """" }
 """"""""""""""""""""""""""""""
 
