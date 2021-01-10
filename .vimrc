@@ -605,7 +605,8 @@ function! s:FzfBookmark()
   let l:cmdtype = getcmdtype()
   let l:args = {
   \   'source': 'cat $HOME/bookmarks',
-  \   'sink': { lines -> lines }
+  \   'sink': { lines -> lines },
+  \   'down': '~50%'
   \ } " sink does nothing
   if l:cmdtype == ':'
     let l:list = fzf#run(fzf#wrap(l:args))
@@ -624,7 +625,8 @@ function! s:FzfFile()
   let l:dir = substitute(l:cmdline, '^[^\\]\+ \(.\{-1,}\)/\?$', '\1', '')
   let l:args = {
   \   'source': 'find ' . l:dir . ' -follow',
-  \   'sink': { lines -> lines }
+  \   'sink': { lines -> lines },
+  \   'down': '~50%',
   \ } " sink does nothing
   if l:cmdtype == ':'
     let l:list = fzf#run(fzf#wrap(l:args))
