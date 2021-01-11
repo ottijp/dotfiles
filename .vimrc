@@ -235,11 +235,6 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   call dein#add(s:dein_repo_dir)
-  call dein#add('Shougo/deoplete.nvim')
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
 
   call dein#add('Shougo/context_filetype.vim')
   call dein#add('scrooloose/nerdtree')
@@ -283,6 +278,12 @@ if dein#load_state(s:dein_dir)
   call dein#add('digitaltoad/vim-pug', { 'lazy': 1, 'on_ft': 'pug' })
   call dein#add('keith/swift.vim', { 'lazy': 1, 'on_ft': 'swift' })
   call dein#add('tomlion/vim-solidity', { 'lazy': 1, 'on_ft': 'solidity' })
+  call dein#add('prabirshrestha/asyncomplete.vim')
+  call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+  call dein#add('prabirshrestha/vim-lsp')
+  call dein#add('mattn/vim-lsp-settings')
+  call dein#add('hrsh7th/vim-vsnip')
+  call dein#add('hrsh7th/vim-vsnip-integ')
 
   call dein#end()
   if dein#check_install()
@@ -663,6 +664,34 @@ command! MarkuPrev call OpenWithMarkuPrev()
 """"""""""""""""""""""""""""""
 """" gitgutter {
 highlight! link SignColumn LineNr
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" lsp {
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> <f2> <plug>(lsp-rename)
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+endfunction
+
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+command! LspStartServer call lsp#enable()
+
+let g:lsp_signature_help_enabled = 1
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_fold_enabled = 0
+let g:lsp_diagnostics_signs_error = {'text': '!!'}
+let g:lsp_diagnostics_signs_warning = {'text': '>>'}
 """" }
 """"""""""""""""""""""""""""""
 
