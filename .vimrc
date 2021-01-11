@@ -284,6 +284,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('mattn/vim-lsp-settings')
   call dein#add('hrsh7th/vim-vsnip')
   call dein#add('hrsh7th/vim-vsnip-integ')
+  call dein#add('dense-analysis/ale')
 
   call dein#end()
   if dein#check_install()
@@ -692,6 +693,14 @@ let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_fold_enabled = 0
 let g:lsp_diagnostics_signs_error = {'text': '!!'}
 let g:lsp_diagnostics_signs_warning = {'text': '>>'}
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" ALE {
+let g:ale_sign_error = '!!'
+let g:ale_sign_warning = '>>'
+let g:ale_disable_lsp = 1
 """" }
 """"""""""""""""""""""""""""""
 
