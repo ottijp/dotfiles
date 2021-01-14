@@ -34,6 +34,7 @@ mkdir -p ~/.docker
 link_files '.??*'
 link_files bin
 link_files templates
+link_files .vsnip
 
 if is_osx; then
   ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua

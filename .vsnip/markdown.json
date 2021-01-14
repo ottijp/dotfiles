@@ -1,0 +1,18 @@
+{
+ "table_x2": {
+   "prefix": "table_x2",
+   "body": "|th|th|\n|:-|-:|\n|td|td|"
+ },
+ "table_x3": {
+   "prefix": "table_x3",
+   "body": "|th|th|th|\n|:-|-:|-:|\n|td|td|td|"
+ },
+ "table_x4": {
+   "prefix": "table_x4",
+   "body": "|th|th|th|th|\n|:-|-:|-:|-:|\n|td|td|td|td|"
+ },
+ "table_x5": {
+   "prefix": "table_x5",
+   "body": "|th|th|th|th|th|\n|:-|-:|-:|-:|-:|\n|td|td|td|td|td|"
+ }
+}
