@@ -264,6 +264,8 @@ if dein#load_state(s:dein_dir)
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-speeddating')
+  call dein#add('deton/jasegment.vim')
+  call dein#add('deton/jasentence.vim')
   " call dein#add('mattn/benchvimrc-vim')
 
   call dein#add('plasticboy/vim-markdown', { 'lazy': 1, 'on_ft': 'markdown' })
@@ -701,6 +703,12 @@ let g:lsp_diagnostics_signs_warning = {'text': '>>'}
 let g:ale_sign_error = '!!'
 let g:ale_sign_warning = '>>'
 let g:ale_disable_lsp = 1
+"""" }
+""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" jasentence {
+let g:jasentence_endpat = '[、。，．？！\n]\+'
 """" }
 """"""""""""""""""""""""""""""
 
