@@ -72,6 +72,8 @@ set showmatch
 set noshowmode
 set laststatus=2
 
+" command line completion
+set wildmode=longest,list
 
 " search
 " highlight matched
