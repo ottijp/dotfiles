@@ -304,20 +304,6 @@ syntax enable
 syntax enable
 set background=dark
 colorscheme solarized
-let g:lightline = {
-      \ 'colorscheme': 'solarized',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filepath', 'modified'] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
-      \ },
-      \ 'component': {
-      \   'charvaluehex': '0x%B',
-      \   'filepath': '%f'
-      \ },
-      \ }
 
 " light color for MatchParen background
 highlight MatchParen ctermbg=0
@@ -711,6 +697,64 @@ let g:ale_disable_lsp = 1
 let g:jasentence_endpat = '[、。，．？！\n]\+'
 """" }
 """"""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""
+"""" lightline {
+" ref https://gist.github.com/cormacrelf/d0bee254f5630b0e93c3
+function! SelectingCount()
+  let l:ret = ""
+  let currentmode = mode()
+  if !exists("g:lastmode_lc")
+    let g:lastmode_lc = currentmode
+  endif
+  " if we modify file, open a new buffer, be in visual ever, or switch modes
+  " since last run, we recompute.
+  if &modified || !exists("b:linecount") || currentmode =~? '\c.*v' || currentmode != g:lastmode_lc
+    let g:lastmode_lc = currentmode
+    let l:old_position = getpos('.')
+    let l:old_status = v:statusmsg
+    execute "silent normal g\<c-g>"
+    if v:statusmsg == "--No lines in buffer--"
+      let b:linecount = 0
+    else
+      let s:split_lc = split(v:statusmsg)
+      if index(s:split_lc, "Selected") < 0
+        let b:linecount = str2nr(s:split_lc[6])
+      else
+        let b:linecount = str2nr(s:split_lc[1])
+      endif
+      let v:statusmsg = l:old_status
+    endif
+    call setpos('.', l:old_position)
+  endif
+  let l:ret = b:linecount
+  if lightline#mode() ==# 'VISUAL' || lightline#mode() ==# 'V-LINE'
+    return l:ret
+  else
+    return ''
+  endif
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filepath', 'modified'] ],
+      \   'right': [ [ 'lineinfo', 'selectingcount' ],
+      \              [ 'percent' ],
+      \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
+      \ },
+      \ 'component': {
+      \   'charvaluehex': '0x%B',
+      \   'filepath': '%f'
+      \ },
+      \ 'component_function': {
+      \   'selectingcount': 'SelectingCount'
+      \ },
+      \ }
+"""" }
+""""""""""""""""""""""""""""""
+
 
 " read local setting
 if filereadable(expand('~/.vimrc.local'))
