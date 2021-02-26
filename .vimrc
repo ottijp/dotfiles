@@ -73,7 +73,7 @@ set noshowmode
 set laststatus=2
 
 " command line completion
-set wildmode=longest,list
+set wildmode=longest,list,full
 
 " search
 " highlight matched
