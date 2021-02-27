@@ -335,11 +335,52 @@ let g:NERDTreeIgnore=['\.DS_Store']
 let g:NERDTreeShowHidden=1
 " show bookmarks on startup
 let g:NERDTreeShowBookmarks=1
-" close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" function to find file under current node
+function! NERDTreeFindFile(node)
+  if a:node.path.isDirectory == 1
+    let path = a:node.path.str()
+  else
+    let path = a:node.path.getDir().str()
+  endif
+  let args = {
+  \   'source': 'rg --files -- ' . path,
+  \   'sink': { lines -> lines },
+  \   'down': '~50%',
+  \ }
+  let list = fzf#run(fzf#wrap(args))
+  if len(list)
+    execute 'NERDTreeFind' list[0]
+  endif
+endfunction
+" function to grep files under current node
+function! NERDTreeGrepFile(node)
+  if a:node.path.isDirectory == 1
+    let path = a:node.path.str()
+  else
+    let path = a:node.path.getDir().str()
+  endif
+  NERDTreeClose
+  call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case \"\" ".shellescape(path), 1, fzf#vim#with_preview())
+endfunction
+augroup nerdtree
+  autocmd!
+  " close vim if the only window left open is a NERDTree
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  " find file under current node
+  autocmd VimEnter * call NERDTreeAddKeyMap({
+        \ 'key': 'zf',
+        \ 'callback': 'NERDTreeFindFile',
+        \ 'quickhelpText': 'find file under current node',
+        \ 'scope': 'Node' })
+  " grep files under current node
+  autocmd VimEnter * call NERDTreeAddKeyMap({
+        \ 'key': 'zg',
+        \ 'callback': 'NERDTreeGrepFile',
+        \ 'quickhelpText': 'grep files under current node',
+        \ 'scope': 'Node' })
+augroup END
 """" }
 """"""""""""""""""""""""""""""
-
 
 """"""""""""""""""""""""""""""
 " PreVim
