@@ -49,7 +49,6 @@ augroup aug_filetypes
   autocmd BufEnter,VimEnter * if expand("%") == "" && &filetype == "" | setlocal ft=markdown | endif
   autocmd BufRead,BufNewFile *.jade,*.pug setfiletype pug
   autocmd BufRead,BufNewFile *.vue setfiletype vue
-  autocmd BufRead,BufNewFile *.sol setfiletype solidity
   autocmd BufRead,BufNewFile *.swift setfiletype swift
   autocmd BufRead,BufNewFile *.uml,*.pu,*plantuml setfiletype plantuml
   autocmd BufWinEnter * :PreciousReset | :PreciousSwitch
@@ -281,7 +280,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('aklt/plantuml-syntax', { 'lazy': 1, 'on_ft': 'plantuml' })
   call dein#add('digitaltoad/vim-pug', { 'lazy': 1, 'on_ft': 'pug' })
   call dein#add('keith/swift.vim', { 'lazy': 1, 'on_ft': 'swift' })
-  call dein#add('tomlion/vim-solidity', { 'lazy': 1, 'on_ft': 'solidity' })
   call dein#add('prabirshrestha/asyncomplete.vim')
   call dein#add('prabirshrestha/asyncomplete-lsp.vim')
   call dein#add('prabirshrestha/vim-lsp')
