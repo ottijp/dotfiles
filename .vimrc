@@ -340,15 +340,8 @@ function! NERDTreeFindFile(node)
   else
     let path = a:node.path.getDir().str()
   endif
-  let args = {
-  \   'source': 'rg --files -- ' . path,
-  \   'sink': { lines -> lines },
-  \   'down': '~50%',
-  \ }
-  let list = fzf#run(fzf#wrap(args))
-  if len(list)
-    execute 'NERDTreeFind' list[0]
-  endif
+  NERDTreeClose
+  call fzf#vim#files(path)
 endfunction
 " function to grep files under current node
 function! NERDTreeGrepFile(node)
