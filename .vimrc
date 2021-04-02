@@ -456,7 +456,7 @@ let g:vim_markdown_new_list_item_indent = 0
 
 """"""""""""""""""""""""""""""
 """" vim-js-pretty-template {
-autocmd FileType typescript JsPreTmpl markdown
+autocmd FileType typescript JsPreTmpl
 autocmd FileType typescript syn clear foldBraces
 """" }
 """"""""""""""""""""""""""""""
