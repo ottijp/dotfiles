@@ -736,6 +736,9 @@ let g:jasentence_endpat = '[、。，．？！\n]\+'
 """" lightline {
 " ref https://gist.github.com/cormacrelf/d0bee254f5630b0e93c3
 function! SelectingCount()
+  if lightline#mode() !=# 'VISUAL' && lightline#mode() !=# 'V-LINE'
+    return ''
+  endif
   let l:ret = ""
   let currentmode = mode()
   if !exists("g:lastmode_lc")
@@ -761,12 +764,7 @@ function! SelectingCount()
     endif
     call setpos('.', l:old_position)
   endif
-  let l:ret = b:linecount
-  if lightline#mode() ==# 'VISUAL' || lightline#mode() ==# 'V-LINE'
-    return l:ret
-  else
-    return ''
-  endif
+  return b:linecount
 endfunction
 
 let g:lightline = {
