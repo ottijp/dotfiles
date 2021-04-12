@@ -739,23 +739,23 @@ function! SelectingCount()
   if lightline#mode() !=# 'VISUAL' && lightline#mode() !=# 'V-LINE'
     return ''
   endif
-  let l:ret = ""
+  let l:ret = ''
   let currentmode = mode()
-  if !exists("g:lastmode_lc")
+  if !exists('g:lastmode_lc')
     let g:lastmode_lc = currentmode
   endif
   " if we modify file, open a new buffer, be in visual ever, or switch modes
   " since last run, we recompute.
-  if &modified || !exists("b:linecount") || currentmode =~? '\c.*v' || currentmode != g:lastmode_lc
+  if &modified || !exists('b:linecount') || currentmode =~? '\c.*v' || currentmode != g:lastmode_lc
     let g:lastmode_lc = currentmode
     let l:old_position = getpos('.')
     let l:old_status = v:statusmsg
     execute "silent normal g\<c-g>"
-    if v:statusmsg == "--No lines in buffer--"
+    if v:statusmsg ==# '--No lines in buffer--'
       let b:linecount = 0
     else
       let s:split_lc = split(v:statusmsg)
-      if index(s:split_lc, "Selected") < 0
+      if index(s:split_lc, 'Selected') < 0
         let b:linecount = str2nr(s:split_lc[6])
       else
         let b:linecount = str2nr(s:split_lc[1])
