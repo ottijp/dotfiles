@@ -79,9 +79,6 @@ set wildmode=longest,list,full
 set hlsearch
 " enable incremental search
 set incsearch
-" use very magic as default
-nnoremap / /\v
-cnoremap %s/ %s/\v
 
 " save buffer
 nnoremap gw :w<CR>
