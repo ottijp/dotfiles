@@ -27,7 +27,9 @@ alias tmux-changekey='tmux set-option -ag prefix C-b'
 alias tmux-revertkey='tmux set-option -ag prefix C-t'
 
 # ctags
-alias ctags=`brew --prefix`/bin/ctags
+if is_exists 'brew' ; then
+  alias ctags=`brew --prefix`/bin/ctags
+fi
 
 # locale
 export LC_ALL=en_US.UTF-8
@@ -72,8 +74,10 @@ export NVM_DIR="$HOME/.nvm"
 set -o vi
 
 # fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_OPTS='--reverse --border --height 50%'
+if is_exists 'fzf'; then
+  source ~/.fzf.bash
+  export FZF_DEFAULT_OPTS='--reverse --border --height 50%'
+fi
 
 
 #-----------------------------------
@@ -136,4 +140,6 @@ function tmux_automatically_attach_session()
     fi
   fi
 }
-tmux_automatically_attach_session
+if is_exists 'tmux'; then
+  tmux_automatically_attach_session
+fi
