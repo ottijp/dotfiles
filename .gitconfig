@@ -17,7 +17,7 @@
   pu = push
   # checkout
   co = checkout
-  com = checkout master
+  com = !"if git branch --format '%(refname:lstrip=-1)' | grep '^master$' > /dev/null; then git checkout master; else git checkout main; fi"
   cob = checkout -b
   # branch
   br = branch
