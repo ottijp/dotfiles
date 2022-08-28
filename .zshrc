@@ -45,7 +45,7 @@ fzf-cmd() {
 # search bookmarks functions
 fzf-bookmark() {
   local selected
-  selected=`(cat ~/bookmarks 2>/dev/null) | fzf`
+  selected=`(cat ~/bookmarks | grep -vE "^#" | grep -vE "^$" 2>/dev/null) | fzf`
   if [ -n "$selected" ]; then
     LBUFFER=${LBUFFER}"`awk 'BEGIN{FS=","}{print $2}' <<<"$selected" | sed 's/ /\\\\ /g'` "
   fi
