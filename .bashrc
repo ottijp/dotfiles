@@ -17,10 +17,17 @@ function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
 # command alias and env vars
 #-----------------------------------
 # ls
-alias ls="ls -GF"
-alias la="ls -GFa"
-alias ll="ls -GFl"
-alias lla="ls -GFal"
+if is_osx; then
+  alias ls="ls -GF"
+  alias la="ls -GFa"
+  alias ll="ls -GFlh"
+  alias lla="ls -GFalh"
+else
+  alias ls="ls -F"
+  alias la="ls -Fa"
+  alias ll="ls -Flh"
+  alias lla="ls -Falh"
+fi
 
 # tmux
 alias tmux-changekey='tmux set-option -ag prefix C-b'

@@ -57,10 +57,17 @@ fzf-bookmark() {
 # command alias and env vars
 #-----------------------------------
 # ls
-alias ls="ls -GF"
-alias la="ls -GFa"
-alias ll="ls -GFlh"
-alias lla="ls -GFalh"
+if is_osx; then
+  alias ls="ls -GF"
+  alias la="ls -GFa"
+  alias ll="ls -GFlh"
+  alias lla="ls -GFalh"
+else
+  alias ls="ls -F"
+  alias la="ls -Fa"
+  alias ll="ls -Flh"
+  alias lla="ls -Falh"
+fi
 
 # mkdir
 alias mkdir='mkdir -p'
