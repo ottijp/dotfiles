@@ -8,7 +8,7 @@
 	editor = vim -c \"set fenc=utf-8\"
 	quotepath = false
 [alias]
-  delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -d %
+  delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|main$|develop$' | xargs -I % git branch -d %
   fp = !git fetch -p && git delete-merged-branches
   pp = !git pull -p && git delete-merged-branches
   tree = !git log --graph --all --format=' [%ad] %C(yellow)%h%Creset %C(cyan bold)%an%Creset %s %C(magenta reverse)%d%Creset' --date=short
