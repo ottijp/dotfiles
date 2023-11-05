@@ -19,38 +19,27 @@ set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 
-" change tab width
-function! ChangeTabWidth(w)
-  let &l:tabstop = a:w
-  let &l:shiftwidth = a:w
-  let &l:softtabstop = a:w
-endfunction
-
 " indent on new line
 set autoindent
 
 " block indentation
 set smarttab
-
-" extension customize
-augroup aug_markdown
-  autocmd!
-  " .md as markdown
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
-  autocmd Filetype markdown call ChangeTabWidth(4)
-augroup END
-
 """" }
 """"""""""""""""""""""""""""""
 
-" filetypes
-augroup aug_filetypes
+" default filetype
+function! s:NoneFileTypeSetMarkdown()
+  if len(&filetype) == 0
+    set filetype=markdown
+  endif
+endfunction
+augroup default_filetype
+  autocmd BufEnter,WinEnter * call s:NoneFileTypeSetMarkdown()
+augroup END
+
+" auto filetype switching
+augroup auto_filetype_switching
   autocmd!
-  autocmd BufEnter,VimEnter * if expand("%") == "" && &filetype == "" | setlocal ft=markdown | endif
-  autocmd BufRead,BufNewFile *.jade,*.pug setfiletype pug
-  autocmd BufRead,BufNewFile *.vue setfiletype vue
-  autocmd BufRead,BufNewFile *.swift setfiletype swift
-  autocmd BufRead,BufNewFile *.uml,*.pu,*plantuml setfiletype plantuml
   autocmd BufWinEnter * :PreciousReset | :PreciousSwitch
 augroup END
 
@@ -784,6 +773,11 @@ let g:lightline = {
 """" }
 """"""""""""""""""""""""""""""
 
+""""""""""""""""""""""""""""""
+"""" markdown {
+let g:markdown_recommended_style = 1
+"""" }
+""""""""""""""""""""""""""""""
 
 " read local setting
 if filereadable(expand('~/.vimrc.local'))
