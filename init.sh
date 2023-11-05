@@ -40,7 +40,7 @@ if is_osx; then
   ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
   ln -snf ~/dotfiles/karabiner/terminal-disable-shortcut.json ~/.config/karabiner/assets/complex_modifications/terminal-disable-shortcut.json
 fi
-ln -snf ~/dotfiles/colors ~/.vim/colors
+ln -snf ~/dotfiles/.vim/colors ~/.vim/colors
 ln -snf ~/dotfiles/.docker/config.json ~/.docker/config.json
 
 mkdir -p ~/.config
