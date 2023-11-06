@@ -74,8 +74,6 @@ nnoremap gw :w<CR>
 " close buffer
 nnoremap gq :q<CR>
 
-" disable search highlight
-nnoremap <Leader>h :set nohlsearch!<CR>
 " short cut for pasteboard
 vnoremap <Leader>y "*y
 nnoremap <Leader>p "*p
