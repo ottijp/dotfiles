@@ -679,7 +679,17 @@ function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
   nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> <f2> <plug>(lsp-rename)
+  nmap <buffer> gs <plug>(lsp-document-symbol-search)
+  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> gi <plug>(lsp-implementation)
+  nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> <leader>rn <plug>(lsp-rename)
+  nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+  nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+  nmap <buffer> K <plug>(lsp-hover)
+  nnoremap <buffer> <expr>gj lsp#scroll(+4)
+  nnoremap <buffer> <expr>gk lsp#scroll(-4)
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
@@ -698,6 +708,7 @@ let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_fold_enabled = 0
 let g:lsp_diagnostics_signs_error = {'text': '!!'}
 let g:lsp_diagnostics_signs_warning = {'text': '>>'}
+let lsp_diagnostics_virtual_text_align = "right"
 """" }
 """"""""""""""""""""""""""""""
 
