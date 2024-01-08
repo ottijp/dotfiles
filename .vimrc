@@ -249,7 +249,6 @@ if dein#load_state(s:dein_dir)
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-repeat')
   call dein#add('tpope/vim-speeddating')
-  call dein#add('deton/jasegment.vim')
   call dein#add('deton/jasentence.vim')
   " call dein#add('mattn/benchvimrc-vim')
 
