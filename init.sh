@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+script_dir=$(cd $(dirname "$0"); pwd)
 config_home=${XDG_CONFIG_HOME:-$HOME/.config}
 mkdir -p $config_home
 
@@ -21,7 +22,7 @@ function link_files() {
       [[ "$f" == ".gitignore" ]] && continue
       [[ "$f" == ".DS_Store" ]] && continue
 
-      ln -snf ~/dotfiles/$f ~/$f
+      ln -snf "$script_dir/$f" ~/$f
   done
 }
 
@@ -38,27 +39,27 @@ link_files templates
 link_files .vsnip
 
 if is_osx; then
-  ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
-  ln -snf ~/dotfiles/karabiner/terminal-disable-shortcut.json $config_home/karabiner/assets/complex_modifications/terminal-disable-shortcut.json
+  ln -snf "$script_dir/.hammerspoon/init.lua" ~/.hammerspoon/init.lua
+  ln -snf "$script_dir/karabiner/terminal-disable-shortcut.json" $config_home/karabiner/assets/complex_modifications/terminal-disable-shortcut.json
 fi
 
 # vim
 mkdir -p $config_home/vim
-ln -snf ~/dotfiles/vim/vimrc $config_home/vim/vimrc
-ln -snf ~/dotfiles/vim/after $config_home/vim/after
-ln -snf ~/dotfiles/vim/filetype.vim $config_home/vim
-ln -snf ~/dotfiles/vim/ftdetect $config_home/vim
-ln -snf ~/dotfiles/vim/dein $config_home/vim
+ln -snf "$script_dir/vim/vimrc" $config_home/vim/vimrc
+ln -snf "$script_dir/vim/after" $config_home/vim/after
+ln -snf "$script_dir/vim/filetype.vim" $config_home/vim
+ln -snf "$script_dir/vim/ftdetect" $config_home/vim
+ln -snf "$script_dir/vim/dein" $config_home/vim
 mkdir -p $config_home/nvim
 ln -snf $config_home/vim/vimrc $config_home/nvim/init.vim
 
-ln -snf ~/dotfiles/.docker/config.json ~/.docker/config.json
+ln -snf "$script_dir/.docker/config.json" ~/.docker/config.json
 
-ln -sf ~/dotfiles/ranger $config_home
+ln -sf "$script_dir/ranger" $config_home
 
 # pandoc
 mkdir -p ~/.pandoc
-ln -snf ~/dotfiles/templates/pandoc ~/.pandoc/templates
+ln -snf "$script_dir/templates/pandoc" ~/.pandoc/templates
 
 # bash git completion
 
