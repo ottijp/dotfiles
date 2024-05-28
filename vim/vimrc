@@ -223,7 +223,11 @@ call mkdir($XDG_CACHE_HOME, 'p', 0700)
 
 " install dein
 
-let s:dein_base = $XDG_CACHE_HOME.'/vim/dein'
+if !has('nvim')
+  let s:dein_base = $XDG_CACHE_HOME.'/vim/dein'
+else
+  let s:dein_base = $XDG_CACHE_HOME.'/nvim/dein'
+endif
 let s:dein_src = s:dein_base.'/repos/github.com/Shougo/dein.vim'
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_src)

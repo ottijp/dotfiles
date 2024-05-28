@@ -48,6 +48,9 @@ ln -snf ~/dotfiles/vim/vimrc $config_home/vim/vimrc
 ln -snf ~/dotfiles/vim/after $config_home/vim/after
 ln -snf ~/dotfiles/vim/filetype.vim $config_home/vim
 ln -snf ~/dotfiles/vim/ftdetect $config_home/vim
+ln -snf ~/dotfiles/vim/dein $config_home/vim
+mkdir -p $config_home/nvim
+ln -snf $config_home/vim/vimrc $config_home/nvim/init.vim
 
 ln -snf ~/dotfiles/.docker/config.json ~/.docker/config.json
 
