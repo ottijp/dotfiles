@@ -236,19 +236,6 @@ if &runtimepath !~# '/dein.vim'
   execute 'set runtimepath^='.s:dein_src
 endif
 
-" " dein dir path
-" let s:dein_dir = $XDG expand('~/.vim/bundles')
-" " dein.vim path
-" let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-
-" if dein.vim not found, install it
-" if &runtimepath !~# '/dein.vim'
-"   if !isdirectory(s:dein_repo_dir)
-"     execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-"   endif
-"   execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
-" endif
-
 if dein#load_state(s:dein_base)
   call dein#begin(s:dein_base)
 
