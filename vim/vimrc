@@ -1,10 +1,39 @@
-" change current directory to file directory automatically
-" set autochdir
+set nocompatible
 
-" backup/swap/undo directories
-set backupdir=$HOME/vimbackup
-set directory=$HOME/vimbackup
-set undodir=$HOME/vimbackup
+" XDG support
+" cf. https://jorenar.com/blog/vim-xdg
+"
+if empty($MYVIMRC) | let $MYVIMRC = expand('<sfile>:p') | endif
+
+if empty($XDG_CACHE_HOME)  | let $XDG_CACHE_HOME  = $HOME."/.cache"       | endif
+if empty($XDG_CONFIG_HOME) | let $XDG_CONFIG_HOME = $HOME."/.config"      | endif
+if empty($XDG_DATA_HOME)   | let $XDG_DATA_HOME   = $HOME."/.local/share" | endif
+if empty($XDG_STATE_HOME)  | let $XDG_STATE_HOME  = $HOME."/.local/state" | endif
+if empty($XDG_CACHE_HOME)  | let $XDG_CACHE_HOME  = $HOME."/.cache"       | endif
+
+set runtimepath^=$XDG_CONFIG_HOME/vim
+set runtimepath+=$XDG_DATA_HOME/vim
+set runtimepath+=$XDG_CONFIG_HOME/vim/after
+
+set packpath^=$XDG_DATA_HOME/vim
+set packpath+=$XDG_DATA_HOME/vim/after
+
+let g:netrw_home = $XDG_DATA_HOME."/vim"
+call mkdir($XDG_DATA_HOME."/vim/spell", 'p', 0700)
+
+
+set backupdir=$XDG_STATE_HOME/vim/backup | call mkdir(&backupdir, 'p', 0700)
+set directory=$XDG_STATE_HOME/vim/swap   | call mkdir(&directory, 'p', 0700)
+set undodir=$XDG_STATE_HOME/vim/undo     | call mkdir(&undodir,   'p', 0700)
+set viewdir=$XDG_STATE_HOME/vim/view     | call mkdir(&viewdir,   'p', 0700)
+
+if !has('nvim') " Neovim has its own location which already complies with XDG specification
+  set viminfofile=$XDG_STATE_HOME/vim/viminfo
+endif
+
+
+" enable backup
+set backup
 
 " space key for <Leader>
 let mapleader = "\<Space>"
@@ -26,16 +55,6 @@ set autoindent
 set smarttab
 """" }
 """"""""""""""""""""""""""""""
-
-" default filetype
-function! s:NoneFileTypeSetMarkdown()
-  if len(&filetype) == 0
-    set filetype=markdown
-  endif
-endfunction
-augroup default_filetype
-  autocmd BufEnter,WinEnter * call s:NoneFileTypeSetMarkdown()
-augroup END
 
 " auto filetype switching
 augroup auto_filetype_switching
@@ -200,30 +219,30 @@ filetype plugin indent off
 """"""""""""""""""""""""""""""
 " plugin
 """"""""""""""""""""""""""""""
-if &compatible
-  set nocompatible
-endif
-" dein dir path
-let s:dein_dir = expand('~/.vim/bundles')
-" dein.vim path
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+call mkdir($XDG_CACHE_HOME, 'p', 0700)
 
-" if dein.vim not found, install it
+" install dein
+
+if !has('nvim')
+  let s:dein_base = $XDG_CACHE_HOME.'/vim/dein'
+else
+  let s:dein_base = $XDG_CACHE_HOME.'/nvim/dein'
+endif
+let s:dein_src = s:dein_base.'/repos/github.com/Shougo/dein.vim'
 if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  if !isdirectory(s:dein_src)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_src
   endif
-  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+  execute 'set runtimepath^='.s:dein_src
 endif
 
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
+if dein#load_state(s:dein_base)
+  call dein#begin(s:dein_base)
 
-  call dein#add(s:dein_repo_dir)
+  call dein#add(s:dein_src)
 
   call dein#add('Shougo/context_filetype.vim')
   call dein#add('scrooloose/nerdtree')
-  call dein#add('altercation/vim-colors-solarized')
   call dein#add('tomtom/tcomment_vim')
   call dein#add('tyru/open-browser.vim')
   call dein#add('godlygeek/tabular')
@@ -271,6 +290,8 @@ if dein#load_state(s:dein_dir)
   call dein#add('hrsh7th/vim-vsnip-integ')
   call dein#add('dense-analysis/ale')
 
+  call dein#load_toml($XDG_CONFIG_HOME.'/vim/dein/dein.toml', {'lazy': 0})
+
   call dein#end()
   if dein#check_install()
     call dein#install()
@@ -278,6 +299,11 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
   call map(dein#check_clean(), "delete(v:val, 'rf')")
 endif
+
+" after removing plugin, you need to call this
+function! ClearPluginCache()
+  call dein#recache_runtimepath()
+endfunction
 """"""""""""""""""""""""""""""
 
 filetype plugin indent on
@@ -286,7 +312,7 @@ syntax enable
 " color scheme
 syntax enable
 set background=dark
-colorscheme solarized
+colorscheme nightfox
 
 " light color for MatchParen background
 highlight MatchParen ctermbg=0
@@ -762,7 +788,7 @@ function! SelectingCount()
 endfunction
 
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'nightfox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filepath', 'modified'] ],
@@ -788,7 +814,7 @@ let g:markdown_recommended_style = 1
 """"""""""""""""""""""""""""""
 
 " read local setting
-if filereadable(expand('~/.vimrc.local'))
-    source ~/.vimrc.local
+if filereadable($XDG_CONFIG_HOME.'/vim/vimrc.local')
+  execute 'source '.$XDG_CONFIG_HOME.'/vim/vimrc.local'
 endif
 

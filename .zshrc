@@ -96,10 +96,6 @@ alias grep="grep --color=auto"
 # df
 alias df="df -h"
 
-# frequently used file
-alias vimrc="vim ~/.vimrc"
-alias zshrc="vim ~/.zshrc"
-
 # tar
 alias tgz="tar czvf"
 alias untgz="tar xzvf"
@@ -140,8 +136,10 @@ export PATH=$PATH:~/bin:~/bin.local
 MACVIM_PATH="/Applications/MacVim.app"
 if is_osx and [ -f "$MACVIM_PATH" ]; then
   export EDITOR="$MACVIM_PATH/Contents/MacOS/Vim"
-  alias vi='env LANG=ja_JP.UTF-8 '"$MACVIM_PATH"'/Contents/MacOS/Vim "$@"'
-  alias vim='env LANG=ja_JP.UTF-8 '"$MACVIM_PATH"'/Contents/MacOS/Vim "$@"'
+  alias vim='env LANG=ja_JP.UTF-8 '"$MACVIM_PATH"'/Contents/MacOS/Vim -u ${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc "$@"'
+  alias vi=vim
+else
+  alias vim='vim -u ${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc'
 fi
 
 # Go lang
