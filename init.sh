@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+config_home=${XDG_CONFIG_HOME:-$HOME/.config}
+mkdir -p $config_home
+
 function is_osx() {
   case ${OSTYPE} in
     darwin*)
@@ -38,15 +41,14 @@ link_files .vsnip
 
 if is_osx; then
   ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
-  ln -snf ~/dotfiles/karabiner/terminal-disable-shortcut.json ~/.config/karabiner/assets/complex_modifications/terminal-disable-shortcut.json
+  ln -snf ~/dotfiles/karabiner/terminal-disable-shortcut.json $config_home/karabiner/assets/complex_modifications/terminal-disable-shortcut.json
 fi
 ln -snf ~/dotfiles/.vim/colors ~/.vim/colors
 ln -snf ~/dotfiles/.vim/after ~/.vim/after
 ln -snf ~/dotfiles/.vim/filetype.vim ~/.vim
 ln -snf ~/dotfiles/.docker/config.json ~/.docker/config.json
 
-mkdir -p ~/.config
-ln -sf ~/dotfiles/ranger ~/.config
+ln -sf ~/dotfiles/ranger $config_home
 
 # pandoc
 mkdir -p ~/.pandoc
