@@ -30,8 +30,6 @@ function link_files() {
 if is_osx; then
   mkdir -p ~/.hammerspoon
 fi
-mkdir -p ~/vimbackup
-mkdir -p ~/.vim
 mkdir -p ~/.docker
 
 link_files '.??*'
@@ -43,9 +41,13 @@ if is_osx; then
   ln -snf ~/dotfiles/.hammerspoon/init.lua ~/.hammerspoon/init.lua
   ln -snf ~/dotfiles/karabiner/terminal-disable-shortcut.json $config_home/karabiner/assets/complex_modifications/terminal-disable-shortcut.json
 fi
-ln -snf ~/dotfiles/.vim/colors ~/.vim/colors
-ln -snf ~/dotfiles/.vim/after ~/.vim/after
-ln -snf ~/dotfiles/.vim/filetype.vim ~/.vim
+
+# vim
+mkdir -p $config_home/vim
+ln -snf ~/dotfiles/vim/vimrc $config_home/vim/vimrc
+ln -snf ~/dotfiles/vim/after $config_home/vim/after
+ln -snf ~/dotfiles/vim/filetype.vim $config_home/vim
+
 ln -snf ~/dotfiles/.docker/config.json ~/.docker/config.json
 
 ln -sf ~/dotfiles/ranger $config_home
