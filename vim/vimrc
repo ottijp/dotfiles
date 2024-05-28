@@ -56,16 +56,6 @@ set smarttab
 """" }
 """"""""""""""""""""""""""""""
 
-" default filetype
-function! s:NoneFileTypeSetMarkdown()
-  if len(&filetype) == 0
-    set filetype=markdown
-  endif
-endfunction
-augroup default_filetype
-  autocmd BufEnter,WinEnter * call s:NoneFileTypeSetMarkdown()
-augroup END
-
 " auto filetype switching
 augroup auto_filetype_switching
   autocmd!
