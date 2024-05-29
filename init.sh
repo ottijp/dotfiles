@@ -49,6 +49,7 @@ ln -snf "$script_dir/vim/vimrc" $config_home/vim/vimrc
 ln -snf "$script_dir/vim/after" $config_home/vim/after
 ln -snf "$script_dir/vim/filetype.vim" $config_home/vim
 ln -snf "$script_dir/vim/ftdetect" $config_home/vim
+ln -snf "$script_dir/vim/ftplugin" $config_home/vim
 ln -snf "$script_dir/vim/dein" $config_home/vim
 mkdir -p $config_home/nvim
 ln -snf $config_home/vim/vimrc $config_home/nvim/init.vim
