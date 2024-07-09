@@ -150,3 +150,6 @@ function tmux_automatically_attach_session()
 if is_exists 'tmux'; then
   tmux_automatically_attach_session
 fi
+
+# read local rc
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local
