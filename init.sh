@@ -31,7 +31,6 @@ function link_files() {
 if is_osx; then
   mkdir -p ~/.hammerspoon
 fi
-mkdir -p ~/.docker
 
 link_files '.??*'
 link_files bin
@@ -53,8 +52,6 @@ ln -snf "$script_dir/vim/ftplugin" $config_home/vim
 ln -snf "$script_dir/vim/dein" $config_home/vim
 mkdir -p $config_home/nvim
 ln -snf $config_home/vim/vimrc $config_home/nvim/init.vim
-
-ln -snf "$script_dir/.docker/config.json" ~/.docker/config.json
 
 ln -sf "$script_dir/ranger" $config_home
 
