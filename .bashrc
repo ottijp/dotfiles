@@ -82,7 +82,7 @@ set -o vi
 
 # fzf
 if is_exists 'fzf'; then
-  source ~/.fzf.bash
+  source <(fzf --bash)
   export FZF_DEFAULT_OPTS='--reverse --border --height 50%'
 fi
 

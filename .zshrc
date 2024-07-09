@@ -195,7 +195,7 @@ mkdir -p $HOME/.nodebrew/src
 
 # fzf
 if is_exists 'fzf'; then
-  source ~/.fzf.zsh
+  source <(fzf --zsh)
   _gen_fzf_default_opts() {
     local base03="234"
     local base02="235"
