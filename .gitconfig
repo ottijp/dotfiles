@@ -35,3 +35,6 @@
   path = ~/.gitconfig.local
 [ghq]
   root=~/src
+[user]
+	name = Satoshi SAKAO
+	email = ottijp@users.noreply.github.com
