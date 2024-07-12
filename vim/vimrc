@@ -317,7 +317,10 @@ syntax enable
 " color scheme
 syntax enable
 set background=dark
+" adjust for classic vim
+autocmd ColorSchemePre nightfox highlight IncSearch cterm=NONE
 colorscheme nightfox
+
 
 " light color for MatchParen background
 highlight MatchParen ctermbg=0
