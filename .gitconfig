@@ -31,10 +31,10 @@
   ranking = shortlog -s -n --no-merges
   # grep
   gr = grep -n
-[include]
-  path = ~/.gitconfig.local
 [ghq]
   root=~/src
 [user]
 	name = Satoshi SAKAO
 	email = ottijp@users.noreply.github.com
+[include]
+  path = ~/.gitconfig.local
