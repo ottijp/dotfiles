@@ -79,6 +79,9 @@ set showmatch
 set noshowmode
 set laststatus=2
 
+" encoding list
+set fileencodings=ucs-bom,utf-8,default,sjis,latin1
+
 " command line completion
 set wildmode=longest,list,full
 
