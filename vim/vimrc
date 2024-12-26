@@ -265,7 +265,6 @@ if dein#load_state(s:dein_base)
   call dein#add('itchyny/lightline.vim')
   call dein#add('junegunn/vim-easy-align')
   call dein#add('deton/jasegment.vim')
-  call dein#add('neomake/neomake')
   call dein#add('bronson/vim-trailing-whitespace')
   call dein#add('editorconfig/editorconfig-vim')
   call dein#add('airblade/vim-gitgutter')
@@ -593,16 +592,6 @@ augroup END
   let g:surround_{char2nr("＞")} = "＜\r＞"
   let g:surround_{char2nr("｛")} = "｛ \r ｝"
   let g:surround_{char2nr("｝")} = "｛\r｝"
-"""" }
-""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""
-"""" neomake {
-" let g:neomake_verbose = 3
-" let g:neomake_logfile = '/tmp/neomake.log'
-let g:neomake_error_sign = {'text': '>>', 'texthl': 'Error'}
-let g:neomake_warning_sign = {'text': '>>',  'texthl': 'Todo'}
-call neomake#configure#automake('nrw', 750)
 """" }
 """"""""""""""""""""""""""""""
 
