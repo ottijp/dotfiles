@@ -719,8 +719,8 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> [g <plug>(lsp-previous-diagnostic)
   nmap <buffer> ]g <plug>(lsp-next-diagnostic)
   nmap <buffer> K <plug>(lsp-hover)
-  nnoremap <buffer> <expr>gj lsp#scroll(+4)
-  nnoremap <buffer> <expr>gk lsp#scroll(-4)
+  nnoremap <buffer> <expr>g<Down> lsp#scroll(+4)
+  nnoremap <buffer> <expr>g<Up> lsp#scroll(-4)
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
   inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
