@@ -65,6 +65,9 @@ augroup END
 " prevent auto line feeding
 set tw=0
 
+" allow backspace
+set backspace=indent,eol,start
+
 " show line-break sign
 set showbreak=↪\ 
 
