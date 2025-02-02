@@ -286,7 +286,6 @@ if dein#load_state(s:dein_base)
   call dein#add('kannokanno/previm', { 'lazy': 1, 'on_ft': 'markdown' })
   call dein#add('aklt/plantuml-syntax', { 'lazy': 1, 'on_ft': 'plantuml' })
   call dein#add('digitaltoad/vim-pug', { 'lazy': 1, 'on_ft': 'pug' })
-  call dein#add('keith/swift.vim', { 'lazy': 1, 'on_ft': 'swift' })
   call dein#add('hashivim/vim-terraform', { 'lazy': 1, 'on_ft': 'terraform' })
   call dein#add('carlsmedstad/vim-bicep', { 'lazy': 1, 'on_ft': 'bicep' })
   call dein#add('prabirshrestha/asyncomplete.vim')
@@ -300,8 +299,12 @@ if dein#load_state(s:dein_base)
   endif
 
   call dein#load_toml($XDG_CONFIG_HOME.'/vim/dein/dein.toml', {'lazy': 0})
+  call dein#load_toml($XDG_CONFIG_HOME.'/vim/dein/dein_lazy.toml', {'lazy': 1})
   if filereadable($XDG_CONFIG_HOME.'/vim/dein.local/dein.toml')
     call dein#load_toml($XDG_CONFIG_HOME.'/vim/dein.local/dein.toml', {'lazy': 0})
+  endif
+  if filereadable($XDG_CONFIG_HOME.'/vim/dein.local/dein_lazy.toml')
+    call dein#load_toml($XDG_CONFIG_HOME.'/vim/dein.local/dein_lazy.toml', {'lazy': 1})
   endif
 
   call dein#end()
