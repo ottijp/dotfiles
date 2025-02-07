@@ -1,11 +1,3 @@
 [[plugins]]
 repo = 'keith/swift.vim'
 on_ft = ['swift']
-hook_post_update = '''
-  " ignore MacVim's swift syntax plugin that conflicts with keith/swift.vim
-  let swift_syntax_file = $VIMRUNTIME . '/syntax/swift.vim'
-  if filereadable(swift_syntax_file)
-    let new_name = swift_syntax_file . '.bak'
-    call rename(swift_syntax_file, new_name)
-  endif
-'''
