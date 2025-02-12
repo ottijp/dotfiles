@@ -40,3 +40,7 @@ vnoremap <buffer> <silent> <Leader>* :call <SID>MarkdownAddListPrefix()<CR>
 " insert `[ ] ` before line
 nnoremap <buffer> <silent> <Leader>[ :call <SID>MarkdownAddCheckBox()<CR>
 vnoremap <buffer> <silent> <Leader>[ :call <SID>MarkdownAddCheckBox()<CR>
+
+" tpope/vim-surround
+" sc to surround with ```
+let b:surround_{char2nr('c')} = "```\n\r\n```"
