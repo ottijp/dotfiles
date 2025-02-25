@@ -44,3 +44,9 @@ vnoremap <buffer> <silent> <Leader>[ :call <SID>MarkdownAddCheckBox()<CR>
 " tpope/vim-surround
 " sc to surround with ```
 let b:surround_{char2nr('c')} = "```\n\r\n```"
+
+if exists('b:undo_ftplugin')
+  let b:undo_ftplugin .= "|unlet! b:surround_{char2nr('c')}"
+else
+  let b:undo_ftplugin = "unlet! b:surround_{char2nr('c')}"
+endif
