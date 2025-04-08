@@ -16,3 +16,93 @@ repo = 'tpope/vim-rhubarb'
 repo = 'dense-analysis/ale'
 # ALE and lexima make confliction on Neovim https://github.com/cohama/lexima.vim/issues/154
 if = "!has('nvim')"
+
+# ONLY nvim
+
+[[plugins]]
+repo = 'github/copilot.vim'
+if = 'has("nvim")'
+hook_add = '''
+let g:copilot_filetypes = {
+      \ 'markdown': v:false,
+      \ 'text': v:false,
+      \ }
+inoremap <silent><script><expr> <C-j> copilot#Accept("\<CR>")
+inoremap <F9> <Plug>(copilot-next)
+inoremap <F10> <Plug>(copilot-previous)
+let g:copilot_no_tab_map = v:true
+
+'''
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+if = 'has("nvim")'
+
+[[plugins]]
+repo = 'CopilotC-Nvim/CopilotChat.nvim'
+if = 'has("nvim")'
+depends = ['github/copilot.vim', 'nvim-lua/plenary.nvim']
+hook_add = '''
+lua << EOF
+require('CopilotChat').setup {
+  prompts = {
+    Explain = {
+      prompt = '/COPILOT_EXPLAIN コードの説明を段落で区切って日本語で説明して．',
+      mapping = '<leader>cce',
+      description = 'コードの説明',
+    },
+    Review = {
+      prompt = '/COPILOT_REVIEW コードを日本語でレビューして．',
+      mapping = '<leader>ccr',
+      description = 'コードのレビュー',
+    },
+    Fix = {
+      prompt = '/COPILOT_INSTRUCTIONS このコードには問題がある．問題を特定して修正したコードを表示して．何が問題で，修正したコードがどのように問題を解決したのか日本語で説明して．',
+      mapping = '<leader>ccf',
+      description = 'コードの修正',
+    },
+    Optimize = {
+      prompt = '/COPILOT_INSTRUCTIONS パフォーマンスと可読性を向上するようにコードを最適化して．最適化の戦略とその変更の利点を日本語で説明して．',
+      mapping = '<leader>cco',
+      description = 'コードの最適化（リファクタリング）',
+    },
+    Docs = {
+      prompt = '/COPILOT_INSTRUCTIONS コードに対するドキュメントコメントを日本語で生成して．',
+      mapping = '<leader>ccd',
+      description = 'ドキュメントコメントの生成',
+    },
+    Tests = {
+      prompt = '/COPILOT_INSTRUCTIONS コードに対するテストコードを日本語で生成して．',
+      mapping = '<leader>cct',
+      description = 'テストコードの生成',
+    },
+    Commit = {
+      prompt = '/COPILOT_INSTRUCTIONS 変更に対するコミットメッセージをcommitizenに従って日本語で書いて．タイトルは50文字以内でメッセージは72文字でwrapして．gitcommitコードブロックのフォーマットで書いて．',
+      mapping = '<leader>ccm',
+      context = 'git:staged',
+      description = 'コミットメッセージの生成',
+    },
+  },
+  mappings = {
+    complete = {
+      insert = "",
+    },
+  },
+  window = {
+    linebreak = 0,
+  },
+}
+EOF
+
+" revert linebreak that is set by this plugin
+augroup CopilotChatSettings
+  autocmd!
+  autocmd BufWinEnter copilot-chat setlocal nolinebreak
+augroup END
+
+nnoremap <leader>ccl :CopilotChatReset<CR>
+nnoremap <leader>ccp :CopilotChatPrompts<CR>
+vnoremap <leader>ccp :CopilotChatPrompts<CR>
+nnoremap <leader>ccc :CopilotChatToggle<CR>
+vnoremap <leader>ccc :CopilotChat<CR>
+'''
