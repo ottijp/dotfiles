@@ -292,9 +292,6 @@ if dein#load_state(s:dein_base)
   call dein#add('mattn/vim-lsp-settings')
   call dein#add('hrsh7th/vim-vsnip')
   call dein#add('hrsh7th/vim-vsnip-integ')
-  if !has('nvim') " ALE and lexima make confliction on Neovim https://github.com/cohama/lexima.vim/issues/154
-    call dein#add('dense-analysis/ale')
-  endif
 
   call dein#load_toml($XDG_CONFIG_HOME.'/vim/dein/dein.toml', {'lazy': 0})
   call dein#load_toml($XDG_CONFIG_HOME.'/vim/dein/dein_lazy.toml', {'lazy': 1})

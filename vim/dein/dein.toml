@@ -9,3 +9,10 @@ repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'tpope/vim-rhubarb'
+
+# ONLY vim
+
+[[plugins]]
+repo = 'dense-analysis/ale'
+# ALE and lexima make confliction on Neovim https://github.com/cohama/lexima.vim/issues/154
+if = "!has('nvim')"
