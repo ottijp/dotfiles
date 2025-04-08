@@ -100,6 +100,11 @@ alias df="df -h"
 alias tgz="tar czvf"
 alias untgz="tar xzvf"
 
+# GitHub Copilot
+if gh help 2>/dev/null | grep -q "copilot"; then
+  alias '?'='gh copilot explain'
+  alias how='gh copilot suggest'
+fi
 
 # locale
 export LC_ALL=en_US.UTF-8
