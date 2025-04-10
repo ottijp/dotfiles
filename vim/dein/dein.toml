@@ -45,6 +45,7 @@ depends = ['github/copilot.vim', 'nvim-lua/plenary.nvim']
 hook_add = '''
 lua << EOF
 require('CopilotChat').setup {
+  model = 'gpt-4o',
   prompts = {
     Explain = {
       prompt = '/COPILOT_EXPLAIN コードの説明を段落で区切って日本語で説明して．',
