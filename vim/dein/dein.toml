@@ -87,6 +87,10 @@ require('CopilotChat').setup {
     complete = {
       insert = "",
     },
+    reset = {
+      normal = "",
+      insert = "",
+    },
   },
   window = {
     linebreak = 0,
