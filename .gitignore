@@ -1,3 +1,4 @@
+/.config/git/config.local
 /.config/zsh/.zcompdump
 /.config/zsh/90-local.zsh
 /.config/zsh/misc/git-prompt.sh

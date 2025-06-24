@@ -4,7 +4,7 @@
 [http]
 	sslVerify = false
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesFile = ~/.config/git/gitignore_global
 	quotepath = false
 [alias]
   delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|main$|develop$' | xargs -I % git branch -d %
@@ -36,4 +36,4 @@
 	name = Satoshi SAKAO
 	email = ottijp@users.noreply.github.com
 [include]
-  path = ~/.gitconfig.local
+	path = ~/.config/git/config.local
