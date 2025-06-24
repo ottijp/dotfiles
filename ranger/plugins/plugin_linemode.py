@@ -1,1 +1,0 @@
-/Users/otti/src/github.com/ranger/ranger/examples/plugin_linemode.py
