@@ -43,7 +43,6 @@ create_link .inputrc
 create_link .iterm2
 create_link .tigrc
 create_link .tmux.conf
-# create_link .vifmrc
 create_link .vsnip
 create_link .zprofile
 create_link .zshenv
