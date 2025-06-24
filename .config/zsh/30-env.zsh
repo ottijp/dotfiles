@@ -25,7 +25,8 @@ setopt NOBEEP
 export PROMPT=$'%{\e[36m%}%n@%m:%{\e[35m%}%c%{\e[0;34m%}$(__git_ps1 " (%s)")%{\e[36m%} \$%{\e[0m%} '
 
 # command histories
-export HISTFILE=~/.zhistory
+mkdir -p ${XDG_STATE_HOME:-$HOME/.local/state}/zsh
+export HISTFILE=${XDG_STATE_HOME:-$HOME/.local/state}/zsh/.zhistory
 touch ~/.zhistory
 export HISTSIZE=10000
 export SAVEHIST=9000000
