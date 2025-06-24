@@ -42,7 +42,6 @@ create_link .gvimrc
 create_link .inputrc
 create_link .iterm2
 create_link .tigrc
-create_link .tmux.conf
 create_link .vsnip
 create_link .zprofile
 create_link .zshenv
@@ -51,6 +50,7 @@ create_link .zshrc
 create_link bin
 create_link templates
 
+create_config_link tmux/tmux.conf
 create_config_link zsh
 create_config_link ranger
 
