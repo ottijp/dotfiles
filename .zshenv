@@ -21,6 +21,9 @@ export AZURE_CONFIG_DIR="$XDG_CONFIG_HOME/azure"
 # node
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 
+# .NET
+export DOTNET_ROOT="$XDG_DATA_HOME/dotnet"
+
 # rust
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
