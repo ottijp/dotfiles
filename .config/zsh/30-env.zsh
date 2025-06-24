@@ -60,9 +60,10 @@ export LESS='-g -i -M -R -W -z-5'
 # WORDCHAR
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-# nodebrew
+# node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 mkdir -p $HOME/.nodebrew/src
+export npm_config_cache=${XDG_STATE_HOME:-$HOME/.cache}/npm
 
 # pyenv
 PYENV_ROOT=${HOME}/.pyenv
