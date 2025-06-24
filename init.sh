@@ -89,7 +89,8 @@ fi
 
 # zsh git completion
 
-ZSH_COMPLETION_PATH=~/.zsh/completion
+ZSH_COMPLETION_PATH=$config_home/zsh/completion
+ZSH_MISC_PATH=$config_home/zsh/misc
 mkdir -p $ZSH_COMPLETION_PATH
 if [ ! -f $ZSH_COMPLETION_PATH/git-completion.bash ]; then
   curl -L -o $ZSH_COMPLETION_PATH/git-completion.bash https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
@@ -97,8 +98,8 @@ fi
 if [ ! -f $ZSH_COMPLETION_PATH/_git ]; then
   curl -L -o $ZSH_COMPLETION_PATH/_git https://raw.github.com/git/git/master/contrib/completion/git-completion.zsh
 fi
-if [ ! -f $ZSH_COMPLETION_PATH/git-prompt.sh ]; then
-  curl -L -o $ZSH_COMPLETION_PATH/git-prompt.sh https://github.com/git/git/raw/master/contrib/completion/git-prompt.sh
+if [ ! -f $ZSH_MISC_PATH/git-prompt.sh ]; then
+  curl -L -o $ZSH_MISC_PATH/git-prompt.sh https://github.com/git/git/raw/master/contrib/completion/git-prompt.sh
 fi
 rm -f ~/.zcompdump
 type compinit >/dev/null 2>&1 && compinit

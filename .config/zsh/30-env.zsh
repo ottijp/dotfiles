@@ -88,5 +88,3 @@ if [ -f "$HOME/opt/google-cloud-sdk/completion.zsh.inc" ]; then source "$HOME/op
 # swiftenv
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 
-source ~/.zsh/completion/git-prompt.sh
-

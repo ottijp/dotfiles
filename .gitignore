@@ -1,1 +1,4 @@
 /.config/zsh/90-local.zsh
+/.config/zsh/misc/git-prompt.sh
+/.config/zsh/completion/git-completion.bash
+/.config/zsh/completion/_git

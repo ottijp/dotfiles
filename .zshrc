@@ -8,6 +8,10 @@ stty stop undef
 # avoid duplicated PATHs
 typeset -U path PATH
 
+fpath=(${XDG_CONFIG_HOME:-$HOME/.config}/zsh/completion /usr/local/share/zsh-completions $fpath)
+autoload -U compinit
+compinit
+
 #-----------------------------------
 # tmux auto start
 #-----------------------------------
