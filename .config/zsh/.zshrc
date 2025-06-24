@@ -28,7 +28,7 @@ function tmux_automatically_attach_session()
   if is_screen_or_tmux_running; then
     ! command_exists 'tmux' && return 1
 
-    if is_tmux_runnning; then
+    if is_tmux_running; then
       printf "\e[31;1m  _____ __  __ _   ___  __ \e[m\n"
       printf "\e[31;1m |_   _|  \/  | | | \ \/ / \e[m\n"
       printf "\e[31;1m   | | | |\/| | | | |\  /  \e[m\n"

@@ -7,8 +7,8 @@ stty stop undef
 function is_exists() { type "$1" >/dev/null 2>&1; return $?; }
 function is_osx() { [[ $OSTYPE == darwin* ]]; }
 function is_screen_running() { [ ! -z "$STY" ]; }
-function is_tmux_runnning() { [ ! -z "$TMUX" ]; }
-function is_screen_or_tmux_running() { is_screen_running || is_tmux_runnning; }
+function is_tmux_running() { [ ! -z "$TMUX" ]; }
+function is_screen_or_tmux_running() { is_screen_running || is_tmux_running; }
 function shell_has_started_interactively() { [ ! -z "$PS1" ]; }
 function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
 
@@ -96,7 +96,7 @@ function tmux_automatically_attach_session()
   if is_screen_or_tmux_running; then
     ! is_exists 'tmux' && return 1
 
-    if is_tmux_runnning; then
+    if is_tmux_running; then
       printf "\e[31;1m  _____ __  __ _   ___  __ \e[m\n"
       printf "\e[31;1m |_   _|  \/  | | | \ \/ / \e[m\n"
       printf "\e[31;1m   | | | |\/| | | | |\  /  \e[m\n"
