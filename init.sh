@@ -38,7 +38,7 @@ function create_config_link() {
 
 # create_link .bashrc
 # create_link .ctags
-create_link .eslintrc.json
+# create_link .eslintrc.json
 create_link .gitconfig
 create_link .gitignore_global
 create_link .gvimrc
