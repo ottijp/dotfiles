@@ -47,7 +47,6 @@ create_link .tigrc
 create_link .vsnip
 create_link .zprofile
 create_link .zshenv
-create_link .zshrc
 
 create_link bin
 create_link templates
