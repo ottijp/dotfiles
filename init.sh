@@ -73,7 +73,7 @@ create_config_link vim/dein
 create_config_link vim/vimrc "$XDG_CONFIG_HOME/nvim/init.vim"
 
 # pandoc
-create_link templates/pandoc "$HOME/.pandoc/templates"
+create_config_link pandoc
 
 # bash git completion
 
