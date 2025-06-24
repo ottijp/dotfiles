@@ -15,6 +15,9 @@ export LC_ALL=en_US.UTF-8
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
 
+# node
+export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
+
 # rust
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
