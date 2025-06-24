@@ -17,21 +17,21 @@ function is_osx() {
 }
 
 function create_link() {
-  local src="${2:-$HOME/$1}"
-  local dest="$SCRIPT_DIR/$1"
+  local target="${2:-$HOME/$1}"
+  local src="$SCRIPT_DIR/$1"
 
-  echo "create link: $src -> $dest"
-  mkdir -p "$(dirname "$src")"
-  ln -snf "$dest" "$src"
+  echo "create link: $target -> $src"
+  mkdir -p "$(dirname "$target")"
+  echo ln -snf "$src" "$target"
 }
 
 function create_config_link() {
-  local src="${2:-$XDG_CONFIG_HOME/$1}"
-  local dest="$SCRIPT_DIR/.config/$1"
+  local target="${2:-$XDG_CONFIG_HOME/$1}"
+  local src="$SCRIPT_DIR/.config/$1"
 
-  echo "create link: $src -> $dest"
-  mkdir -p "$(dirname "$src")"
-  ln -snf "$dest" "$src"
+  echo "create link: $target -> $src"
+  mkdir -p "$(dirname "$target")"
+  echo ln -snf "$src" "$target"
 }
 
 # deploy dotfiles
