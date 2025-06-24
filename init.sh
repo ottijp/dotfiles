@@ -20,6 +20,7 @@ function create_link() {
   local dest="$script_dir/$1"
 
   echo "create link: $src -> $dest"
+  mkdir -p "$(dirname "$src")"
   ln -snf "$dest" "$src"
 }
 
@@ -28,6 +29,7 @@ function create_config_link() {
   local dest="$script_dir/.config/$1"
 
   echo "create link: $src -> $dest"
+  mkdir -p "$(dirname "$src")"
   ln -snf "$dest" "$src"
 }
 
@@ -55,24 +57,20 @@ create_config_link zsh
 create_config_link ranger
 
 if is_osx; then
-  mkdir -p ~/.hammerspoon
   create_link .hammerspoon/init.lua
   create_config_link karabiner/assets/complex_modifications/terminal-disable-shortcut.json
 fi
 
 # vim
-mkdir -p $config_home/vim
 create_config_link vim/vimrc
 create_config_link vim/after
 create_config_link vim/filetype.vim
 create_config_link vim/ftdetect
 create_config_link vim/ftplugin
 create_config_link vim/dein
-mkdir -p $config_home/nvim
 create_config_link vim/vimrc $config_home/nvim/init.vim
 
 # pandoc
-mkdir -p ~/.pandoc
 create_link templates/pandoc $HOME/.pandoc/templates
 
 # bash git completion
