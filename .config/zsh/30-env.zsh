@@ -38,7 +38,7 @@ export REPORTTIME=10
 export DIRSTACKSIZE=100
 
 # local bin path
-export PATH=$PATH:~/bin:~/bin.local
+export PATH=~/bin:~/bin.local:$PATH
 
 # editor for osx
 MACVIM_PATH="/Applications/MacVim.app"
