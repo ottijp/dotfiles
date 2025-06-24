@@ -15,49 +15,66 @@ function is_osx() {
   esac
 }
 
-function link_files() {
-  for f in $*
-  do
-      [[ "$f" == ".git" ]] && continue
-      [[ "$f" == ".gitignore" ]] && continue
-      [[ "$f" == ".DS_Store" ]] && continue
+function create_link() {
+  local src="${2:-$HOME/$1}"
+  local dest="$script_dir/$1"
 
-      echo "create link: ~/$f -> $script_dir/$f"
-      ln -snf "$script_dir/$f" ~/$f
-  done
+  echo "create link: $src -> $dest"
+  ln -snf "$dest" "$src"
+}
+
+function create_config_link() {
+  local src="${2:-$config_home/$1}"
+  local dest="$script_dir/.config/$1"
+
+  echo "create link: $src -> $dest"
+  ln -snf "$dest" "$src"
 }
 
 # deploy dotfiles
 
+create_link .bashrc
+create_link .ctags
+create_link .eslintrc.json
+create_link .gitconfig
+create_link .gitignore_global
+create_link .gvimrc
+create_link .inputrc
+create_link .iterm2
+create_link .tigrc
+create_link .tmux.conf
+# create_link .vifmrc
+create_link .vsnip
+create_link .zprofile
+create_link .zshenv
+create_link .zshrc
+
+create_link bin
+create_link templates
+
+create_config_link zsh
+create_config_link ranger
+
 if is_osx; then
   mkdir -p ~/.hammerspoon
-fi
-
-link_files '.??*'
-link_files bin
-link_files templates
-
-if is_osx; then
-  ln -snf "$script_dir/.hammerspoon/init.lua" ~/.hammerspoon/init.lua
-  ln -snf "$script_dir/karabiner/terminal-disable-shortcut.json" $config_home/karabiner/assets/complex_modifications/terminal-disable-shortcut.json
+  create_link .hammerspoon/init.lua
+  create_config_link karabiner/assets/complex_modifications/terminal-disable-shortcut.json
 fi
 
 # vim
 mkdir -p $config_home/vim
-ln -snf "$script_dir/vim/vimrc" $config_home/vim/vimrc
-ln -snf "$script_dir/vim/after" $config_home/vim/after
-ln -snf "$script_dir/vim/filetype.vim" $config_home/vim
-ln -snf "$script_dir/vim/ftdetect" $config_home/vim
-ln -snf "$script_dir/vim/ftplugin" $config_home/vim
-ln -snf "$script_dir/vim/dein" $config_home/vim
+create_config_link vim/vimrc
+create_config_link vim/after
+create_config_link vim/filetype.vim
+create_config_link vim/ftdetect
+create_config_link vim/ftplugin
+create_config_link vim/dein
 mkdir -p $config_home/nvim
-ln -snf $config_home/vim/vimrc $config_home/nvim/init.vim
-
-ln -sf "$script_dir/ranger" $config_home
+create_config_link vim/vimrc $config_home/nvim/init.vim
 
 # pandoc
 mkdir -p ~/.pandoc
-ln -snf "$script_dir/templates/pandoc" ~/.pandoc/templates
+create_link templates/pandoc $HOME/.pandoc/templates
 
 # bash git completion
 
