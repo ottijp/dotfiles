@@ -21,6 +21,11 @@ export AZURE_CONFIG_DIR="$XDG_CONFIG_HOME/azure"
 # node
 export NODE_REPL_HISTORY="$XDG_DATA_HOME/node_repl_history"
 
+# ruby
+export GEM_HOME="$XDG_DATA_HOME/gem"
+export GEM_PATH="$GEM_HOME"
+export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
+
 # .NET
 export DOTNET_ROOT="$XDG_DATA_HOME/dotnet"
 
