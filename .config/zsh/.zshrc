@@ -1,4 +1,11 @@
-for file in ${XDG_CONFIG_HOME:-$HOME/.config}/zsh/*.zsh; do
+# XDG paths
+# delete after migration to zshenv
+export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
+export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
+export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
+
+for file in $XDG_CONFIG_HOME/zsh/*.zsh; do
   [ -r "$file" ] && source "$file"
 done
 
@@ -8,7 +15,7 @@ stty stop undef
 # avoid duplicated PATHs
 typeset -U path PATH
 
-fpath=(${XDG_CONFIG_HOME:-$HOME/.config}/zsh/completion /usr/local/share/zsh-completions $fpath)
+fpath=($XDG_CONFIG_HOME/zsh/completion /usr/local/share/zsh-completions $fpath)
 autoload -U compinit
 compinit
 
@@ -63,7 +70,7 @@ function tmux_automatically_attach_session()
         if is_osx && command_exists 'reattach-to-user-namespace'; then
           # on OS X force tmux's default command
           # to spawn a shell in the user's namespace
-          tmux_config=$(cat ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf <(echo 'set-option -g default-command "reattach-to-user-namespace -l $SHELL"'))
+          tmux_config=$(cat $XDG_CONFIG_HOME/tmux/tmux.conf <(echo 'set-option -g default-command "reattach-to-user-namespace -l $SHELL"'))
           tmux -f <(echo "$tmux_config") new-session && echo "$(tmux -V) created new session supported OS X"
         else
           tmux new-session && echo "tmux created new session"

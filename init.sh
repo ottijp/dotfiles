@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-script_dir=$(cd $(dirname "$0"); pwd)
-config_home=${XDG_CONFIG_HOME:-$HOME/.config}
-mkdir -p $config_home
+readonly SCRIPT_DIR=$(cd $(dirname "$0"); pwd)
+readonly XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+mkdir -p $XDG_CONFIG_HOME
 
 function is_osx() {
   case ${OSTYPE} in
@@ -17,7 +17,7 @@ function is_osx() {
 
 function create_link() {
   local src="${2:-$HOME/$1}"
-  local dest="$script_dir/$1"
+  local dest="$SCRIPT_DIR/$1"
 
   echo "create link: $src -> $dest"
   mkdir -p "$(dirname "$src")"
@@ -25,8 +25,8 @@ function create_link() {
 }
 
 function create_config_link() {
-  local src="${2:-$config_home/$1}"
-  local dest="$script_dir/.config/$1"
+  local src="${2:-$XDG_CONFIG_HOME/$1}"
+  local dest="$SCRIPT_DIR/.config/$1"
 
   echo "create link: $src -> $dest"
   mkdir -p "$(dirname "$src")"
@@ -67,7 +67,7 @@ create_config_link vim/filetype.vim
 create_config_link vim/ftdetect
 create_config_link vim/ftplugin
 create_config_link vim/dein
-create_config_link vim/vimrc $config_home/nvim/init.vim
+create_config_link vim/vimrc $XDG_CONFIG_HOME/nvim/init.vim
 
 # pandoc
 create_link templates/pandoc $HOME/.pandoc/templates
@@ -85,8 +85,8 @@ create_link templates/pandoc $HOME/.pandoc/templates
 
 # zsh git completion
 
-ZSH_COMPLETION_PATH=$config_home/zsh/completion
-ZSH_MISC_PATH=$config_home/zsh/misc
+ZSH_COMPLETION_PATH=$XDG_CONFIG_HOME/zsh/completion
+ZSH_MISC_PATH=$XDG_CONFIG_HOME/zsh/misc
 mkdir -p $ZSH_COMPLETION_PATH
 if [ ! -f $ZSH_COMPLETION_PATH/git-completion.bash ]; then
   curl -L -o $ZSH_COMPLETION_PATH/git-completion.bash https://raw.github.com/git/git/master/contrib/completion/git-completion.bash

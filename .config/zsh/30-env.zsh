@@ -22,8 +22,8 @@ setopt NOBEEP
 export PROMPT=$'%{\e[36m%}%n@%m:%{\e[35m%}%c%{\e[0;34m%}$(__git_ps1 " (%s)")%{\e[36m%} \$%{\e[0m%} '
 
 # command histories
-mkdir -p ${XDG_STATE_HOME:-$HOME/.local/state}/zsh
-export HISTFILE=${XDG_STATE_HOME:-$HOME/.local/state}/zsh/.zhistory
+mkdir -p $XDG_STATE_HOME/zsh
+export HISTFILE=$XDG_STATE_HOME/zsh/.zhistory
 touch ~/.zhistory
 export HISTSIZE=10000
 export SAVEHIST=9000000
@@ -63,7 +63,7 @@ export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 # node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 mkdir -p $HOME/.nodebrew/src
-export npm_config_cache=${XDG_STATE_HOME:-$HOME/.cache}/npm
+export npm_config_cache=$XDG_CACHE_HOME/npm
 
 # pyenv
 PYENV_ROOT=${HOME}/.pyenv
