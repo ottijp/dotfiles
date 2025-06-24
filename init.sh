@@ -33,7 +33,7 @@ function create_config_link() {
 
 # deploy dotfiles
 
-create_link .bashrc
+# create_link .bashrc
 create_link .ctags
 create_link .eslintrc.json
 create_link .gitconfig
@@ -78,13 +78,13 @@ create_link templates/pandoc $HOME/.pandoc/templates
 
 # bash git completion
 
-if [ ! -f ~/.git-completion.bash ]; then
-  curl -L -o ~/.git-completion.bash https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
-fi
-if [ ! -f ~/.git-prompt.sh ]; then
-  curl -L -o ~/.git-prompt.sh https://github.com/git/git/raw/master/contrib/completion/git-prompt.sh
-  chmod +x ~/.git-prompt.sh
-fi
+# if [ ! -f ~/.git-completion.bash ]; then
+#   curl -L -o ~/.git-completion.bash https://raw.github.com/git/git/master/contrib/completion/git-completion.bash
+# fi
+# if [ ! -f ~/.git-prompt.sh ]; then
+#   curl -L -o ~/.git-prompt.sh https://github.com/git/git/raw/master/contrib/completion/git-prompt.sh
+#   chmod +x ~/.git-prompt.sh
+# fi
 
 
 # zsh git completion
