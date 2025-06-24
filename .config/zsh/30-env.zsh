@@ -1,6 +1,3 @@
-# locale
-export LC_ALL=en_US.UTF-8
-
 # prompt
 setopt PROMPT_SUBST
 
@@ -55,9 +52,6 @@ export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME
 export GOBIN=$HOME/bin.local/go
 export PATH=$PATH:$GOBIN
-
-# vifm
-export MYVIFMRC=~/.vifmrc
 
 # less
 # invert only current hit, ignore case, detail prompt, ANSI color, highlight new line, window size -5
