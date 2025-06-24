@@ -24,7 +24,6 @@ export PROMPT=$'%{\e[36m%}%n@%m:%{\e[35m%}%c%{\e[0;34m%}$(__git_ps1 " (%s)")%{\e
 # command histories
 mkdir -p $XDG_STATE_HOME/zsh
 export HISTFILE=$XDG_STATE_HOME/zsh/.zhistory
-touch ~/.zhistory
 export HISTSIZE=10000
 export SAVEHIST=9000000
 setopt hist_ignore_dups
