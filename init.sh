@@ -22,7 +22,7 @@ function create_link() {
 
   echo "create link: $target -> $src"
   mkdir -p "$(dirname "$target")"
-  echo ln -snf "$src" "$target"
+  ln -snf "$src" "$target"
 }
 
 function create_config_link() {
@@ -31,7 +31,7 @@ function create_config_link() {
 
   echo "create link: $target -> $src"
   mkdir -p "$(dirname "$target")"
-  echo ln -snf "$src" "$target"
+  ln -snf "$src" "$target"
 }
 
 # deploy dotfiles
