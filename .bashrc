@@ -10,7 +10,7 @@ function is_screen_running() { [ ! -z "$STY" ]; }
 function is_tmux_running() { [ ! -z "$TMUX" ]; }
 function is_screen_or_tmux_running() { is_screen_running || is_tmux_running; }
 function shell_has_started_interactively() { [ ! -z "$PS1" ]; }
-function is_ssh_running() { [ ! -z "$SSH_CONECTION" ]; }
+function is_ssh_running() { [ ! -z "$SSH_CONNECTION" ]; }
 
 
 #-----------------------------------
