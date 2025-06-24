@@ -37,7 +37,7 @@ function create_config_link() {
 # deploy dotfiles
 
 # create_link .bashrc
-create_link .ctags
+# create_link .ctags
 create_link .eslintrc.json
 create_link .gitconfig
 create_link .gitignore_global
