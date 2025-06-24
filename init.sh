@@ -22,6 +22,7 @@ function link_files() {
       [[ "$f" == ".gitignore" ]] && continue
       [[ "$f" == ".DS_Store" ]] && continue
 
+      echo "create link: ~/$f -> $script_dir/$f"
       ln -snf "$script_dir/$f" ~/$f
   done
 }
