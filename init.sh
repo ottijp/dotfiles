@@ -2,6 +2,7 @@
 
 readonly SCRIPT_DIR=$(cd $(dirname "$0"); pwd)
 readonly XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+readonly XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 mkdir -p $XDG_CONFIG_HOME
 
 function is_osx() {
@@ -43,7 +44,6 @@ create_link .gitignore_global
 create_link .gvimrc
 create_link .inputrc
 create_link .iterm2
-create_link .tigrc
 create_link .vsnip
 create_link .zprofile
 create_link .zshenv
@@ -54,6 +54,9 @@ create_link templates
 create_config_link tmux/tmux.conf
 create_config_link zsh
 create_config_link ranger
+# for .tig_history
+mkdir -p $XDG_DATA_HOME/tig
+create_config_link tig/config
 
 if is_osx; then
   create_link .hammerspoon/init.lua
