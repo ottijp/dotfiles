@@ -15,3 +15,9 @@ export LC_ALL=en_US.UTF-8
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
 
+# rust
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+if [[ -d "$CARGO_HOME" ]] then
+  . "$CARGO_HOME/env"
+fi
