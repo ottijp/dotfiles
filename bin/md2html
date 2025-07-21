@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd "$(dirname '$1')"
-pandoc "$1" -s --self-contained --template=github --wrap=none -f markdown_github-hard_line_breaks -c ~/.pandoc/templates/github.css -o "${1%.*}.html"
+pandoc "$1" -s --self-contained --data-dir="${XDG_CONFIG_HOME}/pandoc" --template=github --wrap=none -f markdown_github-hard_line_breaks -c "${XDG_CONFIG_HOME}/pandoc/templates/github.css" -o "${1%.*}.html"

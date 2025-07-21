@@ -38,7 +38,7 @@ export REPORTTIME=10
 export DIRSTACKSIZE=100
 
 # local bin path
-export PATH=$PATH:~/bin:~/bin.local
+export PATH=~/bin:~/bin.local:$PATH
 
 # editor for osx
 MACVIM_PATH="/Applications/MacVim.app"
@@ -84,3 +84,9 @@ if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 
 # SQLite
 export SQLITE_HISTORY=$XDG_STATE_HOME/sqlite_history
+
+# git
+if command_exists git; then
+  git config --global core.excludesFile ${XDG_CONFIG_HOME/#$HOME/\~}/git/gitignore_global
+  git config --global include.path ${XDG_CONFIG_HOME/#$HOME/\~}/git/config.local
+fi

@@ -37,10 +37,8 @@ function create_config_link() {
 # deploy dotfiles
 
 # create_link .bashrc
-create_link .ctags
-create_link .eslintrc.json
-create_link .gitconfig
-create_link .gitignore_global
+# create_link .ctags
+# create_link .eslintrc.json
 create_link .gvimrc
 create_link .inputrc
 create_link .iterm2
@@ -51,6 +49,8 @@ create_link .zshenv
 create_link bin
 create_link templates
 
+create_config_link git/config
+create_config_link git/gitignore_global
 create_config_link tmux/tmux.conf
 create_config_link zsh
 create_config_link ranger
@@ -73,7 +73,7 @@ create_config_link vim/dein
 create_config_link vim/vimrc "$XDG_CONFIG_HOME/nvim/init.vim"
 
 # pandoc
-create_link templates/pandoc "$HOME/.pandoc/templates"
+create_config_link pandoc
 
 # bash git completion
 
