@@ -32,6 +32,6 @@ export DOTNET_ROOT="$XDG_DATA_HOME/dotnet"
 # rust
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
-if [[ -d "$CARGO_HOME" ]] then
+if [[ -d "$CARGO_HOME" ]]; then
   . "$CARGO_HOME/env"
 fi
