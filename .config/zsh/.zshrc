@@ -19,7 +19,7 @@ fpath=($XDG_CONFIG_HOME/zsh/completion /usr/local/share/zsh-completions $fpath)
 autoload -U compinit
 compinit
 
-# tmux warning
+# Display a warning if tmux is not running in an interactive shell and no screen or tmux session is active
 if shell_has_started_interactively \
   && ! is_ssh_running \
   && command_exists 'tmux' \
