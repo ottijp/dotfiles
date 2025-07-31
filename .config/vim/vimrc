@@ -248,13 +248,10 @@ if dein#load_state(s:dein_base)
   call dein#add(s:dein_src)
 
   call dein#add('Shougo/context_filetype.vim')
-  call dein#add('scrooloose/nerdtree')
   call dein#add('tomtom/tcomment_vim')
   call dein#add('tyru/open-browser.vim')
   call dein#add('godlygeek/tabular')
   call dein#add('cohama/lexima.vim')
-  call dein#add('junegunn/fzf', { 'build': './install --bin' }) " Configuration is managed by myself. Binary installation is needed for fzf.vim to be loaded properly.
-  call dein#add('junegunn/fzf.vim')
   call dein#add('rhysd/clever-f.vim')
   call dein#add('kana/vim-submode')
   call dein#add('kana/vim-textobj-line')
@@ -343,57 +340,6 @@ call submode#map('indent', 'i', '', '<', '<C-d>')
 nnoremap <Leader>cp :%s/、/，/ge<CR>:%s/。/．/ge<CR>
 vnoremap <Leader>cp :s/、/，/ge<CR>gv:s/。/．/ge<CR>
 
-
-""""""""""""""""""""""""""""""
-"""" NERDTree {
-nnoremap <silent><Leader>f :NERDTreeToggle<CR>
-" quit NERDTree on open
-let g:NERDTreeQuitOnOpen=1
-" ignore system files
-let g:NERDTreeIgnore=['\.DS_Store']
-" show hidden files on startup
-let g:NERDTreeShowHidden=1
-" show bookmarks on startup
-let g:NERDTreeShowBookmarks=1
-" function to find file under current node
-function! NERDTreeFindFile(node)
-  if a:node.path.isDirectory == 1
-    let path = a:node.path.str()
-  else
-    let path = a:node.path.getDir().str()
-  endif
-  NERDTreeClose
-  call fzf#vim#files(path, fzf#vim#with_preview())
-endfunction
-" function to grep files under current node
-function! NERDTreeGrepFile(node)
-  if a:node.path.isDirectory == 1
-    let path = fnamemodify(a:node.path.str(), ":.")
-  else
-    let path = fnamemodify(a:node.path.getDir().str(), ":.")
-  endif
-  NERDTreeClose
-  call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case \"\" ".fzf#shellescape(path), fzf#vim#with_preview())
-endfunction
-augroup nerdtree
-  autocmd!
-  " close vim if the only window left open is a NERDTree
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-  " find file under current node
-  autocmd VimEnter * call NERDTreeAddKeyMap({
-        \ 'key': 'zf',
-        \ 'callback': 'NERDTreeFindFile',
-        \ 'quickhelpText': 'find file under current node',
-        \ 'scope': 'Node' })
-  " grep files under current node
-  autocmd VimEnter * call NERDTreeAddKeyMap({
-        \ 'key': 'zg',
-        \ 'callback': 'NERDTreeGrepFile',
-        \ 'quickhelpText': 'grep files under current node',
-        \ 'scope': 'Node' })
-augroup END
-"""" }
-""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
 " PreVim
@@ -611,86 +557,6 @@ map , <Plug>(clever-f-repeat-back)
 """"""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
-"""" fzf {
-function! s:FzfBookmark()
-  let l:BS = "\u08" " <C-h>
-  let l:cmdtype = getcmdtype()
-  let l:args = {
-  \   'source': 'cat $HOME/bookmarks',
-  \   'sink': { lines -> lines },
-  \   'down': '~50%'
-  \ } " sink does nothing
-  if l:cmdtype == ':'
-    let l:list = fzf#run(fzf#wrap(l:args))
-    if len(list)
-      return escape(substitute(list[0], '^.\{-,},', '', ''), ' ')
-    else
-      return 'a' . l:BS " workaround for redraw problem
-    endif
-  endif
-endfunction
-
-function! s:FzfFile()
-  let l:BS = "\u08" " <C-h>
-  let l:cmdtype = getcmdtype()
-  let l:cmdline = getcmdline()
-  let l:dir = substitute(l:cmdline, '^[^\\]\+ \(.\{-1,}\)/\?$', '\1', '')
-  let l:args = {
-  \   'source': 'find ' . l:dir . ' -follow',
-  \   'sink': { lines -> lines },
-  \   'down': '~50%',
-  \ } " sink does nothing
-  if l:cmdtype == ':'
-    let l:list = fzf#run(fzf#wrap(l:args))
-    if len(list)
-      return "\<C-u>" . substitute(l:cmdline, '^\([^\\]\+ \)\(.\{-1,}\)$', '\1' . escape(list[0], ' '), '')
-    else
-      return 'a' . l:BS " workaround for redraw problem
-    endif
-  endif
-  return ''
-endfunction
-
-function! s:list_buffers()
-  redir => list
-  silent ls
-  redir END
-  return split(list, "\n")
-endfunction
-
-function! s:delete_buffers(lines)
-  execute 'bdelete' join(map(a:lines, {_, line -> split(line)[0]}))
-endfunction
-
-" delete buffer
-command! BD call fzf#run(fzf#wrap({
-      \ 'source': s:list_buffers(),
-      \ 'sink*': { lines -> s:delete_buffers(lines) },
-      \ 'options': '--multi --reverse --bind ctrl-a:select-all'
-      \ }))
-
-" open sibiling file
-command! -bang SFiles call fzf#vim#files(expand('%:p:h'), {
-      \ 'source': 'find . -depth 1 -type f',
-      \ 'options': ['--info=inline', '--preview', 'cat {}']
-      \ }, <bang>0)
-
-let g:fzf_vim = {}
-let g:fzf_vim.preview_window = ['down,50%', 'ctrl-/']
-
-cnoremap <expr> <C-x>b <SID>FzfBookmark()
-cnoremap <expr> <C-x>f <SID>FzfFile()
-nnoremap <C-P> :Buffers<CR>
-nnoremap <C-N> :SFiles<CR>
-noremap <Leader>m :History<CR>
-
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-l> <plug>(fzf-complete-line)
-"""" }
-""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""
 """" MarkuPrev {
 function! OpenWithMarkuPrev()
   echo system('open /Applications/MarkuPrev.app' . ' -n --args ' . shellescape(expand('%:p')))
@@ -818,6 +684,11 @@ let g:lightline = {
 let g:markdown_recommended_style = 1
 """" }
 """"""""""""""""""""""""""""""
+
+" nvim in vscode
+if exists('g:vscode')
+  execute 'source '.$XDG_CONFIG_HOME.'/vim/nvim_vscode'
+endif
 
 " read local setting
 if filereadable($XDG_CONFIG_HOME.'/vim/vimrc.local')

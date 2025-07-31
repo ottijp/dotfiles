@@ -1,0 +1,11 @@
+" With these keymaps, other commands work fine, and these commands fire on other maps, but when combined together, they don't work.
+" That's why I'm setting them in VSCode's keybinding.
+" nnoremap <C-l> "<cmd>lua require('vscode').action('workbench.action.nextEditor')<CR>"
+" nnoremap <C-h> "<cmd>lua require('vscode').action('workbench.action.previousEditor')<CR>"
+" nnoremap gq "<cmd>lua require('vscode').action('workbench.action.closeActiveEditor')<CR>"
+" nnoremap gw "<cmd>lua require('vscode').action('workbench.action.files.save')<CR>"
+
+" search file
+command! -bang Files lua require('vscode').action('find-it-faster.findFiles')
+command! -bang Rg lua require('vscode').action('find-it-faster.findWithinFiles')
+

@@ -71,9 +71,15 @@ create_config_link vim/ftdetect
 create_config_link vim/ftplugin
 create_config_link vim/dein
 create_config_link vim/vimrc "$XDG_CONFIG_HOME/nvim/init.vim"
+create_config_link vim/nvim_vscode
 
 # pandoc
 create_config_link pandoc
+
+# vscode
+if is_osx; then
+  create_link vscode_keybindings.json "$HOME/Library/Application Support/Cursor/User/keybindings.json"
+fi
 
 # bash git completion
 

@@ -1,0 +1,54 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+l",
+        "command": "workbench.action.nextEditor",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "workbench.action.previousEditor",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "g q",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+        "key": "g w",
+        "command": "workbench.action.files.save",
+        "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+      "command": "runCommands",
+      "key": "cmd+b",
+      "args": {
+        "commands": [
+          "workbench.action.toggleSidebarVisibility",
+          "workbench.view.explorer"
+        ]
+      },
+      "when": "!sideBarVisible && editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+      "command": "runCommands",
+      "key": "cmd+b",
+      "args": {
+        "commands": [
+          "workbench.view.explorer"
+        ]
+      },
+      "when": "sideBarVisible && editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    },
+    {
+      "command": "workbench.action.toggleSidebarVisibility",
+      "key": "cmd+b",
+      "when": "sideBarVisible && sideBarFocus"
+    },
+    {
+      "command": "workbench.action.toggleSidebarVisibility",
+      "key": "cmd+b",
+      "when": "sideBarVisible && editorTextFocus && neovim.init && neovim.mode == 'normal'"
+    }
+]
