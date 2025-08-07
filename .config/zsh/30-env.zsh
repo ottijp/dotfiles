@@ -70,7 +70,9 @@ if [ -d "${PYENV_ROOT}" ]; then
     export PYENV_ROOT
     export PATH=${PYENV_ROOT}/bin:$PATH
     eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+    if [ pyenv vitualenv --version >/dev/null 2>&1 ]; then
+      eval "$(pyenv virtualenv-init -)"
+    fi
 fi
 
 # The next line updates PATH for the Google Cloud SDK.
