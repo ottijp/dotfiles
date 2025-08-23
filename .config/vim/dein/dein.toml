@@ -145,7 +145,8 @@ function! NERDTreeGrepFile(node)
     let path = fnamemodify(a:node.path.getDir().str(), ":.")
   endif
   NERDTreeClose
-  call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case \"\" ".fzf#shellescape(path), fzf#vim#with_preview())
+  call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case \"\" ".fzf#shellescape(path),
+        \ fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}))
 endfunction
 augroup nerdtree
   autocmd!
