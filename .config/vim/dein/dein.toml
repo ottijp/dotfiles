@@ -167,6 +167,30 @@ augroup nerdtree
 augroup END
 '''
 
+[[plugins]]
+repo = 'cohama/lexima.vim'
+hook_add = '''
+call lexima#init()
+" japanese surrounds
+call lexima#add_rule({'char': '「', 'input_after': '」', 'at': '\%#$'})
+call lexima#add_rule({'char': '」', 'at': '\%#」', 'leave': 1})
+call lexima#add_rule({'char': '【', 'input_after': '】', 'at': '\%#$'})
+call lexima#add_rule({'char': '】', 'at': '\%#】', 'leave': 1})
+call lexima#add_rule({'char': '（', 'input_after': '）', 'at': '\%#$'})
+call lexima#add_rule({'char': '）', 'at': '\%#）', 'leave': 1})
+call lexima#add_rule({'char': '＜', 'input_after': '＞', 'at': '\%#$'})
+call lexima#add_rule({'char': '＞', 'at': '\%#＞', 'leave': 1})
+call lexima#add_rule({'char': '｛', 'input_after': '｝', 'at': '\%#$'})
+call lexima#add_rule({'char': '｝', 'at': '\%#｝', 'leave': 1})
+" python f|r|b|u-string
+call lexima#add_rule({
+      \ 'filetype': 'python',
+      \ 'char': "'",
+      \ 'at': '\(^\|[^a-zA-Z]\)\(f\|r\|b\|u\)\%#',
+      \ 'input_after': "'",
+      \})
+'''
+
 # ONLY vim
 
 [[plugins]]
