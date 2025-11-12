@@ -25,6 +25,15 @@ endfunction
 
 nnoremap <Leader>r :call QuickRunWithArgsIfDefined('n')<CR>
 vnoremap <Leader>r :<C-u>call QuickRunWithArgsIfDefined('v')<CR>
+
+if !exists('g:quickrun_config')
+  let g:quickrun_config = {}
+endif
+" ts-node is not support console.log() outputs and transpile errors.
+" so I use tsc only.
+let g:quickrun_config['typescript'] = {
+  \ 'type': 'typescript/tsc',
+  \ }
 '''
 
 [[plugins]]
