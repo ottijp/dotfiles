@@ -94,6 +94,9 @@ set hlsearch
 " enable incremental search
 set incsearch
 
+" disable Ex mode
+noremap Q <Nop>
+
 " save buffer
 nnoremap gw :w<CR>
 " close buffer
