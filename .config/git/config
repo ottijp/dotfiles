@@ -35,5 +35,12 @@
 [user]
 	name = Satoshi SAKAO
 	email = ottijp@users.noreply.github.com
+ 	signingkey = ~/.ssh/id_github_signing.pub
+[gpg]
+ 	format = ssh
+[gpg "ssh"]
+ 	allowedSignersFile = ~/.ssh/allowed_signers
+[commit]
+ 	gpgsign = true
 [include]
 	path = ~/.config/git/config.local
