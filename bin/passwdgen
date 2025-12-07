@@ -1,0 +1,12 @@
+#!/bin/bash
+set -euo pipefail
+
+if [ $# -lt 1 ]; then
+  cmdname=$(basename "$0")
+  echo "usage: $cmdname num_char" >&2
+  exit 1
+fi
+
+numchar=$(($1))
+numbytes=$(((numchar * 6 + 8 - 1) / 8))
+openssl rand -base64 $numbytes | head -c $numchar
