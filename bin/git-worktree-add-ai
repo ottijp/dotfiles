@@ -21,3 +21,7 @@ if [ -d ".codex" ]; then
   ln -s "$PWD/.codex" "$path"
   echo "symlink created: \"$path/.codex\" -> \".codex\"" >&2
 fi
+if [ -d ".agents" ]; then
+  ln -s "$PWD/agents" "$path"
+  echo "symlink created: \"$path/agents\" -> \"agents\"" >&2
+fi
