@@ -42,7 +42,7 @@ export PATH=~/bin:~/bin.local:$PATH
 
 # editor for osx
 MACVIM_PATH="/Applications/MacVim.app"
-if is_osx and [ -f "$MACVIM_PATH" ]; then
+if is_osx && [ -f "$MACVIM_PATH" ]; then
   export EDITOR="$MACVIM_PATH/Contents/MacOS/Vim"
 fi
 

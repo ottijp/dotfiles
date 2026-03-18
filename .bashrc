@@ -49,7 +49,7 @@ export PATH=$PATH:~/bin
 
 # editor for osx
 MACVIM_PATH="/Applications/MacVim.app"
-if is_osx and [ -f "$MACVIM_PATH" ]; then
+if is_osx && [ -f "$MACVIM_PATH" ]; then
   export EDITOR="$MACVIM_PATH/Contents/MacOS/Vim"
   alias vi='env LANG=ja_JP.UTF-8 '"$MACVIM_PATH"'/Contents/MacOS/Vim "$@"'
   alias vim='env LANG=ja_JP.UTF-8 '"$MACVIM_PATH"'/Contents/MacOS/Vim "$@"'
