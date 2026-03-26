@@ -2,17 +2,17 @@
 set -euo pipefail
 
 if [ "$#" -lt 2 ]; then
-  echo "usage: $0 <new-branch> <path>" >&2
+  echo "usage: $0 <new-branch> <path> [<start-point>]" >&2
   exit 1
 fi
 
 new_branch=$1
 path=$2
-from=${3:-HEAD}
+start_point=${3:-HEAD}
 
-echo "creating new worktree: new-branch=\"$new_branch\" path=\"$path\" from=\"$from\"" >&2
+echo "creating new worktree: new-branch=\"$new_branch\" path=\"$path\" start-point=\"$start_point\"" >&2
 
-git worktree add -b "$new_branch" "$path" "$from"
+git worktree add -b "$new_branch" "$path" "$start_point"
 for f in .local AGENTS.md .codex .agents; do
   if [ -e "$f" ] &&  [ ! -e "$path/$f" ]; then
     ln -s "$PWD/$f" "$path"
