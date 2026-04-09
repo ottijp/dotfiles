@@ -40,17 +40,14 @@ export DIRSTACKSIZE=100
 # local bin path
 export PATH=~/bin:~/bin.local:$PATH
 
-# editor for osx
-MACVIM_PATH="/Applications/MacVim.app"
-if is_osx && [ -f "$MACVIM_PATH" ]; then
-  export EDITOR="$MACVIM_PATH/Contents/MacOS/Vim"
-fi
 
 # Go lang
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME
 export GOBIN=$HOME/bin.local/go
 export PATH=$PATH:$GOBIN
+# editor
+EDITOR="$VIM_CMD"
 
 # less
 # invert only current hit, ignore case, detail prompt, ANSI color, highlight new line, window size -5

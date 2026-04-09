@@ -49,8 +49,9 @@ alias suggest='ghcs'
 # vim
 MACVIM_PATH="/Applications/MacVim.app"
 if is_osx && [ -f "$MACVIM_PATH" ]; then
-  alias vim='env LANG=ja_JP.UTF-8 '"$MACVIM_PATH"'/Contents/MacOS/Vim -u $XDG_CONFIG_HOME/vim/vimrc "$@"'
-  alias vi=vim
+  VIM_CMD='env LANG=ja_JP.UTF-8 '"$MACVIM_PATH"'/Contents/MacOS/Vim -u $XDG_CONFIG_HOME/vim/vimrc "$@"'
 else
-  alias vim='vim -u $XDG_CONFIG_HOME/vim/vimrc'
+  VIM_CMD='vim -u $XDG_CONFIG_HOME/vim/vimrc'
 fi
+alias vim="$VIM_CMD"
+alias vi="$VIM_CMD"
