@@ -57,7 +57,8 @@ export LESS='-g -i -M -R -W -z-5'
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 # node
-export npm_config_cache=$XDG_CACHE_HOME/npm
+export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 
 # pyenv
 PYENV_ROOT=${HOME}/.pyenv
