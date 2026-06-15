@@ -329,9 +329,6 @@ colorscheme nightfox
 " light color for MatchParen background
 highlight MatchParen ctermbg=0
 
-" prevent editing readonly file
-autocmd BufRead * let &modifiable = !&readonly
-
 " increment/decrement indent repeatably
 call submode#enter_with('indent', 'i', '', '<C-a>>', '<C-t>')
 call submode#enter_with('indent', 'i', '', '<C-a><', '<C-d>')
