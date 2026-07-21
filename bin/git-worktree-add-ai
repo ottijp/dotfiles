@@ -13,7 +13,7 @@ start_point=${3:-HEAD}
 echo "creating new worktree: new-branch=\"$new_branch\" path=\"$path\" start-point=\"$start_point\"" >&2
 
 git worktree add -b "$new_branch" "$path" "$start_point"
-for f in .local AGENTS.md .codex .agents; do
+for f in .local AGENTS.md AGENTS.override.md .codex .agents; do
   if [ -e "$f" ] &&  [ ! -e "$path/$f" ]; then
     ln -s "$PWD/$f" "$path"
     echo "symlink created: \"$path/$f\" -> \"$f\"" >&2
