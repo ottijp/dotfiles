@@ -11,6 +11,6 @@ selected=$(echo "$candidates" | fzf -m | awk '{print $1}')
 
 if [[ "$selected" ]]; then
   for prog in $(echo "$selected"); do
-    brew cask upgrade $prog
+    brew cask upgrade --yes $prog
   done
 fi

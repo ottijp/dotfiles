@@ -10,6 +10,6 @@ selected=$(echo "$candidates" | fzf -m | awk '{print $1}')
 
 if [[ $selected ]]; then
   for formula in $selected; do
-    brew upgrade "$formula"
+    brew upgrade --yes "$formula"
   done
 fi
