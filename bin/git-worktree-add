@@ -1,0 +1,34 @@
+#!/bin/zsh
+set -euo pipefail
+setopt NULL_GLOB
+
+if [ "$#" -lt 2 ]; then
+  echo "usage: $0 <new-branch> <path> [<start-point>]" >&2
+  exit 1
+fi
+
+new_branch=$1
+new_path=$2
+start_point=${3:-HEAD}
+main_path=$(git rev-parse --show-toplevel)
+
+echo "creating new worktree: new-branch=\"$new_branch\" new_path=\"$new_path\" start-point=\"$start_point\"" >&2
+git worktree add -b "$new_branch" "$new_path" "$start_point"
+new_path=$(cd "$new_path" && pwd)
+
+cd "$main_path"
+if [ ! -f .worktree-links ]; then
+  exit
+fi
+
+while read -r pattern; do
+  [[ -z "$pattern" || "$pattern" == \#* ]] && continue
+  for f in ${~pattern}; do
+    if [ ! -e "$new_path/$f" ]; then
+      target="$new_path/$f"
+      mkdir -p "$(dirname "$target")"
+      ln -s "$main_path/$f" "$target"
+      echo "symlink created: \"$target\" -> \"$main_path/$f\"" >&2
+    fi
+  done
+done < .worktree-links
