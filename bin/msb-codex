@@ -1,0 +1,25 @@
+#!/bin/zsh
+set -euo pipefail
+
+if [ "$#" -lt 1 ]; then
+  echo "usage: $0 <name> [<source_path>]" >&2
+  exit 1
+fi
+
+name=$1
+src_path=${2:-""}
+
+image_name=codex-$name
+
+if ! msb inspect $image_name >/dev/null 2>&1; then
+  echo "image name \"$image_name\" not found. creating..."
+  # イメージを小さくするならnode:NN-bookworm-slimの方のイメージ（microsandboxの公式ガイドにある）だが，起動に時間がかかるし，psコマンドがなかったりするのでslimは使わないようにしている．
+  msb run --name $image_name --replace \
+    --cpus 2 --memory 2G --root-disk 4G \
+    ${src_path:+--mount-dir "$src_path:/workspace:rw"} \
+    --copy-file "$HOME/.codex/AGENTS.md:/root/.codex/AGENTS.md" \
+    --copy-file "$HOME/.codex/auth.json:/root/.codex/auth.json" \
+    ${src_path:+--workdir /workspace} \
+    node:24-bookworm -- npm install -g @openai/codex
+fi
+msb exec $image_name -- codex --no-daemon

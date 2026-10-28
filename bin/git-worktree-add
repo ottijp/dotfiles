@@ -17,7 +17,7 @@ git worktree add -b "$new_branch" "$new_path" "$start_point"
 new_path=$(cd "$new_path" && pwd)
 
 cd "$main_path"
-if [ ! -f .worktree-links ]; then
+if [ ! -f .worktreeinclude ]; then
   exit
 fi
 
@@ -27,8 +27,8 @@ while read -r pattern; do
     if [ ! -e "$new_path/$f" ]; then
       target="$new_path/$f"
       mkdir -p "$(dirname "$target")"
-      ln -s "$main_path/$f" "$target"
-      echo "symlink created: \"$target\" -> \"$main_path/$f\"" >&2
+      cp -a "$main_path/$f" "$target"
+      echo "copied: \"$main_path/$f\" -> \"$target\"" >&2
     fi
   done
-done < .worktree-links
+done < .worktreeinclude
