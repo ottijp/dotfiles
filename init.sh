@@ -54,6 +54,7 @@ create_config_link git/gitignore_global
 create_config_link tmux/tmux.conf
 create_config_link zsh
 create_config_link ranger
+create_config_link npm
 # for .tig_history
 mkdir -p "$XDG_DATA_HOME/tig"
 create_config_link tig/config
