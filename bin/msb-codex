@@ -14,12 +14,16 @@ image_name=codex-$name
 if ! msb inspect $image_name >/dev/null 2>&1; then
   echo "image name \"$image_name\" not found. creating..."
   # イメージを小さくするならnode:NN-bookworm-slimの方のイメージ（microsandboxの公式ガイドにある）だが，起動に時間がかかるし，psコマンドがなかったりするのでslimは使わないようにしている．
-  msb run --name $image_name --replace \
-    --cpus 2 --memory 2G --root-disk 4G \
-    ${src_path:+--mount-dir "$src_path:/workspace:rw"} \
-    --copy-file "$HOME/.codex/AGENTS.md:/root/.codex/AGENTS.md" \
-    --copy-file "$HOME/.codex/auth.json:/root/.codex/auth.json" \
-    ${src_path:+--workdir /workspace} \
-    node:24-bookworm -- npm install -g @openai/codex
+  args=()
+  args+=(--name $image_name)
+  args+=(--replace)
+  args+=(--cpus 2)
+  args+=(--memory 2G)
+  args+=(--root-disk 4G)
+  args+=(--copy-file "$HOME/.codex/AGENTS.md:/root/.codex/AGENTS.md")
+  args+=(--copy-file "$HOME/.codex/auth.json:/root/.codex/auth.json")
+  [[ -n ${src_path:-} ]] && args+=(--mount-dir "$src_path:/workspace:rw")
+  [[ -n ${src_path:-} ]] && args+=(--workdir /workspace)
+  msb run "${args[@]}" node:24-bookworm -- npm install -g @openai/codex
 fi
 msb exec $image_name -- codex --no-daemon
