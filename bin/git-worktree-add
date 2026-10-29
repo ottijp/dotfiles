@@ -17,18 +17,18 @@ git worktree add -b "$new_branch" "$new_path" "$start_point"
 new_path=$(cd "$new_path" && pwd)
 
 cd "$main_path"
-if [ ! -f .worktreeinclude ]; then
-  exit
-fi
+for include_file in .worktreeinclude .worktreeinclude.local; do
+  [ -f "$include_file" ] || continue
 
-while read -r pattern; do
-  [[ -z "$pattern" || "$pattern" == \#* ]] && continue
-  for f in ${~pattern}; do
-    if [ ! -e "$new_path/$f" ]; then
-      target="$new_path/$f"
-      mkdir -p "$(dirname "$target")"
-      cp -a "$main_path/$f" "$target"
-      echo "copied: \"$main_path/$f\" -> \"$target\"" >&2
-    fi
-  done
-done < .worktreeinclude
+  while read -r pattern; do
+    [[ -z "$pattern" || "$pattern" == \#* ]] && continue
+    for f in ${~pattern}; do
+      if [ ! -e "$new_path/$f" ]; then
+        target="$new_path/$f"
+        mkdir -p "$(dirname "$target")"
+        cp -a "$main_path/$f" "$target"
+        echo "copied: \"$main_path/$f\" -> \"$target\"" >&2
+      fi
+    done
+  done < "$include_file"
+done
