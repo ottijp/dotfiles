@@ -9,6 +9,16 @@ fi
 name=$1
 src_path=${2:-""}
 
+# src_pathがworktreeの場合の共有gitディレクトリを特定する
+common_git_dir=""
+if [[ -n "$src_path" ]]; then
+  src_path=$(cd "$src_path" && pwd -P)
+  if git -C "$src_path" rev-parse --git-dir >/dev/null 2>&1; then
+    common_git_dir=$(git -C "$src_path" rev-parse --path-format=absolute --git-common-dir)
+    common_git_dir=$(cd "$common_git_dir" && pwd -P)
+  fi
+fi
+
 image_name=codex-$name
 
 if ! msb inspect $image_name >/dev/null 2>&1; then
@@ -23,8 +33,16 @@ if ! msb inspect $image_name >/dev/null 2>&1; then
   args+=(--copy-file "$HOME/.codex/AGENTS.md:/root/.codex/AGENTS.md")
   args+=(--copy-file "$HOME/.codex/auth.json:/root/.codex/auth.json")
   [[ -d $HOME/.agent/skills ]] && args+=(--mount-dir "$HOME/.agent/skills:/root/.agent/skills:ro")
-  [[ -n ${src_path:-} ]] && args+=(--mount-dir "$src_path:/workspace:rw")
-  [[ -n ${src_path:-} ]] && args+=(--workdir /workspace)
+  if [[ -n "$src_path" ]]; then
+    args+=(--mount-dir "${src_path}:/workspace:rw")
+    args+=(--workdir /workspace)
+    if [[ -n "$common_git_dir" && "$common_git_dir" != "$src_path/"* ]]; then
+      # 他のブランチ等を参照するために共有gitディレクトリも.gitのgitdir参照パスと同じパスでマウントする
+      args+=(--mount-dir "${common_git_dir}:${common_git_dir}:rw")
+      # 逆参照の整合性を保つために共有gitディレクトリからの参照先にもマウントする
+      [[ "$src_path" == /workspace ]] || args+=(--mount-dir "${src_path}:${src_path}:rw")
+    fi
+  fi
   msb run "${args[@]}" node:24-bookworm -- npm install -g @openai/codex
 fi
-msb exec $image_name -- codex --no-daemon
+msb exec $image_name -- codex --no-daemon -c 'projects./workspace.trust_level=trusted'
