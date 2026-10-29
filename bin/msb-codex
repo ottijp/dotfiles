@@ -22,7 +22,7 @@ if ! msb inspect $image_name >/dev/null 2>&1; then
   args+=(--root-disk 4G)
   args+=(--copy-file "$HOME/.codex/AGENTS.md:/root/.codex/AGENTS.md")
   args+=(--copy-file "$HOME/.codex/auth.json:/root/.codex/auth.json")
-  args+=(--mount-dir "$HOME/.agent/skills:/root/.agent/skills:ro")
+  [[ -d $HOME/.agent/skills ]] && args+=(--mount-dir "$HOME/.agent/skills:/root/.agent/skills:ro")
   [[ -n ${src_path:-} ]] && args+=(--mount-dir "$src_path:/workspace:rw")
   [[ -n ${src_path:-} ]] && args+=(--workdir /workspace)
   msb run "${args[@]}" node:24-bookworm -- npm install -g @openai/codex
