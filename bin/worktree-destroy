@@ -1,0 +1,115 @@
+#!/bin/zsh
+set -euo pipefail
+
+err() {
+  echo "$*" >&2
+}
+
+# parse options
+
+force=false
+
+while getopts ":f" opt; do
+  case "$opt" in
+    f) force=true ;;
+    *) err "usage: $(basename "$0") [-f] <path>"; exit 1;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+if [ "$#" -lt 1 ]; then
+  err "usage: $(basename "$0") [-f] <path>"
+  exit 1
+fi
+
+target_path=$(cd "$1" && pwd)
+
+
+# check existence
+
+if [ ! -d "$target_path" ]; then
+  err "$target_path not found"
+  return 1
+fi
+
+if [ ! -f "$target_path/.git" ]; then
+  err "$target_path is not worktree directory"
+  return 1
+fi
+
+branch_name=$(git -C "$target_path" branch --show-current)
+if [[ -z "$branch_name" ]]; then
+  err "'$target_path' has a detached HEAD"
+  exit 1
+fi
+common_git_dir=$(git -C "$target_path" rev-parse --path-format=absolute --git-common-dir)
+common_root=$(dirname "$common_git_dir")
+
+
+# check untracked and unmerged
+
+if [[ -n $(git -C "$target_path" status --porcelain) && "$force" != true ]]; then
+  err "'$target_path' contains modified or untracked files, use -f to delete it"
+  exit 2
+fi
+
+if base=$(git -C "$common_root" rev-parse --verify "${branch_name}@{upstream}" 2>/dev/null); then
+  :
+else
+  base=HEAD
+fi
+if git -C "$common_root" merge-base --is-ancestor "$branch_name" "$base"; then
+  :
+else
+  status=$?
+  if (( status != 1 )); then
+    err "failed to check if branch '$branch_name' is merged"
+    exit "$status"
+  fi
+  if [[ "$force" != true ]]; then
+    err "'$branch_name' is unmerged, use -f to delete it"
+    exit 2
+  fi
+fi
+
+
+# specify sandbox name
+
+sandbox_name=""
+if [ -f "$target_path/.local/.worktree-sandbox-name" ]; then
+  sandbox_name=$(cat "$target_path/.local/.worktree-sandbox-name")
+fi
+
+
+# confirmation
+
+err "workree '$target_path' will be deleted"
+err "branch '$branch_name' will be deleted"
+if [ -n "$sandbox_name" ]; then
+  err "sandbox '$sandbox_name' will be deleted"
+fi
+
+printf "Are you sure? [y/N] "
+read -r answer
+[[ "$answer" =~ ^[Yy]$ ]] || exit 1
+
+
+# destroy
+
+if [[ "$force" == true ]]; then
+  git -C "$common_root" worktree remove --force "$target_path"
+else
+  git -C "$common_root" worktree remove "$target_path"
+fi
+err "workree '$target_path' was deleted"
+if [[ "$force" == true ]]; then
+  git -C "$common_root" branch -D $branch_name
+else
+  git -C "$common_root" branch -d $branch_name
+fi
+err "branch '$branch_name' was deleted"
+if [[ -n "$sandbox_name" ]]; then
+  msb remove "$sandbox_name"
+  err "sandbox '$sandbox_name' was deleted"
+fi

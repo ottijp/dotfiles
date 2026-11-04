@@ -1,48 +1,58 @@
 #!/bin/zsh
 set -euo pipefail
 
+err() {
+  echo "$*" >&2
+}
+
+# parse options
+
 if [ "$#" -lt 1 ]; then
-  echo "usage: $0 <name> [<source_path>]" >&2
+  err "usage: $0 <name> [<source_path>]"
   exit 1
 fi
 
-name=$1
+sandbox_name=$1
 src_path=${2:-""}
+if [[ -n "$src_path" ]]; then
+  mount_source=true
+  src_path=$(cd "$src_path" && pwd -P)
+else
+  mount_source=false
+fi
+
 
 # src_pathがworktreeの場合の共有gitディレクトリを特定する
 common_git_dir=""
-if [[ -n "$src_path" ]]; then
-  src_path=$(cd "$src_path" && pwd -P)
+if [[ "$mount_source" == "true" ]]; then
   if git -C "$src_path" rev-parse --git-dir >/dev/null 2>&1; then
     common_git_dir=$(git -C "$src_path" rev-parse --path-format=absolute --git-common-dir)
-    common_git_dir=$(cd "$common_git_dir" && pwd -P)
   fi
 fi
 
-image_name=codex-$name
 
-if ! msb inspect $image_name >/dev/null 2>&1; then
-  echo "image name \"$image_name\" not found. creating..."
-  # イメージを小さくするならnode:NN-bookworm-slimの方のイメージ（microsandboxの公式ガイドにある）だが，起動に時間がかかるし，psコマンドがなかったりするのでslimは使わないようにしている．
+# create sandbox
+# node:NN-bookworm-slim is better for less image size, but I don't use slim image becasue some of commands (e.g.`ps`) aren't included.
+
+if ! msb inspect $sandbox_name >/dev/null 2>&1; then
+  echo "sandbox '$sandbox_name' not found. creating..."
   args=()
-  args+=(--name $image_name)
+  args+=(--name $sandbox_name)
   args+=(--replace)
   args+=(--cpus 2)
   args+=(--memory 2G)
   args+=(--root-disk 4G)
-  args+=(--copy-file "$HOME/.codex/AGENTS.md:/root/.codex/AGENTS.md")
-  args+=(--copy-file "$HOME/.codex/auth.json:/root/.codex/auth.json")
-  [[ -d $HOME/.agents/skills ]] && args+=(--mount-dir "$HOME/.agents/skills:/root/.agents/skills:ro")
-  if [[ -n "$src_path" ]]; then
-    args+=(--mount-dir "${src_path}:/workspace:rw")
-    args+=(--workdir /workspace)
+  [[ -d "$XDG_DATA_HOME/codex" ]] && args+=(--mount-dir "$XDG_DATA_HOME/codex:/root/.codex:rw")
+  [[ -d "$HOME/.agents" ]] && args+=(--mount-dir "$HOME/.agents:/root/.agents:rw")
+  if [[ "$mount_source" == "true" ]]; then
+    # mount worktree directory as its original path for integrity of reverse reference from common git directory
+    args+=(--mount-dir "${src_path}:/${src_path}:rw")
+    args+=(--workdir "${src_path}")
     if [[ -n "$common_git_dir" && "$common_git_dir" != "$src_path/"* ]]; then
-      # 他のブランチ等を参照するために共有gitディレクトリも.gitのgitdir参照パスと同じパスでマウントする
+      # mount common git dir as its original path for git operations (e.g. refer to other branches).
       args+=(--mount-dir "${common_git_dir}:${common_git_dir}:rw")
-      # 逆参照の整合性を保つために共有gitディレクトリからの参照先にもマウントする
-      [[ "$src_path" == /workspace ]] || args+=(--mount-dir "${src_path}:${src_path}:rw")
     fi
   fi
   msb run "${args[@]}" node:24-bookworm -- npm install -g @openai/codex
 fi
-msb exec $image_name -- codex --no-daemon -c 'projects./workspace.trust_level=trusted'
+msb exec $sandbox_name -- codex --no-daemon -c "projects.$src_path.trust_level=trusted"

@@ -1,0 +1,22 @@
+#!/bin/zsh
+set -euo pipefail
+
+err() {
+  echo "$*" >&2
+}
+
+# specify sandbox name
+
+repo_root=$(git rev-parse --show-toplevel)
+sandbox_name=""
+if [ -f "$repo_root/.local/.worktree-sandbox-name" ]; then
+  sandbox_name=$(cat "$repo_root/.local/.worktree-sandbox-name")
+else
+  err "$repo_root/.local/.worktree-sandbox-name not found"
+  exit 1
+fi
+
+
+# execute codex
+
+msb exec "$sandbox_name" -- codex --no-daemon -c "projects.$PWD.trust_level=trusted" "$@"

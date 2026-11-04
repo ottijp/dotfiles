@@ -1,0 +1,73 @@
+#!/bin/zsh
+set -euo pipefail
+setopt NULL_GLOB
+
+err() {
+  echo "$*" >&2
+}
+
+# parse options
+
+if [ "$#" -lt 2 ]; then
+  err "usage: $(basename "$0") <new-branch> <path> [<base-branch>]"
+  exit 1
+fi
+
+new_branch_name=$1
+new_path="$2"
+base_branch_name=${3:-HEAD}
+
+
+# create git worktree
+
+err "creating new git worktree: new-branch=\"$new_branch_name\" new_path=\"$new_path\" start-point=\"$base_branch_name\""
+git worktree add -b "$new_branch_name" "$new_path" "$base_branch_name"
+
+common_git_dir=$(git -C "$new_path" rev-parse --path-format=absolute --git-common-dir)
+common_root=$(dirname "$common_git_dir")
+new_path=$(cd "$2" && pwd)
+
+cd "$common_root"
+for include_file in ".worktreeinclude" ".worktreeinclude.local"; do
+  [ -f "$include_file" ] || continue
+
+  while read -r pattern; do
+    [[ -z "$pattern" || "$pattern" == \#* ]] && continue
+    for f in ${~pattern}; do
+      if [ ! -e "$new_path/$f" ]; then
+        target="$new_path/$f"
+        mkdir -p "$(dirname "$target")"
+        cp -a "$f" "$target"
+        err "copied: $common_root/$f -> $target"
+      fi
+    done
+  done < "$include_file"
+done
+err "git worktree \"$new_path\" is created."
+
+
+# create sandbox
+# node:NN-bookworm-slim is better for less image size, but I don't use slim image becasue some of commands (e.g.`ps`) aren't included.
+
+sandbox_name=$(basename "$new_path")-$(openssl rand -hex 4)
+
+args=()
+args+=(--name $sandbox_name)
+args+=(--replace)
+args+=(--cpus 2)
+args+=(--memory 2G)
+args+=(--root-disk 4G)
+[[ -d "$XDG_DATA_HOME/codex" ]] && args+=(--mount-dir "$XDG_DATA_HOME/codex:/root/.codex:rw")
+[[ -d "$HOME/.agents" ]] && args+=(--mount-dir "$HOME/.agents:/root/.agents:rw")
+# mount common git dir as its original path for git operations (e.g. refer to other branches).
+args+=(--mount-dir "${common_git_dir}:${common_git_dir}:rw")
+# mount worktree directory as its original path for integrity of reverse reference from common git directory
+args+=(--mount-dir "${new_path}:/${new_path}:rw")
+args+=(--workdir "${new_path}")
+msb run "${args[@]}" node:24-bookworm -- npm install -g @openai/codex
+
+# record sandbox name for this worktree
+mkdir -p "$new_path/.local"
+echo $sandbox_name > "$new_path/.local/.worktree-sandbox-name"
+
+err "msb sandbox '$sandbox_name' is created."
