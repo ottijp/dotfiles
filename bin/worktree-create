@@ -58,7 +58,7 @@ args+=(--cpus 2)
 args+=(--memory 2G)
 args+=(--root-disk 4G)
 [[ -d "$XDG_DATA_HOME/codex" ]] && args+=(--mount-dir "$XDG_DATA_HOME/codex:/root/.codex:rw")
-[[ -d "$HOME/.agents" ]] && args+=(--mount-dir "$HOME/.agents:/root/.agents:rw")
+[[ -d "$XDG_DATA_HOME/agents" ]] && args+=(--mount-dir "$XDG_DATA_HOME/agents:/root/.agents:rw")
 # mount common git dir as its original path for git operations (e.g. refer to other branches).
 args+=(--mount-dir "${common_git_dir}:${common_git_dir}:rw")
 # mount worktree directory as its original path for integrity of reverse reference from common git directory
