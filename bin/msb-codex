@@ -55,4 +55,4 @@ if ! msb inspect $sandbox_name >/dev/null 2>&1; then
   fi
   msb run "${args[@]}" node:24-bookworm -- npm install -g @openai/codex
 fi
-msb exec $sandbox_name -- codex --no-daemon -c "projects.$src_path.trust_level=trusted" "$@"
+msb exec $sandbox_name -- codex --no-daemon -c "projects.$src_path.trust_level=trusted"
