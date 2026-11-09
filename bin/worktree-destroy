@@ -30,12 +30,12 @@ target_path=$(cd "$1" && pwd)
 
 if [ ! -d "$target_path" ]; then
   err "$target_path not found"
-  return 1
+  exit 1
 fi
 
 if [ ! -f "$target_path/.git" ]; then
   err "$target_path is not worktree directory"
-  return 1
+  exit 1
 fi
 
 branch_name=$(git -C "$target_path" branch --show-current)
