@@ -62,7 +62,7 @@ args+=(--root-disk 4G)
 # mount common git dir as its original path for git operations (e.g. refer to other branches).
 args+=(--mount-dir "${common_git_dir}:${common_git_dir}:rw")
 # mount worktree directory as its original path for integrity of reverse reference from common git directory
-args+=(--mount-dir "${new_path}:/${new_path}:rw")
+args+=(--mount-dir "${new_path}:${new_path}:rw")
 args+=(--workdir "${new_path}")
 msb run "${args[@]}" node:24-bookworm -- npm install -g @openai/codex
 
