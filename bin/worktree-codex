@@ -19,4 +19,4 @@ fi
 
 # execute codex
 
-msb exec "$sandbox_name" -- codex --no-daemon -c "projects.$PWD.trust_level=trusted" "$@"
+msb exec "$sandbox_name" -- codex --no-daemon "$@"
