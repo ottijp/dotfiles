@@ -84,7 +84,7 @@ fi
 
 # confirmation
 
-err "workree '$target_path' will be deleted"
+err "worktree '$target_path' will be deleted"
 err "branch '$branch_name' will be deleted"
 if [ -n "$sandbox_name" ]; then
   err "sandbox '$sandbox_name' will be deleted"
@@ -102,7 +102,7 @@ if [[ "$force" == true ]]; then
 else
   git -C "$common_root" worktree remove "$target_path"
 fi
-err "workree '$target_path' was deleted"
+err "worktree '$target_path' was deleted"
 if [[ "$force" == true ]]; then
   git -C "$common_root" branch -D $branch_name
 else

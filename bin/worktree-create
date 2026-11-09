@@ -47,7 +47,7 @@ err "git worktree \"$new_path\" is created."
 
 
 # create sandbox
-# node:NN-bookworm-slim is better for less image size, but I don't use slim image becasue some of commands (e.g.`ps`) aren't included.
+# node:NN-bookworm-slim is better for less image size, but I don't use slim image because some of commands (e.g.`ps`) aren't included.
 
 sandbox_name=$(basename "$new_path")-$(openssl rand -hex 4)
 
