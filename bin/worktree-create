@@ -34,7 +34,7 @@ for include_file in ".worktreeinclude" ".worktreeinclude.local"; do
   while read -r pattern; do
     [[ -z "$pattern" || "$pattern" == \#* ]] && continue
     for f in ${~pattern}; do
-      if [ ! -e "$new_path/$f" ]; then
+      if [[ ! -e "$new_path/$f" && -e "$f" ]]; then
         target="$new_path/$f"
         mkdir -p "$(dirname "$target")"
         cp -a "$f" "$target"
