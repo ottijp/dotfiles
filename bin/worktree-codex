@@ -19,4 +19,6 @@ fi
 
 # execute codex
 
-msb exec "$sandbox_name" -- codex --no-daemon "$@"
+msb exec "$sandbox_name" -- \
+  env CODEX_SQLITE_HOME=/root/codex-sqlite \
+  codex --no-daemon "$@"
